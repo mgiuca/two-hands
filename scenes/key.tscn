@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsy54vm4i37kq"]
+
+[ext_resource type="PackedScene" uid="uid://bw43r4qqsiwkj" path="res://meshes/key.tscn" id="1_yk2u2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yk2u2"]
+radius = 0.044433594
+height = 0.20678711
+
+[node name="Key" type="StaticBody3D"]
+
+[node name="model" parent="." instance=ExtResource("1_yk2u2")]
+transform = Transform3D(-2.2477375e-08, 0, 0.5142224, 0, 0.5142224, 0, -0.5142224, 0, -2.2477375e-08, 0, 0, 0)
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2.0756499e-09, -0.04748535)
+shape = SubResource("CapsuleShape3D_yk2u2")

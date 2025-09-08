@@ -23,10 +23,6 @@ func _ready() -> void:
 
   hud.debug_visible = debug_info
 
-  InputManager.mouse_visible = false
-  InputManager.input_mode_changed.connect(_on_input_mode_changed)
-  _on_input_mode_changed(InputManager.input_mode)
-
 func _unhandled_input(event: InputEvent) -> void:
   # Meta/UI inputs.
   if event.is_action_pressed('menu'):
@@ -51,11 +47,3 @@ func _process(delta: float) -> void:
     var x : float
     for i in randi_range(1000000, 4000000):
       x = sin(x)
-
-func _on_input_mode_changed(new_mode: InputManager.InputMode) -> void:
-  # TODO: Set the textures for all the button prompts.
-  match new_mode:
-    InputManager.InputMode.KEYBOARD:
-      pass
-    InputManager.InputMode.JOYSTICK:
-      pass

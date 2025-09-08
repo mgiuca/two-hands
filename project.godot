@@ -17,7 +17,6 @@ config/features=PackedStringArray("4.5", "GL Compatibility")
 [autoload]
 
 Globals="*res://scenes/managers/globals.gd"
-InputManager="*res://scenes/managers/input_manager.gd"
 AudioManager="*res://scenes/managers/audio_manager.gd"
 LevelManager="*res://scenes/managers/level_manager.gd"
 GitStatus="*res://addons/git-status/utility.gd"

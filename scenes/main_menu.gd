@@ -19,8 +19,6 @@ func _ready() -> void:
 
   Globals.init_settings(music_volume, sound_effects_volume)
 
-  InputManager.mouse_visible = true
-
   if OS.has_feature('mobile') or OS.has_feature('web'):
     # Doesn't make sense to "quit" on mobile or web.
     # (Especially web, which just crashes.)

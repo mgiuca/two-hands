@@ -17,14 +17,12 @@ func _unhandled_input(event: InputEvent) -> void:
 func show_menu() -> void:
   get_tree().paused = true
   show()
-  InputManager.mouse_visible = true
   set_process_unhandled_input(true)
   (%BtnResume as Control).grab_focus()
 
 func resume() -> void:
   hide()
   get_tree().paused = false
-  InputManager.mouse_visible = false
   set_process_unhandled_input(false)
 
 func _on_btn_resume_pressed() -> void:

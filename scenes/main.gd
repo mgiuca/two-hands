@@ -3,7 +3,7 @@
 # This is so we can smoothly transition scenes with fades, keep audio, etc.
 
 class_name Main
-extends Node
+extends Node3D
 
 ## The currently loaded scene.
 @export var current_scene : PackedScene
@@ -44,6 +44,8 @@ const FADE_TIME : float = 0.2
 
 var music_fade_tween : Tween
 
+var xr_interface : XRInterface
+
 func _ready() -> void:
   if OS.has_feature('web'):
     # Web can't start in fullscreen (but it can go fullscreen later in response
@@ -60,6 +62,20 @@ func _ready() -> void:
 
   AudioManager.audio_volume_changed.connect(_on_audio_volume_changed)
   _on_audio_volume_changed(AudioManager.AudioType.MUSIC, AudioManager.music_volume)
+
+  # Initialize OpenXR.
+  # TODO: Also support WebXR.
+  xr_interface = XRServer.find_interface("OpenXR")
+  if xr_interface and xr_interface.is_initialized():
+    print("OpenXR initialized successfully")
+
+    # Turn off v-sync!
+    DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+
+    # Change our main viewport to output to the HMD
+    get_viewport().use_xr = true
+  else:
+    print("OpenXR not initialized, please check if your headset is connected")
 
   lbl_version.text = get_version_number()
   lbl_git_hash.text = get_git_hash()

@@ -11,8 +11,12 @@ height = 0.20678711
 input_ray_pickable = false
 script = ExtResource("1_fttkb")
 
-[node name="model" parent="." instance=ExtResource("1_yk2u2")]
-transform = Transform3D(-2.2477375e-08, 0, 0.5142224, 0, 0.5142224, 0, -0.5142224, 0, -2.2477375e-08, 0, 0, 0)
+[node name="Visual" type="Node3D" parent="."]
+transform = Transform3D(0.99999994, 0, -3.5527137e-15, 0, 0.99999994, 0, 3.5527137e-15, 0, 0.99999994, 0, 0, 0)
+top_level = true
+
+[node name="model" parent="Visual" instance=ExtResource("1_yk2u2")]
+transform = Transform3D(-2.247738e-08, 0, 0.51422244, 0, 0.51422244, 0, -0.51422244, 0, -2.247738e-08, 0, 0, 0)
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2.0756499e-09, -0.04748535)

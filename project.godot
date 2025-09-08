@@ -83,6 +83,10 @@ debug_next_level={
 ]
 }
 
+[physics]
+
+common/enable_object_picking=false
+
 [rendering]
 
 renderer/rendering_method="mobile"

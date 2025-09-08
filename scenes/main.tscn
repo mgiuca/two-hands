@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://byc7se7k0wfad"]
 
 [ext_resource type="Script" uid="uid://nx224gcg15g1" path="res://scenes/main.gd" id="1_c0h74"]
-[ext_resource type="PackedScene" uid="uid://bvweswfxul5oo" path="res://scenes/main_menu.tscn" id="2_l2wju"]
+[ext_resource type="PackedScene" uid="uid://dhouj103pnqy3" path="res://scenes/levels/level1.tscn" id="2_tbgi4"]
 [ext_resource type="Theme" uid="uid://cav6s4wk6wpbp" path="res://themes/ui.tres" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://dhaqth6q5yw4n" path="res://addons/godot-xr-tools/hands/model/hand_l.gltf" id="4_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://ds1t8vc0kxoeo" path="res://addons/godot-xr-tools/hands/model/hand_r.gltf" id="5_tefeu"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_c0h74")
-current_scene = ExtResource("2_l2wju")
+current_scene = ExtResource("2_tbgi4")
 music_volume = null
 sound_effects_volume = null
 

@@ -17,6 +17,9 @@ var tween : Tween
 
 @export var up : bool:
   set(value):
+    if up == value:
+      return
+
     up = value
     # TODO: Tween it quickly.
     if tween:

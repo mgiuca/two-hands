@@ -48,6 +48,7 @@ var flag_state : FlagState:
 func _on_collision_area_body_entered(body: Node3D) -> void:
   if body is Key:
     var key := body as Key
+    # TODO: Don't allow a second key if there's already one.
     key.lock_to_keyhole = self
 
 func _on_collision_area_body_exited(body: Node3D) -> void:
@@ -55,6 +56,7 @@ func _on_collision_area_body_exited(body: Node3D) -> void:
     var key := body as Key
     if key.lock_to_keyhole == self:
       key.lock_to_keyhole = null
+      active = false
 
 func _process(_delta: float) -> void:
   if LevelManager.current_level.victory:

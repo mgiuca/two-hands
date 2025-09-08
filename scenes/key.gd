@@ -29,5 +29,9 @@ func _physics_process(_delta: float) -> void:
     # fixed rotation in the other two axes.
     aligned_rotation.z = Globals.angle_clamp(xr_controller.global_rotation.z, -PI, PI)
     visual.global_rotation = aligned_rotation
+
+    # Set keyhole active if the key is turned far enough.
+    if absf(aligned_rotation.z) >= PI - 0.01:
+      lock_to_keyhole.active = true
   else:
     visual.global_transform = global_transform

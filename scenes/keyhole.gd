@@ -1,3 +1,4 @@
+class_name Keyhole
 extends Node3D
 
 func _on_collision_area_body_entered(body: Node3D) -> void:

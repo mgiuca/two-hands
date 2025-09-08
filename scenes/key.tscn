@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsy54vm4i37kq"]
+[gd_scene load_steps=4 format=3 uid="uid://dsy54vm4i37kq"]
 
+[ext_resource type="Script" uid="uid://dvr8xd1dbichu" path="res://scenes/key.gd" id="1_fttkb"]
 [ext_resource type="PackedScene" uid="uid://bw43r4qqsiwkj" path="res://meshes/key.tscn" id="1_yk2u2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yk2u2"]
@@ -8,6 +9,7 @@ height = 0.20678711
 
 [node name="Key" type="AnimatableBody3D"]
 input_ray_pickable = false
+script = ExtResource("1_fttkb")
 
 [node name="model" parent="." instance=ExtResource("1_yk2u2")]
 transform = Transform3D(-2.2477375e-08, 0, 0.5142224, 0, 0.5142224, 0, -0.5142224, 0, -2.2477375e-08, 0, 0, 0)

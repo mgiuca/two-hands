@@ -15,8 +15,8 @@ extends Node
 ## low-performance device.
 @export var artificial_lag : bool
 
-@onready var key_left : AnimatableBody3D = $KeyLeft
-@onready var key_right : AnimatableBody3D = $KeyRight
+@onready var key_left : Key = $KeyLeft
+@onready var key_right : Key = $KeyRight
 
 func _ready() -> void:
   if Main.ensure_main_and_load_file(self):
@@ -25,6 +25,9 @@ func _ready() -> void:
   LevelManager.current_level = self
 
   hud.debug_visible = debug_info
+
+  key_left.xr_controller = Globals.main.left_hand
+  key_right.xr_controller = Globals.main.right_hand
 
 func _unhandled_input(event: InputEvent) -> void:
   # Meta/UI inputs.
@@ -50,8 +53,3 @@ func _process(delta: float) -> void:
     var x : float
     for i in randi_range(1000000, 4000000):
       x = sin(x)
-
-func _physics_process(_delta: float) -> void:
-  # Move the keys to match the hands.
-  key_left.global_transform = Globals.main.left_hand.global_transform
-  key_right.global_transform = Globals.main.right_hand.global_transform

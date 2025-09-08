@@ -13,3 +13,13 @@ func init_settings(start_music_volume: float, start_fx_volume: float) -> void:
   AudioManager.music_volume = start_music_volume
   AudioManager.fx_volume = start_fx_volume
   inited = true
+
+## Clamps an angle in some range around 0°. min and max must be in (-PI, PI),
+## exclusive.
+@warning_ignore("shadowed_global_identifier")
+func angle_clamp(angle: float, min: float, max: float) -> float:
+  # Normalize angle into the range (-PI, PI].
+  angle = fmod(angle, TAU)
+  if angle > PI:
+    angle -= TAU
+  return clampf(angle, min, max)

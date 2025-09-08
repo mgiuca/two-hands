@@ -27,7 +27,7 @@ func _physics_process(_delta: float) -> void:
     # Only take Z axis rotation from the controllers.
     # TODO: Allow the keyhole to determine the allowed rotation axis and the
     # fixed rotation in the other two axes.
-    aligned_rotation.z = xr_controller.global_rotation.z
+    aligned_rotation.z = Globals.angle_clamp(xr_controller.global_rotation.z, -PI, PI)
     visual.global_rotation = aligned_rotation
   else:
     visual.global_transform = global_transform

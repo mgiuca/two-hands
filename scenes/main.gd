@@ -75,6 +75,23 @@ func _ready() -> void:
   lbl_git_hash.text = get_git_hash()
   lbl_godot_version.text = get_godot_version()
 
+## Gets the VR play area, falling back to a 1x1 meter space if not available.
+func get_play_area() -> PackedVector3Array:
+  var play_area : PackedVector3Array
+  if xr_interface:
+    play_area = xr_interface.get_play_area()
+  else:
+    push_warning('xr_interface not initialized')
+
+  if play_area.is_empty():
+    play_area = PackedVector3Array([
+      Vector3(-0.5, 0, -0.5),
+      Vector3(-0.5, 0, 0.5),
+      Vector3(0.5, 0, 0.5),
+      Vector3(0.5, 0, -0.5),
+    ])
+  return play_area
+
 func get_version_number() -> String:
   var ver : String = ProjectSettings.get_setting('application/config/version')
   var is_debug : bool = OS.is_debug_build()

@@ -15,8 +15,15 @@ extends Node
 ## low-performance device.
 @export var artificial_lag : bool
 
+@onready var keyhole_left : Keyhole = $PedestalLeft/Keyhole
+@onready var keyhole_right : Keyhole = $PedestalRight/Keyhole
+
 @onready var key_left : Key = $KeyLeft
 @onready var key_right : Key = $KeyRight
+
+## Both locks have been activated at the same time. Once true, never set to
+## false (even if locks become inactive).
+var victory : bool
 
 func _ready() -> void:
   if Main.ensure_main_and_load_file(self):
@@ -53,3 +60,14 @@ func _process(delta: float) -> void:
     var x : float
     for i in randi_range(1000000, 4000000):
       x = sin(x)
+
+func complete_level() -> void:
+  victory = true
+
+func _on_keyhole_activate(_keyhole_id: int) -> void:
+  if keyhole_left.active and keyhole_right.active:
+    complete_level()
+
+func _on_keyhole_deactivate(_keyhole_id: int) -> void:
+  # Actually nothing to do here.
+  pass

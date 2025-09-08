@@ -55,3 +55,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.65, -0.5)
 [node name="KeyLeft" parent="." instance=ExtResource("5_ppgk2")]
 
 [node name="KeyRight" parent="." instance=ExtResource("5_ppgk2")]
+
+[connection signal="activate" from="PedestalLeft/Keyhole" to="." method="_on_keyhole_activate" binds= [0]]
+[connection signal="deactivate" from="PedestalLeft/Keyhole" to="." method="_on_keyhole_deactivate" binds= [0]]
+[connection signal="activate" from="PedestalRight/Keyhole" to="." method="_on_keyhole_activate" binds= [1]]
+[connection signal="deactivate" from="PedestalRight/Keyhole" to="." method="_on_keyhole_deactivate" binds= [1]]
+
+[editable path="PedestalLeft"]
+[editable path="PedestalRight"]

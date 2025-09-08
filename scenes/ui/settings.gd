@@ -10,20 +10,16 @@ func _unhandled_input(event: InputEvent) -> void:
     close_dialog()
 
 func show_dialog() -> void:
-  (%ChkFullscreen as CheckBox).button_pressed = Globals.fullscreen
   (%SldMusicVolume as Slider).value = AudioManager.music_volume
   (%SldSoundVolume as Slider).value = AudioManager.fx_volume
   show()
   set_process_unhandled_input(true)
-  (%ChkFullscreen as Control).grab_focus()
+  (%SldMusicVolume as Control).grab_focus()
 
 func close_dialog() -> void:
   hide()
   set_process_unhandled_input(false)
   closed.emit()
-
-func _on_chk_fullscreen_toggled(toggled_on: bool) -> void:
-  Globals.fullscreen = toggled_on
 
 func _on_btn_back_pressed() -> void:
   close_dialog()

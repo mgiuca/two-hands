@@ -27,7 +27,6 @@ func _ready() -> void:
   input_mode = InputMode.KEYBOARD if Input.get_connected_joypads().is_empty() \
                else InputMode.JOYSTICK
   process_mode = Node.PROCESS_MODE_ALWAYS  # So _input works when paused.
-  Globals.fullscreen_changed.connect(set_mouse_mode)
   set_mouse_mode()
 
 func _input(event : InputEvent) -> void:
@@ -48,13 +47,7 @@ func set_mouse_mode() -> void:
   # TODO: Assumes the game will use a mouse only for menus. If the game will
   # always have a mouse cursor, remove the mouse_visible concept and delete the
   # else branches here.
-  if Globals.fullscreen:
-    if mouse_visible and input_mode == InputMode.KEYBOARD:
-      DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CONFINED)
-    else:
-      DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CONFINED_HIDDEN)
+  if mouse_visible and input_mode == InputMode.KEYBOARD:
+    DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
   else:
-    if mouse_visible and input_mode == InputMode.KEYBOARD:
-      DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
-    else:
-      DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
+    DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)

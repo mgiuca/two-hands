@@ -16,9 +16,6 @@ var current_scene_node : Node
 
 @export_group('Settings')
 
-## Starts the game in fullscreen mode.
-@export var start_fullscreen : bool = true
-
 ## Default volume of the music bus.
 @export var music_volume : float = 1.0
 
@@ -47,12 +44,7 @@ var music_fade_tween : Tween
 var xr_interface : XRInterface
 
 func _ready() -> void:
-  if OS.has_feature('web'):
-    # Web can't start in fullscreen (but it can go fullscreen later in response
-    # to a user gesture).
-    start_fullscreen = false
-
-  Globals.init_settings(start_fullscreen, music_volume, sound_effects_volume)
+  Globals.init_settings(music_volume, sound_effects_volume)
   Globals.main = self
   if override_startup_scene != '':
     # This will be set if another scene was loaded by the editor.
@@ -107,11 +99,6 @@ func get_godot_version() -> String:
     ('-' + version_info.status) if version_info.status != 'stable' else ''
   return 'godot %d.%d%s%s' % [version_info.major, version_info.minor,
                               patch_str, status_str]
-
-func _unhandled_input(event: InputEvent) -> void:
-  # Meta/UI inputs.
-  if event.is_action_pressed('toggle_fullscreen'):
-    Globals.fullscreen = not Globals.fullscreen
 
 ## Ensures that Main is the current top-level scene (which it always should be,
 ## but the use of the editor's F6 key to load another scene can cause some other

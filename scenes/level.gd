@@ -34,8 +34,6 @@ func _unhandled_input(event: InputEvent) -> void:
       get_tree().quit()
     else:
       (%Menu as Menu).show_menu()
-  elif event.is_action_pressed('toggle_fullscreen'):
-    Globals.fullscreen = not Globals.fullscreen
   elif event.is_action_pressed('debug_prev_level'):
     LevelManager.switch_to_prev_level()
   elif event.is_action_pressed('debug_next_level'):

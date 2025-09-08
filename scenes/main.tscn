@@ -9,6 +9,8 @@
 [node name="Main" type="Node3D"]
 script = ExtResource("1_c0h74")
 current_scene = ExtResource("2_l2wju")
+music_volume = null
+sound_effects_volume = null
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3

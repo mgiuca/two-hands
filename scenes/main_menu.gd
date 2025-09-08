@@ -7,9 +7,6 @@ var txt_credits_focused : bool = false
 
 @export_group('Settings')
 
-## Starts the game in fullscreen mode.
-@export var start_fullscreen : bool = true
-
 ## Default volume of the music bus (0.0-1.0).
 @export var music_volume : float = 1.0
 
@@ -20,7 +17,7 @@ func _ready() -> void:
   if Main.ensure_main_and_load_file(self):
     return
 
-  Globals.init_settings(start_fullscreen, music_volume, sound_effects_volume)
+  Globals.init_settings(music_volume, sound_effects_volume)
 
   InputManager.mouse_visible = true
 
@@ -28,17 +25,8 @@ func _ready() -> void:
     # Doesn't make sense to "quit" on mobile or web.
     # (Especially web, which just crashes.)
     (%BtnQuit as Control).hide()
-  if OS.has_feature('web'):
-    # Set up the "Exit Fullscreen" main menu button as a substitute for "Quit".
-    Globals.fullscreen_changed.connect(_on_fullscreen_changed)
-    _on_fullscreen_changed()
-  else:
-    (%BtnExitFullscreen as Control).hide()
 
   (%BtnStart as Control).grab_focus()
-
-func _on_fullscreen_changed() -> void:
-  (%BtnExitFullscreen as Control).visible = Globals.fullscreen
 
 func _unhandled_input(event: InputEvent) -> void:
   if event.is_action_pressed('ui_cancel'):
@@ -78,9 +66,6 @@ func _on_btn_credits_pressed() -> void:
 
 func _on_btn_quit_pressed() -> void:
   get_tree().quit()
-
-func _on_btn_exit_fullscreen_pressed() -> void:
-  Globals.fullscreen = false
 
 func _on_settings_closed() -> void:
   (%TopLevel as Control).show()

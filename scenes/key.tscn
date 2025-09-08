@@ -6,7 +6,8 @@
 radius = 0.044433594
 height = 0.20678711
 
-[node name="Key" type="StaticBody3D"]
+[node name="Key" type="AnimatableBody3D"]
+input_ray_pickable = false
 
 [node name="model" parent="." instance=ExtResource("1_yk2u2")]
 transform = Transform3D(-2.2477375e-08, 0, 0.5142224, 0, 0.5142224, 0, -0.5142224, 0, -2.2477375e-08, 0, 0, 0)

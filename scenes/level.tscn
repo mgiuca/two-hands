@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://tdgkmflrwhol"]
+[gd_scene load_steps=9 format=3 uid="uid://tdgkmflrwhol"]
 
 [ext_resource type="Script" uid="uid://6el64wahmcuf" path="res://scenes/level.gd" id="1_j03b7"]
 [ext_resource type="PackedScene" uid="uid://c7js5gws2kjj5" path="res://scenes/ui/menu.tscn" id="3_8hwtq"]
 [ext_resource type="PackedScene" uid="uid://cj46p1qq7r6sp" path="res://scenes/ui/hud.tscn" id="4_epnyg"]
 [ext_resource type="PackedScene" uid="uid://b57w04rr00g0x" path="res://scenes/pedestal_with_keyhole.tscn" id="4_mx8sn"]
+[ext_resource type="PackedScene" uid="uid://dsy54vm4i37kq" path="res://scenes/key.tscn" id="5_ppgk2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w8frs"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -50,3 +51,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.65, -0.5)
 
 [node name="PedestalRight" parent="." instance=ExtResource("4_mx8sn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.65, -0.5)
+
+[node name="KeyLeft" parent="." instance=ExtResource("5_ppgk2")]
+
+[node name="KeyRight" parent="." instance=ExtResource("5_ppgk2")]

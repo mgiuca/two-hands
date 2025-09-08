@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkk0yyari5lal"]
+[gd_scene load_steps=5 format=3 uid="uid://bkk0yyari5lal"]
 
 [ext_resource type="Material" uid="uid://cc78ffnb8dytv" path="res://materials/wood.tres" id="1_5m3i7"]
+[ext_resource type="Script" uid="uid://ddg1gdy43ys40" path="res://scenes/keyhole.gd" id="1_ua3lo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5m3i7"]
 albedo_color = Color(0, 0, 0, 1)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5m3i7"]
+radius = 0.03955078
+height = 0.18508911
+
 [node name="Keyhole" type="Node3D"]
+script = ExtResource("1_ua3lo")
 
 [node name="Woodbox" type="CSGBox3D" parent="."]
 size = Vector3(0.2, 0.2, 0.2)
@@ -25,3 +31,13 @@ operation = 2
 height = 2.0356445
 sides = 16
 material = SubResource("StandardMaterial3D_5m3i7")
+
+[node name="CollisionArea" type="Area3D" parent="."]
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00032043457, 0.070689924)
+shape = SubResource("CapsuleShape3D_5m3i7")
+
+[connection signal="body_entered" from="CollisionArea" to="." method="_on_collision_area_body_entered"]
+[connection signal="body_exited" from="CollisionArea" to="." method="_on_collision_area_body_exited"]

@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://byc7se7k0wfad"]
+[gd_scene load_steps=4 format=3 uid="uid://byc7se7k0wfad"]
 
 [ext_resource type="Script" uid="uid://nx224gcg15g1" path="res://scenes/main.gd" id="1_c0h74"]
 [ext_resource type="PackedScene" uid="uid://dhouj103pnqy3" path="res://scenes/levels/level1.tscn" id="2_tbgi4"]
 [ext_resource type="Theme" uid="uid://cav6s4wk6wpbp" path="res://themes/ui.tres" id="3_sugp2"]
-[ext_resource type="PackedScene" uid="uid://dsy54vm4i37kq" path="res://scenes/key.tscn" id="4_tbgi4"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_c0h74")
@@ -102,11 +101,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
 show_when_tracked = true
 
-[node name="Key" parent="XROrigin/LeftHand" instance=ExtResource("4_tbgi4")]
-
 [node name="RightHand" type="XRController3D" parent="XROrigin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
 show_when_tracked = true
-
-[node name="Key" parent="XROrigin/RightHand" instance=ExtResource("4_tbgi4")]

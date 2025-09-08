@@ -15,6 +15,9 @@ extends Node
 ## low-performance device.
 @export var artificial_lag : bool
 
+@onready var key_left : AnimatableBody3D = $KeyLeft
+@onready var key_right : AnimatableBody3D = $KeyRight
+
 func _ready() -> void:
   if Main.ensure_main_and_load_file(self):
     return
@@ -47,3 +50,8 @@ func _process(delta: float) -> void:
     var x : float
     for i in randi_range(1000000, 4000000):
       x = sin(x)
+
+func _physics_process(_delta: float) -> void:
+  # Move the keys to match the hands.
+  key_left.global_transform = Globals.main.left_hand.global_transform
+  key_right.global_transform = Globals.main.right_hand.global_transform

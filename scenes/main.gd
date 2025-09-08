@@ -43,6 +43,9 @@ var music_fade_tween : Tween
 
 var xr_interface : XRInterface
 
+@onready var left_hand : XRController3D = $XROrigin/LeftHand
+@onready var right_hand : XRController3D = $XROrigin/RightHand
+
 func _ready() -> void:
   Globals.init_settings(music_volume, sound_effects_volume)
   Globals.main = self

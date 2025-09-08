@@ -21,6 +21,8 @@ InputManager="*res://scenes/managers/input_manager.gd"
 AudioManager="*res://scenes/managers/audio_manager.gd"
 LevelManager="*res://scenes/managers/level_manager.gd"
 GitStatus="*res://addons/git-status/utility.gd"
+XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
+XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"
 
 [debug]
 
@@ -41,7 +43,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/git-status/plugin.cfg")
+enabled=PackedStringArray("res://addons/git-status/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg")
 
 [input]
 

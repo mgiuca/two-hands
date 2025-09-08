@@ -1,5 +1,7 @@
 # 3D artwork
 
+* [Platformer Kit](https://kenney.nl/assets/platformer-kit) by Kenney.
+
 # 2D artwork
 
 # Sounds

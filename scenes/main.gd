@@ -46,14 +46,6 @@ var xr_interface : XRInterface
 func _ready() -> void:
   Globals.init_settings(music_volume, sound_effects_volume)
   Globals.main = self
-  if override_startup_scene != '':
-    # This will be set if another scene was loaded by the editor.
-    change_scene_to_file(override_startup_scene)
-  else:
-    change_scene_to_packed(current_scene)
-
-  AudioManager.audio_volume_changed.connect(_on_audio_volume_changed)
-  _on_audio_volume_changed(AudioManager.AudioType.MUSIC, AudioManager.music_volume)
 
   # Initialize OpenXR.
   # TODO: Also support WebXR.
@@ -68,6 +60,16 @@ func _ready() -> void:
     get_viewport().use_xr = true
   else:
     print("OpenXR not initialized, please check if your headset is connected")
+    return
+
+  if override_startup_scene != '':
+    # This will be set if another scene was loaded by the editor.
+    change_scene_to_file(override_startup_scene)
+  else:
+    change_scene_to_packed(current_scene)
+
+  AudioManager.audio_volume_changed.connect(_on_audio_volume_changed)
+  _on_audio_volume_changed(AudioManager.AudioType.MUSIC, AudioManager.music_volume)
 
   lbl_version.text = get_version_number()
   lbl_git_hash.text = get_git_hash()

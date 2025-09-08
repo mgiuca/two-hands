@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://tdgkmflrwhol"]
+[gd_scene load_steps=8 format=3 uid="uid://tdgkmflrwhol"]
 
 [ext_resource type="Script" uid="uid://6el64wahmcuf" path="res://scenes/level.gd" id="1_j03b7"]
 [ext_resource type="PackedScene" uid="uid://c7js5gws2kjj5" path="res://scenes/ui/menu.tscn" id="3_8hwtq"]
 [ext_resource type="PackedScene" uid="uid://cj46p1qq7r6sp" path="res://scenes/ui/hud.tscn" id="4_epnyg"]
+[ext_resource type="PackedScene" uid="uid://bkk0yyari5lal" path="res://scenes/keyhole.tscn" id="4_mx8sn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w8frs"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -37,3 +38,23 @@ environment = SubResource("Environment_mx8sn")
 unique_name_in_owner = true
 process_mode = 2
 visible = false
+
+[node name="Static" type="Node3D" parent="."]
+
+[node name="Ground" type="CSGBox3D" parent="Static"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(11, 1, 11)
+
+[node name="BoxLeft" type="CSGBox3D" parent="Static"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.65, -0.5)
+size = Vector3(0.5, 1.3, 0.5)
+
+[node name="BoxRight" type="CSGBox3D" parent="Static"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.65, -0.5)
+size = Vector3(0.5, 1.3, 0.5)
+
+[node name="KeyholeLeft" parent="." instance=ExtResource("4_mx8sn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1, -0.299)
+
+[node name="KeyholeRight" parent="." instance=ExtResource("4_mx8sn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1, -0.299)

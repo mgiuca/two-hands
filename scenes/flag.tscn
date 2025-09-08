@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcgyrk7uf2qml"]
+
+[ext_resource type="Script" uid="uid://bq15rcb52yf2o" path="res://scenes/flag.gd" id="1_32e5v"]
+
+[node name="Flag" type="Node3D"]
+script = ExtResource("1_32e5v")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Sprite" type="Sprite3D" parent="Pivot"]
+unique_name_in_owner = true
+transform = Transform3D(0.030442724, 0, 0, 0, -1.3306937e-09, 0.030442724, 0, -0.030442724, -1.3306937e-09, 0, 0, -0.038379937)

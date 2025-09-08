@@ -16,12 +16,12 @@ transform = Transform3D(0.08050533, 0, 0, 0, 0.08050533, 0, 0, 0, 0.08050533, 0,
 material_override = SubResource("StandardMaterial3D_5m3i7")
 operation = 2
 polygon = PackedVector2Array(-0.3921969, -0.46982265, -0.1881783, 0.7769569, 0.188, 0.777, 0.392, -0.47)
-depth = 0.4
+depth = 2.0
 material = SubResource("StandardMaterial3D_5m3i7")
 
 [node name="KeyholeTop" type="CSGCylinder3D" parent="Woodbox"]
-transform = Transform3D(0.08050533, 0, 0, 0, -3.5189998e-09, -0.08050533, 0, 0.08050533, -3.5189998e-09, 0, 0.0443705, 0.09194947)
+transform = Transform3D(0.08050533, 0, 0, 0, -3.5189998e-09, -0.08050533, 0, 0.08050533, -3.5189998e-09, 0, 0.0443705, 0.025955915)
 operation = 2
-height = 0.4
+height = 2.0356445
 sides = 16
 material = SubResource("StandardMaterial3D_5m3i7")

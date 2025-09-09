@@ -47,15 +47,10 @@ func _on_collision_area_body_exited(body: Node3D) -> void:
       active = false
       snd_remove.play()
 
-func _process(_delta: float) -> void:
-  if LevelManager.current_level.victory:
-    flags.state = Flags.State.TWO
-  else:
-    flags.state = Flags.State.ONE if active else Flags.State.NONE
-
-
 func _on_activate() -> void:
+  flags.one_active = true
   snd_click.play()
 
 func _on_deactivate() -> void:
+  flags.one_active = false
   snd_unclick.play()

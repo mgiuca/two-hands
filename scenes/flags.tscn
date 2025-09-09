@@ -7,6 +7,7 @@
 
 [node name="Flags" type="Node3D"]
 script = ExtResource("1_e6vwc")
+one_active = null
 
 [node name="FlagOneKey" parent="." instance=ExtResource("2_j5w1v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.102, 0.099)

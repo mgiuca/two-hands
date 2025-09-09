@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://bitpgl5vt47x2"]
+
+[ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_180wm"]
+[ext_resource type="PackedScene" uid="uid://bkk0yyari5lal" path="res://scenes/keyhole.tscn" id="2_180wm"]
+
+[node name="Level" node_paths=PackedStringArray("activator1", "activator2") instance=ExtResource("1_180wm")]
+activator1 = NodePath("Cave/KeyholeTop")
+activator2 = NodePath("Cave/KeyholeBottom")
+
+[node name="Static" type="Node3D" parent="." index="7"]
+
+[node name="Ground" type="CSGBox3D" parent="Static" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(11, 1, 11)
+
+[node name="Cave" type="CSGBox3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1.7558129)
+size = Vector3(3, 2, 3)
+
+[node name="Tunnel" type="CSGBox3D" parent="Cave" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10205078, 1.1760254)
+operation = 2
+size = Vector3(1, 0.79589844, 0.6479492)
+
+[node name="BoxHoleTop" type="CSGBox3D" parent="Cave" index="1"]
+transform = Transform3D(0.9508958, 0, 0, 0, 0.9508958, 0, 0, 0, 0.9508958, 0, 0.5, 1.492339)
+operation = 2
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="KeyholeTop" parent="Cave" index="2" instance=ExtResource("2_180wm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.492339)
+
+[node name="BoxHoleBottom" type="CSGBox3D" parent="Cave" index="3"]
+transform = Transform3D(0.9508958, 0, 0, 0, 0.9508958, 0, 0, 0, 0.9508958, 0, -0.0070016384, 0.83809066)
+operation = 2
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="KeyholeBottom" parent="Cave" index="4" instance=ExtResource("2_180wm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0070016384, 0.83809066)

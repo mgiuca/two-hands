@@ -62,8 +62,7 @@ func _ready() -> void:
     # Change our main viewport to output to the HMD
     get_viewport().use_xr = true
   else:
-    print("OpenXR not initialized, please check if your headset is connected")
-    return
+    print("OpenXR not initialized; assuming regular mode")
 
   if override_startup_scene != '':
     # This will be set if another scene was loaded by the editor.

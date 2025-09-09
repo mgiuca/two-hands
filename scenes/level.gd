@@ -21,6 +21,8 @@ extends Node
 @onready var key_left : Key = $KeyLeft
 @onready var key_right : Key = $KeyRight
 
+@onready var snd_success : AudioStreamPlayer = $SndSuccess
+
 ## Both locks have been activated at the same time. Once true, never set to
 ## false (even if locks become inactive).
 var victory : bool
@@ -62,7 +64,11 @@ func _process(delta: float) -> void:
       x = sin(x)
 
 func complete_level() -> void:
+  if victory:
+    return
+
   victory = true
+  snd_success.play()
 
 func _on_keyhole_activate(_keyhole_id: int) -> void:
   if keyhole_left.active and keyhole_right.active:

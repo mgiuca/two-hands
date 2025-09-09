@@ -58,3 +58,9 @@ visible = false
 
 [node name="SndSuccess" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_wc255")
+
+[node name="WinTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="WinTimer" to="." method="_on_win_timer_timeout"]

@@ -23,6 +23,8 @@ extends Node
 ## low-performance device.
 @export var artificial_lag : bool
 
+@onready var win_timer : Timer = $WinTimer
+
 @onready var snd_success : AudioStreamPlayer = $SndSuccess
 
 ## Both locks have been activated at the same time. Once true, never set to
@@ -76,6 +78,7 @@ func complete_level() -> void:
 
   victory = true
   snd_success.play()
+  win_timer.start()
 
 func _on_activator_activate(_activator_id: int) -> void:
   if activator1.active and activator2.active:
@@ -84,3 +87,6 @@ func _on_activator_activate(_activator_id: int) -> void:
 func _on_activator_deactivate(_activator_id: int) -> void:
   # Actually nothing to do here.
   pass
+
+func _on_win_timer_timeout() -> void:
+  LevelManager.switch_to_next_level_or_quit()

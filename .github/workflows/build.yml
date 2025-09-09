@@ -12,7 +12,7 @@ env:
   GODOT_VERSION: 4.5-rc1
   # Same as GODOT_VERSION but with '.' instead of '-'.
   GODOT_VERSION_DOT: 4.5.rc1
-  EXPORT_NAME: app-name
+  EXPORT_NAME: two-keys-vr
   # debug or release
   EXPORT_BUILD: release
 

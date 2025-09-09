@@ -95,7 +95,6 @@ shape = SubResource("CapsuleShape3D_5m3i7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.046323612, 0.14130442)
 
 [node name="Flags" parent="." instance=ExtResource("3_2cbv6")]
-one_active = false
 
 [node name="SndInsert" type="AudioStreamPlayer3D" parent="."]
 visible = false

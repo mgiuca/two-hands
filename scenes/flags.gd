@@ -14,6 +14,8 @@ enum State {
 @export var state : State = State.NONE:
   set(value):
     state = value
+    if flag_one_key == null or flag_two_keys == null:
+      return
     match value:
       State.NONE:
         flag_one_key.up = false
@@ -34,6 +36,10 @@ enum State {
     # In editor only, set the state from this. (In game, _process does it.)
     if Engine.is_editor_hint():
       state = State.ONE if value else State.NONE
+
+func _ready() -> void:
+  flag_one_key.up = state == State.ONE
+  flag_two_keys.up = state == State.TWO
 
 func _process(_delta: float) -> void:
   if Engine.is_editor_hint():

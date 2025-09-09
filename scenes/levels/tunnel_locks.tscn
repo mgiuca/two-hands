@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bitpgl5vt47x2"]
+[gd_scene load_steps=4 format=3 uid="uid://bitpgl5vt47x2"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_180wm"]
 [ext_resource type="PackedScene" uid="uid://bkk0yyari5lal" path="res://scenes/keyhole.tscn" id="2_180wm"]
+[ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="2_rm5jy"]
 
 [node name="Level" node_paths=PackedStringArray("activator1", "activator2") instance=ExtResource("1_180wm")]
 activator1 = NodePath("Cave/KeyholeTop")
@@ -42,3 +43,6 @@ size = Vector3(0.2, 0.2, 0.2)
 
 [node name="KeyholeBottom" parent="Cave" index="4" instance=ExtResource("2_180wm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0070016384, 0.83809066)
+
+[node name="Door" parent="." index="10" instance=ExtResource("2_rm5jy")]
+transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -5.1633463)

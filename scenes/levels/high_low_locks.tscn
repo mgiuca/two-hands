@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1fernks3jkny"]
+[gd_scene load_steps=4 format=3 uid="uid://d1fernks3jkny"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_g8rwh"]
 [ext_resource type="PackedScene" uid="uid://bkk0yyari5lal" path="res://scenes/keyhole.tscn" id="2_g8rwh"]
+[ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="3_ofxq6"]
 
 [node name="Level" node_paths=PackedStringArray("activator1", "activator2") instance=ExtResource("1_g8rwh")]
 activator1 = NodePath("Pedestal/KeyholeTop")
@@ -33,7 +34,10 @@ size = Vector3(0.2, 0.2, 0.2)
 [node name="KeyholeBottom" parent="Pedestal" index="3" instance=ExtResource("2_g8rwh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6407427, 0.23652616)
 
-[node name="SecondaryLight" type="OmniLight3D" parent="." index="10"]
+[node name="Door" parent="." index="9" instance=ExtResource("3_ofxq6")]
+transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -5.1633463)
+
+[node name="SecondaryLight" type="OmniLight3D" parent="." index="11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2278504, 0.83508337)
 light_color = Color(1, 0.94133335, 0.68, 1)
 light_energy = 0.34

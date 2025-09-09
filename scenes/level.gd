@@ -85,6 +85,7 @@ func complete_level() -> void:
   victory = true
   snd_success.play()
   win_timer.start()
+  open_door()
 
 func _on_activator_activate(_activator_id: int) -> void:
   if activator1.active and activator2.active:
@@ -96,3 +97,14 @@ func _on_activator_deactivate(_activator_id: int) -> void:
 
 func _on_win_timer_timeout() -> void:
   LevelManager.switch_to_next_level_or_quit()
+
+## Opens the door, if there is one.
+##
+## Not all levels have a door; if there isn't a top-level node called Door,
+## this just does nothing.
+func open_door() -> void:
+  var door : Door = get_node_or_null('Door')
+  if door == null:
+    return
+
+  door.open()

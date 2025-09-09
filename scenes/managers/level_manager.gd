@@ -8,6 +8,7 @@ const LEVEL_NAMES : Array[String] = [
   'far_locks',
   'high_low_locks',
   'tunnel_locks',
+  'sliding_locks',
 ]
 
 # Mapping from level basename to display name. If the name is missing, the
@@ -17,6 +18,7 @@ const LEVEL_DISPLAY_NAMES : Dictionary[String, String] = {
   'far_locks': 'Far Locks',
   'high_low_locks': 'High and Low Locks',
   'tunnel_locks': 'Tunnel Locks',
+  'sliding_locks': 'Sliding Locks',
 }
 
 var current_level : Level:

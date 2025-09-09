@@ -1,0 +1,110 @@
+[gd_scene load_steps=6 format=3 uid="uid://djcn8g4voxvv7"]
+
+[ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_pp17t"]
+[ext_resource type="PackedScene" uid="uid://b57w04rr00g0x" path="res://scenes/pedestal_with_keyhole.tscn" id="2_kwq4q"]
+
+[sub_resource type="Animation" id="Animation_pp17t"]
+resource_name = "slide_loop"
+length = 5.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PedestalTop:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1, 1.201, -0.5), Vector3(1, 1.201, -0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PedestalBottom:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 0.65, -0.5), Vector3(-1, 0.65, -0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_kwq4q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PedestalTop:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.201, -0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PedestalBottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.65, -0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wonm7"]
+_data = {
+&"RESET": SubResource("Animation_kwq4q"),
+&"slide_loop": SubResource("Animation_pp17t")
+}
+
+[node name="Level" node_paths=PackedStringArray("activator1", "activator2") instance=ExtResource("1_pp17t")]
+activator1 = NodePath("PedestalTop/Keyhole")
+activator2 = NodePath("PedestalBottom/Keyhole")
+
+[node name="Static" type="Node3D" parent="." index="7"]
+
+[node name="Ground" type="CSGBox3D" parent="Static" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(11, 1, 11)
+
+[node name="PedestalTop" parent="." index="8" instance=ExtResource("2_kwq4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.201, -0.5)
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="BoxHole" parent="PedestalTop" index="0"]
+transform = Transform3D(0.9508958, 0, 0, 0, 0.9508958, 0, 0, 0, 0.9508958, 0, 0, 0.23652616)
+
+[node name="Keyhole" parent="PedestalTop" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.23652616)
+
+[node name="PedestalBottom" parent="." index="9" instance=ExtResource("2_kwq4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, -0.5)
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="BoxHole" parent="PedestalBottom" index="0"]
+transform = Transform3D(0.9508958, 0, 0, 0, 0.9508958, 0, 0, 0, 0.9508958, 0, 0, 0.23652616)
+
+[node name="Keyhole" parent="PedestalBottom" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.23652616)
+
+[node name="SecondaryLight" type="OmniLight3D" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2278504, 0.83508337)
+light_color = Color(1, 0.94133335, 0.68, 1)
+light_energy = 0.34
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="12"]
+libraries = {
+&"": SubResource("AnimationLibrary_wonm7")
+}
+autoplay = "slide_loop"
+
+[editable path="PedestalTop"]
+[editable path="PedestalBottom"]

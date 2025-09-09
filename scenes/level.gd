@@ -3,6 +3,14 @@ extends Node
 
 @onready var hud : HUD = $UI/HUD
 
+@export_group('Setup')
+
+@export var activator1 : Activator
+@export var activator2 : Activator
+
+@onready var key_left : Key = $KeyLeft
+@onready var key_right : Key = $KeyRight
+
 @export_group('Debug')
 
 ## If true, UI shows lots of extra debugging info.
@@ -14,12 +22,6 @@ extends Node
 ## Introduces an artificial random lag each (actual) frame to simulate a
 ## low-performance device.
 @export var artificial_lag : bool
-
-@onready var keyhole_left : Keyhole = $PedestalLeft/Keyhole
-@onready var keyhole_right : Keyhole = $PedestalRight/Keyhole
-
-@onready var key_left : Key = $KeyLeft
-@onready var key_right : Key = $KeyRight
 
 @onready var snd_success : AudioStreamPlayer = $SndSuccess
 
@@ -34,6 +36,11 @@ func _ready() -> void:
   LevelManager.current_level = self
 
   hud.debug_visible = debug_info
+
+  activator1.activate.connect(_on_activator_activate.bind(0))
+  activator1.deactivate.connect(_on_activator_deactivate.bind(0))
+  activator2.activate.connect(_on_activator_activate.bind(1))
+  activator2.deactivate.connect(_on_activator_deactivate.bind(1))
 
   key_left.xr_controller = Globals.main.left_hand
   key_right.xr_controller = Globals.main.right_hand
@@ -70,10 +77,10 @@ func complete_level() -> void:
   victory = true
   snd_success.play()
 
-func _on_keyhole_activate(_keyhole_id: int) -> void:
-  if keyhole_left.active and keyhole_right.active:
+func _on_activator_activate(_activator_id: int) -> void:
+  if activator1.active and activator2.active:
     complete_level()
 
-func _on_keyhole_deactivate(_keyhole_id: int) -> void:
+func _on_activator_deactivate(_activator_id: int) -> void:
   # Actually nothing to do here.
   pass

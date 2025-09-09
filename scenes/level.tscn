@@ -31,8 +31,10 @@ stream_2/stream = ExtResource("8_8iemx")
 stream_3/stream = ExtResource("9_64w2a")
 stream_4/stream = ExtResource("10_fpun6")
 
-[node name="Level" type="Node"]
+[node name="Level" type="Node" node_paths=PackedStringArray("activator1", "activator2")]
 script = ExtResource("1_j03b7")
+activator1 = NodePath("PedestalLeft/Keyhole")
+activator2 = NodePath("PedestalRight/Keyhole")
 debug_info = true
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
@@ -71,11 +73,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.65, -0.5)
 
 [node name="SndSuccess" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_wc255")
-
-[connection signal="activate" from="PedestalLeft/Keyhole" to="." method="_on_keyhole_activate" binds= [0]]
-[connection signal="deactivate" from="PedestalLeft/Keyhole" to="." method="_on_keyhole_deactivate" binds= [0]]
-[connection signal="activate" from="PedestalRight/Keyhole" to="." method="_on_keyhole_activate" binds= [1]]
-[connection signal="deactivate" from="PedestalRight/Keyhole" to="." method="_on_keyhole_deactivate" binds= [1]]
 
 [editable path="PedestalLeft"]
 [editable path="PedestalRight"]

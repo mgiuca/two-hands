@@ -1,5 +1,5 @@
 class_name Keyhole
-extends Node3D
+extends Activator
 
 @onready var key_lock_marker : Marker3D = $KeyLockMarker
 @onready var flags : Flags = $Flags
@@ -13,26 +13,6 @@ extends Node3D
 var key_lock_global_position : Vector3:
   get():
     return key_lock_marker.global_position
-
-## Whether a key is actively turned in the lock (thus, is transmitting an
-## activation "signal", two of which win a level).
-var active : bool:
-  set(value):
-    if active == value:
-      return
-    active = value
-    if active:
-      activate.emit()
-      snd_click.play()
-    else:
-      deactivate.emit()
-      snd_unclick.play()
-
-## Emitted when the lock activates (e.g. the key turns).
-signal activate
-
-## Emitted when the lock deactivates (e.g. the key is unturned).
-signal deactivate
 
 var prev_angle_played_sound : float = 0.0
 
@@ -72,3 +52,10 @@ func _process(_delta: float) -> void:
     flags.state = Flags.State.TWO
   else:
     flags.state = Flags.State.ONE if active else Flags.State.NONE
+
+
+func _on_activate() -> void:
+  snd_click.play()
+
+func _on_deactivate() -> void:
+  snd_unclick.play()

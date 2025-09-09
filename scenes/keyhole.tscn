@@ -111,5 +111,7 @@ stream = SubResource("AudioStreamRandomizer_22e3x")
 stream = SubResource("AudioStreamRandomizer_d7fjr")
 volume_db = -35.0
 
+[connection signal="activate" from="." to="." method="_on_activate"]
+[connection signal="deactivate" from="." to="." method="_on_deactivate"]
 [connection signal="body_entered" from="CollisionArea" to="." method="_on_collision_area_body_entered"]
 [connection signal="body_exited" from="CollisionArea" to="." method="_on_collision_area_body_exited"]

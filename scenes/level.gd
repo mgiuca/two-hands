@@ -33,6 +33,10 @@ var victory : bool
 
 func _ready() -> void:
   if Main.ensure_main_and_load_file(self):
+    # Unloading the scene. Disable these or their _physics_process will crash before the scene
+    # is unloaded.
+    key_left.process_mode = Node.PROCESS_MODE_DISABLED
+    key_right.process_mode = Node.PROCESS_MODE_DISABLED
     return
 
   LevelManager.current_level = self

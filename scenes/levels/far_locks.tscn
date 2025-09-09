@@ -58,7 +58,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AACAvmZmJr8AAIC+AACAvmZmJj8AAIC+AACAvmZmJr8AAIA+AACAvmZmJr8AAIC+AACAvmZmJr8AAIA+AACAPmZmJr8AAIC+AACAvmZmJr8AAIC+AACAPmZmJr8AAIC+AACAvmZmJj8AAIC+AACAvmZmJr8AAIA+U77CvZ+Dgj4AAIA+U77CPZ+Dgj4AAIA+AACAvmZmJj8AAIA+AACAvmZmJj8AAIA+U77Cvcni4z4AAIA+AACAvmZmJj8AAIC+AACAPmZmJj8AAIA+AACAvmZmJj8AAIA+U77CPcni4z4AAIA+AACAPmZmJr8AAIA+AACAPmZmJj8AAIA+AACAPmZmJr8AAIA+AACAPmZmJr8AAIC+AACAPmZmJr8AAIA+AACAPmZmJj8AAIA+AACAPmZmJj8AAIC+AACAPmZmJj8AAIC+AACAPmZmJj8AAIC+U77CvZ+Dgj7A1BA+U77CvZ+Dgj4AAIA+U77Cvcni4z4AAIA+U77CvZ+Dgj7A1BA+U77Cvcni4z7A1BA+U77CPZ+Dgj7A1BA+U77CvZ+Dgj7A1BA+U77CPZ+Dgj7A1BA+U77CvZ+Dgj4AAIA+U77Cvcni4z7A1BA+U77Cvcni4z7A1BA+U77Cvcni4z4AAIA+U77CPcni4z4AAIA+U77CPZ+Dgj4AAIA+U77CPZ+Dgj7A1BA+U77CPcni4z7A1BA+U77CPZ+Dgj4AAIA+U77CPcni4z7A1BA+U77CPcni4z7A1BA+U77CPcni4z4AAIA+AAAAgP9//n8AAACA/3/+fwAAAID/f/5/AIAAAP//AAAAgAAA//8AAACAAAD//wAA/////wAA/z//////AAD/P/////8AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8/AAAAgP9//n//f/9/AAD/P/9//38AAP8/AID/////AAAAgP////8AAACA/////wAA/3//fwAA/z8AgAAA//8AAP9//38AAP8//3//fwAA/z///wCA/3/+f///AID/f/5///8AgP9//n//////AAD/PwCA/////wAA//8AgP9//n///wCA/38AgP//AID/fwCA//8AgP9/AID/f/9/AAD/v/9//38AAP+//3//fwAA/78AgP///////wCA////////AID//////////wCA/38AgACAAAD/////AIAAAP////8AgAAA/////wCA////////AAAAgP9/AIAAAACA/38AgAAAAID/fwCA/3//fwAA/78AgAAA/////wAAAID/fwCA")
 }]
 
-[node name="Level" node_paths=PackedStringArray("activator1", "activator2") instance=ExtResource("1_bvxa4")]
+[node name="Level2" node_paths=PackedStringArray("activator1", "activator2") instance=ExtResource("1_bvxa4")]
 activator1 = NodePath("KeyholeLeft")
 activator2 = NodePath("KeyholeRight")
 
@@ -87,8 +87,14 @@ skeleton = NodePath("../..")
 [node name="KeyholeLeft" parent="." index="8" instance=ExtResource("2_bvxa4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 1, -0.26347384)
 
+[node name="LightmapProbe" type="LightmapProbe" parent="KeyholeLeft" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.016439378)
+
 [node name="KeyholeRight" parent="." index="9" instance=ExtResource("2_bvxa4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1, -0.26347384)
+
+[node name="LightmapProbe" type="LightmapProbe" parent="KeyholeRight" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.016571462)
 
 [node name="SecondaryLight" type="OmniLight3D" parent="." index="11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2278504, 0.83508337)

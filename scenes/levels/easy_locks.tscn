@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_3olt6"]
 [ext_resource type="PackedScene" uid="uid://b57w04rr00g0x" path="res://scenes/pedestal_with_keyhole.tscn" id="2_4tcl0"]
 
-[node name="Level1" node_paths=PackedStringArray("activator1", "activator2") instance=ExtResource("1_3olt6")]
+[node name="Level" node_paths=PackedStringArray("activator1", "activator2") instance=ExtResource("1_3olt6")]
 activator1 = NodePath("PedestalLeft/Keyhole")
 activator2 = NodePath("PedestalRight/Keyhole")
 

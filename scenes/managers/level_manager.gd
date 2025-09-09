@@ -4,13 +4,13 @@ extends Node
 
 # List of levels, in order, by base filename (no dir or extension).
 const LEVEL_NAMES : Array[String] = [
-  'level1',
+  'easy_locks',
 ]
 
 # Mapping from level basename to display name. If the name is missing, the
 # game will display the basename with a warning.
 const LEVEL_DISPLAY_NAMES : Dictionary[String, String] = {
-  'level1': 'Level One',
+  'easy_locks': 'Easy Locks',
 }
 
 var current_level : Level:

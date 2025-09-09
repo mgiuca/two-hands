@@ -39,13 +39,6 @@ jobs:
           path: out
           run-id: ${{inputs.run_id}}
           github-token: ${{ github.token }}
-      - name: Download Linux build
-        uses: actions/download-artifact@v5
-        with:
-          name: ${{env.EXPORT_NAME}}-linux
-          path: out/linux
-          run-id: ${{inputs.run_id}}
-          github-token: ${{ github.token }}
       - name: Download Windows build
         uses: actions/download-artifact@v5
         with:
@@ -80,6 +73,5 @@ jobs:
         # Automatically uses BUTLER_API_KEY environment variable.
         run: |
           /tmp/butler/butler login
-          /tmp/butler/butler push out/linux ${ITCH_TARGET}:linux${{inputs.channel_suffix}} --userversion-file out/project_version.txt
           /tmp/butler/butler push out/windows ${ITCH_TARGET}:windows${{inputs.channel_suffix}} --userversion-file out/project_version.txt
           /tmp/butler/butler push out/html ${ITCH_TARGET}:web${{inputs.channel_suffix}} --userversion-file out/project_version.txt

@@ -11,7 +11,7 @@ enum State {
   NONE, ONE, TWO
 }
 
-@export var state : State:
+@export var state : State = State.NONE:
   set(value):
     state = value
     match value:
@@ -28,7 +28,7 @@ enum State {
 ## Sets whether the local activator connected to this flag is active. Controls
 ## the state of the yellow "one key" flag. Always overridden by the level being
 ## completed.
-@export var one_active : bool:
+@export var one_active : bool = false:
   set(value):
     one_active = value
     # In editor only, set the state from this. (In game, _process does it.)

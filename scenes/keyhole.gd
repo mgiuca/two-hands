@@ -2,7 +2,6 @@ class_name Keyhole
 extends Activator
 
 @onready var key_lock_marker : Marker3D = $KeyLockMarker
-@onready var flags : Flags = $Flags
 
 @onready var snd_insert : AudioStreamPlayer3D = $SndInsert
 @onready var snd_remove : AudioStreamPlayer3D = $SndRemove
@@ -48,9 +47,7 @@ func _on_collision_area_body_exited(body: Node3D) -> void:
       snd_remove.play()
 
 func _on_activate() -> void:
-  flags.one_active = true
   snd_click.play()
 
 func _on_deactivate() -> void:
-  flags.one_active = false
   snd_unclick.play()

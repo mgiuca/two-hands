@@ -61,8 +61,9 @@ stream_3/stream = ExtResource("20_5cxul")
 stream_4/stream = ExtResource("21_4iyyx")
 stream_5/stream = ExtResource("22_weka7")
 
-[node name="Keyhole" type="Node3D"]
+[node name="Keyhole" type="Node3D" node_paths=PackedStringArray("flags")]
 script = ExtResource("1_ua3lo")
+flags = NodePath("Flags")
 
 [node name="Woodbox" type="CSGBox3D" parent="."]
 size = Vector3(0.2, 0.2, 0.2)
@@ -94,6 +95,7 @@ shape = SubResource("CapsuleShape3D_5m3i7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.046323612, 0.14130442)
 
 [node name="Flags" parent="." instance=ExtResource("3_2cbv6")]
+one_active = false
 
 [node name="SndInsert" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_hixa5")

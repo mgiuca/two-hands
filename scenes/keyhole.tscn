@@ -98,18 +98,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.046323612, 0.14130442)
 one_active = false
 
 [node name="SndInsert" type="AudioStreamPlayer3D" parent="."]
+visible = false
 stream = SubResource("AudioStreamRandomizer_hixa5")
 
 [node name="SndRemove" type="AudioStreamPlayer3D" parent="."]
+visible = false
 stream = SubResource("AudioStreamRandomizer_j2o5m")
 
 [node name="SndClick" type="AudioStreamPlayer3D" parent="."]
+visible = false
 stream = SubResource("AudioStreamRandomizer_0gc5m")
 
 [node name="SndUnclick" type="AudioStreamPlayer3D" parent="."]
+visible = false
 stream = SubResource("AudioStreamRandomizer_22e3x")
 
 [node name="SndSmall" type="AudioStreamPlayer3D" parent="."]
+visible = false
 stream = SubResource("AudioStreamRandomizer_d7fjr")
 volume_db = -35.0
 

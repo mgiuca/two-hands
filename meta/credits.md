@@ -6,6 +6,10 @@
 
 # Sounds
 
+* [key in lock old](https://freesound.org/s/776567/) by SPAudiobooks -- License: Creative Commons 0
+* [Opening and closing a big old door](https://freesound.org/s/214307/) by lazymonk -- License: Creative Commons 0
+* [Deep Thumps](https://freesound.org/s/400997/) by eardeer -- License: Creative Commons 0
+
 # Fonts
 
 "Play"

@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://udigdayvrvfd"]
+
+[ext_resource type="Script" uid="uid://ghbkdcsh2h80" path="res://scenes/flags.gd" id="1_e6vwc"]
+[ext_resource type="PackedScene" uid="uid://bcgyrk7uf2qml" path="res://scenes/flag.tscn" id="2_j5w1v"]
+[ext_resource type="Texture2D" uid="uid://c1flrkb1jyaf" path="res://images/textures/flag_onekey.png" id="3_bwq35"]
+[ext_resource type="Texture2D" uid="uid://cfdojq4dkloa0" path="res://images/textures/flag_twokeys.png" id="4_h33lr"]
+
+[node name="Flags" type="Node3D"]
+script = ExtResource("1_e6vwc")
+
+[node name="FlagOneKey" parent="." instance=ExtResource("2_j5w1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.102, 0.099)
+texture = ExtResource("3_bwq35")
+
+[node name="FlagTwoKeys" parent="." instance=ExtResource("2_j5w1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.101, 0.099)
+texture = ExtResource("4_h33lr")

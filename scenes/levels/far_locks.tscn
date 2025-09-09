@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://c82ocqhenmlo5"]
+
+[ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_bvxa4"]
+[ext_resource type="PackedScene" uid="uid://b57w04rr00g0x" path="res://scenes/pedestal_with_keyhole.tscn" id="2_61y7v"]
+
+[node name="Level" node_paths=PackedStringArray("activator1", "activator2") instance=ExtResource("1_bvxa4")]
+activator1 = NodePath("PedestalLeft/Keyhole")
+activator2 = NodePath("PedestalRight/Keyhole")
+
+[node name="Static" type="Node3D" parent="." index="7"]
+
+[node name="Ground" type="CSGBox3D" parent="Static" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(11, 1, 11)
+
+[node name="PedestalLeft" parent="." index="8" instance=ExtResource("2_61y7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.65, -0.5)
+
+[node name="PedestalRight" parent="." index="9" instance=ExtResource("2_61y7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.65, -0.5)
+
+[editable path="PedestalLeft"]
+[editable path="PedestalRight"]

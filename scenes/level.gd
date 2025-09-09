@@ -62,6 +62,8 @@ func _unhandled_input(event: InputEvent) -> void:
     LevelManager.switch_to_prev_level()
   elif event.is_action_pressed('debug_next_level'):
     LevelManager.switch_to_next_level()
+  elif event.is_action_pressed('debug_complete_level'):
+    complete_level()
 
 func _process(delta: float) -> void:
   # Delta in real-world seconds.

@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://tdgkmflrwhol"]
+[gd_scene load_steps=14 format=3 uid="uid://tdgkmflrwhol"]
 
 [ext_resource type="Script" uid="uid://6el64wahmcuf" path="res://scenes/level.gd" id="1_j03b7"]
 [ext_resource type="PackedScene" uid="uid://c7js5gws2kjj5" path="res://scenes/ui/menu.tscn" id="3_8hwtq"]
 [ext_resource type="PackedScene" uid="uid://cj46p1qq7r6sp" path="res://scenes/ui/hud.tscn" id="4_epnyg"]
-[ext_resource type="PackedScene" uid="uid://b57w04rr00g0x" path="res://scenes/pedestal_with_keyhole.tscn" id="4_mx8sn"]
 [ext_resource type="PackedScene" uid="uid://dsy54vm4i37kq" path="res://scenes/key.tscn" id="5_ppgk2"]
 [ext_resource type="AudioStream" uid="uid://d1x6iomieb5hh" path="res://sounds/success1.wav" id="6_olg7q"]
 [ext_resource type="AudioStream" uid="uid://bnj8gutlqrt4a" path="res://sounds/success2.wav" id="7_t1rx8"]
@@ -31,10 +30,8 @@ stream_2/stream = ExtResource("8_8iemx")
 stream_3/stream = ExtResource("9_64w2a")
 stream_4/stream = ExtResource("10_fpun6")
 
-[node name="Level" type="Node" node_paths=PackedStringArray("activator1", "activator2")]
+[node name="Level" type="Node"]
 script = ExtResource("1_j03b7")
-activator1 = NodePath("PedestalLeft/Keyhole")
-activator2 = NodePath("PedestalRight/Keyhole")
 debug_info = true
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
@@ -55,24 +52,9 @@ unique_name_in_owner = true
 process_mode = 2
 visible = false
 
-[node name="Static" type="Node3D" parent="."]
-
-[node name="Ground" type="CSGBox3D" parent="Static"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-size = Vector3(11, 1, 11)
-
-[node name="PedestalLeft" parent="." instance=ExtResource("4_mx8sn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.65, -0.5)
-
-[node name="PedestalRight" parent="." instance=ExtResource("4_mx8sn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.65, -0.5)
-
 [node name="KeyLeft" parent="." instance=ExtResource("5_ppgk2")]
 
 [node name="KeyRight" parent="." instance=ExtResource("5_ppgk2")]
 
 [node name="SndSuccess" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_wc255")
-
-[editable path="PedestalLeft"]
-[editable path="PedestalRight"]

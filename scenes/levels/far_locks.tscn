@@ -19,5 +19,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.65, -0.5)
 [node name="PedestalRight" parent="." index="9" instance=ExtResource("2_61y7v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.65, -0.5)
 
+[node name="SecondaryLight" type="OmniLight3D" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2278504, 0.83508337)
+light_color = Color(1, 0.94133335, 0.68, 1)
+light_energy = 0.34
+
 [editable path="PedestalLeft"]
 [editable path="PedestalRight"]

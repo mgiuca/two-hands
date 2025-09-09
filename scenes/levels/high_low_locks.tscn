@@ -32,3 +32,8 @@ size = Vector3(0.2, 0.2, 0.2)
 
 [node name="KeyholeBottom" parent="Pedestal" index="3" instance=ExtResource("2_g8rwh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6407427, 0.23652616)
+
+[node name="SecondaryLight" type="OmniLight3D" parent="." index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2278504, 0.83508337)
+light_color = Color(1, 0.94133335, 0.68, 1)
+light_energy = 0.34

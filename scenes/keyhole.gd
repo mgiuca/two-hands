@@ -13,6 +13,9 @@ var key_lock_global_position : Vector3:
   get():
     return key_lock_marker.global_position
 
+## The key currently in the lock, or null.
+var inserted_key : Key = null
+
 var prev_angle_played_sound : float = 0.0
 
 ## The angle of the key in the lock, from -TAU/4 to TAU/4.
@@ -32,19 +35,17 @@ var key_angle : float:
       prev_angle_played_sound = key_angle
 
 func _on_collision_area_body_entered(body: Node3D) -> void:
-  if body is Key:
-    var key := body as Key
-    # TODO: Don't allow a second key if there's already one.
-    key.lock_to_keyhole = self
+  if body is Key and inserted_key == null:
+    inserted_key = body as Key
+    inserted_key.lock_to_keyhole = self
     snd_insert.play()
 
 func _on_collision_area_body_exited(body: Node3D) -> void:
-  if body is Key:
-    var key := body as Key
-    if key.lock_to_keyhole == self:
-      key.lock_to_keyhole = null
-      active = false
-      snd_remove.play()
+  if body is Key and inserted_key == body:
+    (body as Key).lock_to_keyhole = null
+    inserted_key = null
+    active = false
+    snd_remove.play()
 
 func _on_activate() -> void:
   snd_click.play()

@@ -5,6 +5,12 @@ extends Node3D
 @onready var flag_one_key : Flag = $FlagOneKey
 @onready var flag_two_keys : Flag = $FlagTwoKeys
 
+@onready var snd_insert : AudioStreamPlayer3D = $SndInsert
+@onready var snd_remove : AudioStreamPlayer3D = $SndRemove
+@onready var snd_click : AudioStreamPlayer3D = $SndClick
+@onready var snd_unclick : AudioStreamPlayer3D = $SndUnclick
+@onready var snd_small : AudioStreamPlayer3D = $SndSmall
+
 var key_lock_global_position : Vector3:
   get():
     return key_lock_marker.global_position
@@ -18,8 +24,10 @@ var active : bool:
     active = value
     if active:
       activate.emit()
+      snd_click.play()
     else:
       deactivate.emit()
+      snd_unclick.play()
 
 ## Emitted when the lock activates (e.g. the key turns).
 signal activate
@@ -30,6 +38,24 @@ signal deactivate
 enum FlagState {
   NONE, ONE, TWO
 }
+
+var prev_angle_played_sound : float = 0.0
+
+## The angle of the key in the lock, from -TAU/4 to TAU/4.
+##
+## Setting this changes the activation state of the keyhole.
+var key_angle : float:
+  set(value):
+    key_angle = value
+
+    # Set keyhole activate iff the key is turned far enough.
+    active = absf(key_angle) >= TAU/4 - 0.01
+
+    # Play key turning sounds.
+    if not active and absf(key_angle - prev_angle_played_sound) > deg_to_rad(15) \
+      and not snd_small.playing:
+      snd_small.play()
+      prev_angle_played_sound = key_angle
 
 var flag_state : FlagState:
   set(value):
@@ -50,6 +76,7 @@ func _on_collision_area_body_entered(body: Node3D) -> void:
     var key := body as Key
     # TODO: Don't allow a second key if there's already one.
     key.lock_to_keyhole = self
+    snd_insert.play()
 
 func _on_collision_area_body_exited(body: Node3D) -> void:
   if body is Key:
@@ -57,6 +84,7 @@ func _on_collision_area_body_exited(body: Node3D) -> void:
     if key.lock_to_keyhole == self:
       key.lock_to_keyhole = null
       active = false
+      snd_remove.play()
 
 func _process(_delta: float) -> void:
   if LevelManager.current_level.victory:

@@ -20,6 +20,7 @@ sky_material = SubResource("ProceduralSkyMaterial_w8frs")
 [sub_resource type="Environment" id="Environment_mx8sn"]
 background_mode = 2
 sky = SubResource("Sky_wu84c")
+ambient_light_source = 1
 tonemap_mode = 2
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wc255"]

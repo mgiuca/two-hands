@@ -56,6 +56,7 @@ layout_mode = 2
 text = "Restart level"
 
 [node name="BtnQuit" type="Button" parent="TopLevel/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Quit to Menu"
 

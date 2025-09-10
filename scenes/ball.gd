@@ -1,4 +1,4 @@
-class_name BowlingBall
+class_name Ball
 extends Node3D
 
 @onready var reattach_timer : Timer = $ReattachTimer

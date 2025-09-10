@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://uro72wsx2r5i"]
 
-[ext_resource type="Script" uid="uid://038v01tyahhk" path="res://scenes/bowling_ball.gd" id="1_4t3fo"]
+[ext_resource type="Script" uid="uid://038v01tyahhk" path="res://scenes/ball.gd" id="1_4t3fo"]
 [ext_resource type="PackedScene" uid="uid://d3fb1utrbtvkr" path="res://meshes/bowling_ball.tscn" id="1_abd54"]
 [ext_resource type="Script" uid="uid://cefss4ojbk4cf" path="res://scenes/teleportable_body.gd" id="3_gwpu0"]
 

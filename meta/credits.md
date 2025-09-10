@@ -1,6 +1,9 @@
 # 3D artwork
 
 * [Platformer Kit](https://kenney.nl/assets/platformer-kit) by Kenney.
+* [CGI Moon Kit](https://svs.gsfc.nasa.gov/4720/) by NASA's Scientific Visualization Studio
+    * Visualizer: Ernie Wright (USRA)
+    * Scientist: Noah Petro (NASA/GSFC)
 
 # 2D artwork
 

@@ -29,8 +29,17 @@ var detached : bool:
     detached = value
     if detached:
       print('%s: ball released' % name)
-      # Don't do anything here - the rigid body will be updated on the next
-      # _physics_process, where it is safe to write to the body's properties.
+      # Rigid body is frozen, which means we just set detached to true and we
+      # need to transfer the position and velocity from the controller to the
+      # body, then let it go by unfreezing.
+      visual.reparent(rigid_body, false)
+      rigid_body.teleport(xr_controller.global_transform)
+      # Transfer linear and angular velocity from the controller to the rigid body.
+      var pose := xr_controller.get_pose()
+      print('Transferring controller to rigid: linear = %v, angular = %v (has tracking = %s)' % [pose.linear_velocity, pose.angular_velocity, pose.has_tracking_data])
+      rigid_body.force_new_linear_velocity(pose.linear_velocity)
+      rigid_body.force_new_angular_velocity(pose.angular_velocity)
+      rigid_body.freeze = false
     else:
       print('%s: ball back in hand' % name)
       visual.reparent(animatable_body, false)
@@ -44,7 +53,7 @@ var detached : bool:
       visual.rotation.z = z_rotate
 
 @onready var animatable_body : AnimatableBody3D = $AnimatableBody
-@onready var rigid_body : RigidBody3D = $RigidBody
+@onready var rigid_body : TeleportableBody = $RigidBody
 @onready var visual : Node3D = %Visual
 
 # This has both an AnimatableBody and a RigidBody. Switches between the two
@@ -55,19 +64,7 @@ func _ready() -> void:
   visual.rotation.z = z_rotate
 
 func _physics_process(_delta: float) -> void:
-  if detached:
-    if rigid_body.freeze:
-      # Rigid body is frozen, which means we just set detached to true and we
-      # need to transfer the position and velocity from the controller to the
-      # body, then let it go by unfreezing.
-      visual.reparent(rigid_body, false)
-      rigid_body.global_transform = xr_controller.global_transform
-      # Transfer linear and angular velocity from the controller to the rigid body.
-      var pose := xr_controller.get_pose()
-      rigid_body.linear_velocity = pose.linear_velocity
-      rigid_body.angular_velocity = pose.angular_velocity
-      rigid_body.freeze = false
-  else:
+  if not detached:
     animatable_body.global_transform = xr_controller.global_transform
 
 func _on_controller_button_pressed(button_name: String) -> void:

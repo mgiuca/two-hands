@@ -28,7 +28,6 @@ var detached : bool:
       return
     detached = value
     if detached:
-      print('%s: ball released' % name)
       # Rigid body is frozen, which means we just set detached to true and we
       # need to transfer the position and velocity from the controller to the
       # body, then let it go by unfreezing.
@@ -36,7 +35,6 @@ var detached : bool:
       rigid_body.teleport(xr_controller.global_transform)
       # Transfer linear and angular velocity from the controller to the rigid body.
       var pose := xr_controller.get_pose()
-      print('Transferring controller to rigid: linear = %v, angular = %v (has tracking = %s)' % [pose.linear_velocity, pose.angular_velocity, pose.has_tracking_data])
       # Give the ball a bit of a boost towards the end.
       # TODO: Make this boost a customizable property.
       var lin_vel := pose.linear_velocity + Vector3(0, 0, -3)
@@ -44,7 +42,6 @@ var detached : bool:
       rigid_body.force_new_angular_velocity(pose.angular_velocity)
       rigid_body.freeze = false
     else:
-      print('%s: ball back in hand' % name)
       visual.reparent(animatable_body, false)
       rigid_body.freeze = true
 

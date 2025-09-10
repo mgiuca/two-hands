@@ -87,3 +87,7 @@ func _on_controller_button_released(button_name: String) -> void:
 
 func _on_reattach_timer_timeout() -> void:
   detached = false
+
+func _on_rigid_body_body_entered(body: Node) -> void:
+  if body is Pushable:
+    (body as Pushable).hit_by(rigid_body)

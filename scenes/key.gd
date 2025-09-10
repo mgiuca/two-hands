@@ -25,8 +25,9 @@ func _physics_process(_delta: float) -> void:
     visual.global_position = lock_to_keyhole.key_lock_global_position
     var aligned_rotation := Vector3.ZERO
     # Only take Z axis rotation from the controllers.
-    # TODO: Allow the keyhole to determine the allowed rotation axis and the
-    # fixed rotation in the other two axes.
+    # TODO: This is broken on the Free Your Mind level, where the keyhole can be
+    # arbitrarily rotated. We need to fix the key to the global *transform*
+    # of the keyhole, and then allow rotation in the axis the keyhole is facing.
     aligned_rotation.z = Globals.angle_clamp(xr_controller.global_rotation.z, -TAU/4, TAU/4)
     visual.global_rotation = aligned_rotation
 

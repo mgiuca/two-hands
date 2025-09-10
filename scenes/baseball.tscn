@@ -24,7 +24,7 @@ transform = Transform3D(0.065113954, 0, 0, 0, 0.065113954, 0, 0, 0, 0.065113954,
 shape = SubResource("SphereShape3D_abd54")
 
 [node name="RigidBody" type="RigidBody3D" parent="."]
-mass = 3.0
+mass = 0.5
 physics_material_override = SubResource("PhysicsMaterial_4t3fo")
 freeze = true
 contact_monitor = true

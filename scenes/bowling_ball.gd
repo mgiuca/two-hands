@@ -37,6 +37,9 @@ var detached : bool:
       # Transfer linear and angular velocity from the controller to the rigid body.
       var pose := xr_controller.get_pose()
       print('Transferring controller to rigid: linear = %v, angular = %v (has tracking = %s)' % [pose.linear_velocity, pose.angular_velocity, pose.has_tracking_data])
+      # Give the ball a bit of a boost towards the end.
+      # TODO: Make this boost a customizable property.
+      var lin_vel := pose.linear_velocity + Vector3(0, 0, -3)
       rigid_body.force_new_linear_velocity(pose.linear_velocity)
       rigid_body.force_new_angular_velocity(pose.angular_velocity)
       rigid_body.freeze = false

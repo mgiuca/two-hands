@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1kukgwhukgjf"]
+[gd_scene load_steps=8 format=3 uid="uid://b1kukgwhukgjf"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_suiyq"]
 [ext_resource type="PackedScene" uid="uid://uro72wsx2r5i" path="res://scenes/bowling_ball.tscn" id="2_2p8bq"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="3_2p8bq"]
 [ext_resource type="PackedScene" uid="uid://cvqyeskxo4r8f" path="res://scenes/bowling_pin.tscn" id="3_7wjn3"]
 [ext_resource type="PackedScene" uid="uid://udigdayvrvfd" path="res://scenes/flags.tscn" id="4_2p8bq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2p8bq"]
+albedo_color = Color(1, 0.80828303, 0.43702203, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ujw30"]
+albedo_color = Color(1, 0.42000002, 0.42000002, 1)
 
 [node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_suiyq")]
 left_hand = NodePath("BallLeft")
@@ -24,16 +30,19 @@ z_rotate = -1.5707963267948966
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -2.5)
 use_collision = true
 size = Vector3(11, 1, 16)
+material = SubResource("StandardMaterial3D_2p8bq")
 
 [node name="GutterLeft" type="CSGBox3D" parent="Static/Ground" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, -2)
 operation = 2
 size = Vector3(0.5, 1, 12)
+material = SubResource("StandardMaterial3D_ujw30")
 
 [node name="GutterRight" type="CSGBox3D" parent="Static/Ground" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -2)
 operation = 2
 size = Vector3(0.5, 1, 12)
+material = SubResource("StandardMaterial3D_ujw30")
 
 [node name="PinLeft" parent="." index="8" node_paths=PackedStringArray("flags") instance=ExtResource("3_7wjn3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.571, 0.361, -7.486)

@@ -246,9 +246,7 @@ func _on_btn_enter_web_xr_pressed() -> void:
   # mark the features as required or optional. By including 'hand-tracking'
   # as an optional feature, it will be enabled if supported.
   webxr_interface.required_features = 'local-floor'
-  webxr_interface.optional_features = 'bounded-floor, hand-tracking'
-  # TODO: I probably don't want hand tracking. I do want to validate that
-  # the device actually has two controllers though.
+  webxr_interface.optional_features = 'bounded-floor'
 
   # This will return false if we're unable to even request the session,
   # however, it can still fail asynchronously later in the process, so we

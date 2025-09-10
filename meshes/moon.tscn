@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b45m51w8kv6yn"]
+
+[ext_resource type="PackedScene" uid="uid://0xxx688hjupw" path="res://meshes/moon.glb" id="1_jkfpg"]
+
+[node name="moon" instance=ExtResource("1_jkfpg")]
+
+[node name="Moon" parent="." index="0"]
+cast_shadow = 0

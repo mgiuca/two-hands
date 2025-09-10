@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1sqy5b072rvm"]
+[gd_scene load_steps=8 format=3 uid="uid://b1sqy5b072rvm"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_i34so"]
 [ext_resource type="PackedScene" uid="uid://t1c4s2su3wef" path="res://scenes/baseball.tscn" id="2_f2mr3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://belgehb58nlcj" path="res://materials/dirt.tres" id="3_gcw3b"]
 [ext_resource type="Material" uid="uid://ctwnqtmeffdlp" path="res://materials/grass.tres" id="4_4jxpb"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="5_8o0ly"]
+[ext_resource type="PackedScene" uid="uid://b45m51w8kv6yn" path="res://meshes/moon.tscn" id="7_4jxpb"]
 
 [node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_i34so")]
 left_hand = NodePath("BaseballLeft")
@@ -48,3 +49,6 @@ transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2278504, 0.83508337)
 light_color = Color(1, 0.94133335, 0.68, 1)
 light_energy = 0.34
+
+[node name="moon" parent="." index="11" instance=ExtResource("7_4jxpb")]
+transform = Transform3D(-0.34918553, -0.047553323, -0.24986419, -0.18940955, 0.33185652, 0.20154224, 0.16975708, 0.27245903, -0.28908926, -14, 20, -27)

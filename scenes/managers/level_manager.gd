@@ -11,6 +11,7 @@ const LEVEL_NAMES : Array[String] = [
   'sliding_locks',
   'bowling',
   'baseball',
+  'free_your_mind',
 ]
 
 # Mapping from level basename to display name. If the name is missing, the
@@ -23,6 +24,7 @@ const LEVEL_DISPLAY_NAMES : Dictionary[String, String] = {
   'sliding_locks': 'Sliding Locks',
   'bowling': 'Bowling',
   'baseball': 'Baseball',
+  'free_your_mind': 'Free Your Mind',
 }
 
 var current_level : Level:

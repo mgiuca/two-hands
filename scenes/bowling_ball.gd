@@ -18,6 +18,8 @@ var xr_controller : XRController3D:
 var trigger_pressed : bool = false
 var grip_pressed : bool = false
 
+#var controller_linear_velocity
+
 ## Whether the ball is freely moving as a rigid body (as opposed to attached
 ## to the [member xr_controller]).
 var detached : bool:
@@ -29,8 +31,10 @@ var detached : bool:
       print('%s: ball released' % name)
       visual.reparent(rigid_body, false)
       rigid_body.global_transform = animatable_body.global_transform
-      # TODO: Transfer linear and angular velocity.
-      rigid_body.linear_velocity = Vector3(0, 0, 10)
+      # Transfer linear and angular velocity from the controller to the rigid body.
+      var pose := xr_controller.get_pose()
+      rigid_body.linear_velocity = pose.linear_velocity
+      rigid_body.angular_velocity = pose.angular_velocity
       rigid_body.freeze = false
     else:
       print('%s: ball back in hand' % name)

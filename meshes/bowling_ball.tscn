@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3fb1utrbtvkr"]
+
+[ext_resource type="PackedScene" uid="uid://buoi52emedcwt" path="res://meshes/bowling-ball.glb" id="1_1ehof"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1ehof"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0gnso"]
+noise = SubResource("FastNoiseLite_1ehof")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 0.24
+bump_strength = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_scfpk"]
+albedo_color = Color(0.9999992, 0.21972933, 0.24723738, 1)
+roughness = 0.36
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_0gnso")
+
+[node name="bowling-ball" instance=ExtResource("1_1ehof")]
+
+[node name="Ball" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_scfpk")

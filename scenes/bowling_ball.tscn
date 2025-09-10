@@ -26,8 +26,6 @@ shape = SubResource("SphereShape3D_abd54")
 mass = 3.0
 physics_material_override = SubResource("PhysicsMaterial_4t3fo")
 freeze = true
-linear_damp = 1.0
-angular_damp = 1.0
 script = ExtResource("3_gwpu0")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="RigidBody"]

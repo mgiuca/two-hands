@@ -11,22 +11,22 @@ right_hand = NodePath("KeyRight")
 activator1 = NodePath("Cave/KeyholeTop")
 activator2 = NodePath("Cave/KeyholeBottom")
 
-[node name="SecondaryLight" type="OmniLight3D" parent="." index="6"]
+[node name="SecondaryLight" type="OmniLight3D" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2278504, 0.83508337)
 light_color = Color(1, 0.94133335, 0.68, 1)
 light_energy = 0.34
 
-[node name="KeyLeft" parent="." index="7" instance=ExtResource("2_isopi")]
+[node name="KeyLeft" parent="." index="6" instance=ExtResource("2_isopi")]
 
-[node name="KeyRight" parent="." index="8" instance=ExtResource("2_isopi")]
+[node name="KeyRight" parent="." index="7" instance=ExtResource("2_isopi")]
 
-[node name="Static" type="Node3D" parent="." index="9"]
+[node name="Static" type="Node3D" parent="." index="8"]
 
 [node name="Ground" type="CSGBox3D" parent="Static" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 size = Vector3(11, 1, 11)
 
-[node name="Cave" type="CSGBox3D" parent="." index="10"]
+[node name="Cave" type="CSGBox3D" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1.7558129)
 size = Vector3(3, 2, 3)
 
@@ -51,5 +51,5 @@ size = Vector3(0.2, 0.2, 0.2)
 [node name="KeyholeBottom" parent="Cave" index="4" instance=ExtResource("2_180wm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0070016384, 0.83809066)
 
-[node name="Door" parent="." index="11" instance=ExtResource("2_rm5jy")]
+[node name="Door" parent="." index="10" instance=ExtResource("2_rm5jy")]
 transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -5.1633463)

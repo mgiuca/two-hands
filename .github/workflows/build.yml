@@ -5,7 +5,6 @@ on:
     branches:
       - release
 
-# TODO: Change EXPORT_NAME to the correct app name.
 env:
   # If changing Godot version, need to manually refresh the SHA256 sums (see
   # "Verify hash" step below).
@@ -25,7 +24,6 @@ jobs:
         with:
           sparse-checkout-cone-mode: false
           # Avoid checking out directories that will not be part of the build.
-          # TODO: Customize this list based on non-build dirs in the project.
           sparse-checkout: |
             /*
             !/meta

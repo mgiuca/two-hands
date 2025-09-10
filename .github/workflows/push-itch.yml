@@ -14,9 +14,7 @@ on:
         options:
           - ''
           - '-beta'
-          - '-demo'
 
-# TODO: Change EXPORT_NAME and ITCH_TARGET to the correct app name.
 env:
   EXPORT_NAME: two-hands
   # Need to load BUTLER_API_KEY as a repository secret. Get the key from:

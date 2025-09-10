@@ -20,13 +20,13 @@ activator2 = NodePath("PlateActivator")
 [node name="Static" type="Node3D" parent="." index="7"]
 
 [node name="Ground" type="CSGBox3D" parent="Static" index="0"]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, -0.5, 0)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, -0.5, 3)
 use_collision = true
 size = Vector3(16, 1, 16)
 material = ExtResource("3_gcw3b")
 
 [node name="Grass" type="CSGBox3D" parent="Static" index="1"]
-transform = Transform3D(0.51535165, 0, 0.51535165, 0, 0.7288173, 0, -0.51535165, 0, 0.51535165, 0, -0.30989575, 0)
+transform = Transform3D(0.51535165, 0, 0.51535165, 0, 0.7288173, 0, -0.51535165, 0, 0.51535165, 0, -0.30989575, 3)
 use_collision = true
 size = Vector3(16, 1, 16)
 material = ExtResource("4_4jxpb")
@@ -42,7 +42,7 @@ material = ExtResource("3_gcw3b")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.6601996)
 
 [node name="Door" parent="." index="9" instance=ExtResource("5_8o0ly")]
-transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -10.163345)
+transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -7.1633453)
 
 [node name="SecondaryLight" type="OmniLight3D" parent="." index="10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2278504, 0.83508337)

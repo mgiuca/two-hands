@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1sqy5b072rvm"]
+[gd_scene load_steps=14 format=3 uid="uid://b1sqy5b072rvm"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_i34so"]
 [ext_resource type="Texture2D" uid="uid://bij2yn57174ha" path="res://images/stars-skybox.jpg" id="2_5qpj5"]
 [ext_resource type="PackedScene" uid="uid://t1c4s2su3wef" path="res://scenes/baseball.tscn" id="2_f2mr3"]
 [ext_resource type="PackedScene" uid="uid://cww4n0ain3r8c" path="res://scenes/plate_activator.tscn" id="3_f2mr3"]
 [ext_resource type="Material" uid="uid://belgehb58nlcj" path="res://materials/dirt.tres" id="3_gcw3b"]
+[ext_resource type="Script" uid="uid://bhcxfvmwiw626" path="res://scenes/activator.gd" id="3_i34so"]
 [ext_resource type="Material" uid="uid://ctwnqtmeffdlp" path="res://materials/grass.tres" id="4_4jxpb"]
+[ext_resource type="PackedScene" uid="uid://udigdayvrvfd" path="res://scenes/flags.tscn" id="4_5qpj5"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="5_8o0ly"]
 [ext_resource type="PackedScene" uid="uid://b45m51w8kv6yn" path="res://meshes/moon.tscn" id="7_4jxpb"]
 
@@ -24,7 +26,7 @@ tonemap_mode = 2
 left_hand = NodePath("BaseballLeft")
 right_hand = NodePath("BaseballRight")
 activator1 = NodePath("PlateActivator")
-activator2 = NodePath("PlateActivator")
+activator2 = NodePath("Moon")
 
 [node name="Sun" parent="." index="0"]
 transform = Transform3D(-0.8660254, -0.43301278, 0.24999999, 0.081266895, -0.6152517, -0.78413075, 0.49335158, -0.65876037, 0.5680132, 0, 0, 0)
@@ -64,12 +66,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.6601996)
 [node name="Door" parent="." index="9" instance=ExtResource("5_8o0ly")]
 transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -7.1633453)
 
-[node name="Moon" parent="." index="10" instance=ExtResource("7_4jxpb")]
-transform = Transform3D(-0.34918553, -0.047553323, -0.24986419, -0.18940955, 0.33185652, 0.20154224, 0.16975708, 0.27245903, -0.28908926, -14, 20, -27)
+[node name="Moon" type="Node3D" parent="." index="10" node_paths=PackedStringArray("flags")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 20, -27)
+script = ExtResource("3_i34so")
+flags = NodePath("Flags")
+
+[node name="Visual" parent="Moon" index="0" instance=ExtResource("7_4jxpb")]
+transform = Transform3D(-0.34918553, -0.047553323, -0.24986419, -0.18940955, 0.33185652, 0.20154224, 0.16975708, 0.27245903, -0.28908926, 0, 0, 0)
 
 [node name="MoonLight" type="OmniLight3D" parent="Moon" index="1"]
 omni_range = 100.0
 omni_attenuation = 0.1
+
+[node name="Flags" parent="Moon" index="2" instance=ExtResource("4_5qpj5")]
+transform = Transform3D(30.22732, 0, 0, 0, 22.32864, -20.37456, 0, 20.37456, 22.32864, 6.493055, -0.40192986, -5.9394073)
 
 [node name="FloodLight" type="OmniLight3D" parent="." index="11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.8154063, 0)

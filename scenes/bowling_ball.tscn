@@ -30,3 +30,9 @@ angular_damp = 1.0
 
 [node name="CollisionShape" type="CollisionShape3D" parent="RigidBody"]
 shape = SubResource("SphereShape3D_abd54")
+
+[node name="ReattachTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="ReattachTimer" to="." method="_on_reattach_timer_timeout"]

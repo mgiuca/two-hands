@@ -1,8 +1,22 @@
 class_name BowlingBall
 extends Node3D
 
+@onready var reattach_timer : Timer = $ReattachTimer
+
 ## Controller this ball is bound to. Can't be null (even when detached).
-var xr_controller : XRController3D
+var xr_controller : XRController3D:
+  set(value):
+    if xr_controller != null:
+      xr_controller.button_pressed.disconnect(_on_controller_button_pressed)
+      xr_controller.button_released.disconnect(_on_controller_button_released)
+
+    xr_controller = value
+
+    xr_controller.button_pressed.connect(_on_controller_button_pressed)
+    xr_controller.button_released.connect(_on_controller_button_released)
+
+var trigger_pressed : bool = false
+var grip_pressed : bool = false
 
 ## Whether the ball is freely moving as a rigid body (as opposed to attached
 ## to the [member xr_controller]).
@@ -12,12 +26,14 @@ var detached : bool:
       return
     detached = value
     if detached:
+      print('%s: ball released' % name)
       visual.reparent(rigid_body, false)
       rigid_body.global_transform = animatable_body.global_transform
       # TODO: Transfer linear and angular velocity.
       rigid_body.linear_velocity = Vector3(0, 0, 10)
       rigid_body.freeze = false
     else:
+      print('%s: ball back in hand' % name)
       visual.reparent(animatable_body, false)
       rigid_body.freeze = true
 
@@ -42,3 +58,24 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
   if not detached:
     animatable_body.global_transform = xr_controller.global_transform
+
+func _on_controller_button_pressed(button_name: String) -> void:
+  if button_name == 'trigger_click':
+    trigger_pressed = true
+  elif button_name == 'grip_click':
+    grip_pressed = true
+
+func _on_controller_button_released(button_name: String) -> void:
+  var trigger_or_grip_was_pressed := trigger_pressed or grip_pressed
+  if button_name == 'trigger_click':
+    trigger_pressed = false
+  elif button_name == 'grip_click':
+    grip_pressed = false
+
+  if trigger_or_grip_was_pressed and not trigger_pressed and not grip_pressed:
+    # Was gripping, now released.
+    detached = true
+    reattach_timer.start()
+
+func _on_reattach_timer_timeout() -> void:
+  detached = false

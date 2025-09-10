@@ -18,11 +18,11 @@ on:
 
 # TODO: Change EXPORT_NAME and ITCH_TARGET to the correct app name.
 env:
-  EXPORT_NAME: two-keys-vr
+  EXPORT_NAME: two-hands
   # Need to load BUTLER_API_KEY as a repository secret. Get the key from:
   # https://itch.io/user/settings/api-keys (wharf).
   BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
-  ITCH_TARGET: mgiuca/two-keys-vr
+  ITCH_TARGET: mgiuca/two-hands
 
 permissions:
   # Required to allow the download-artifacts to download from another workflow.

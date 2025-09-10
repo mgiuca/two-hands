@@ -5,4 +5,5 @@
 [node name="moon" instance=ExtResource("1_jkfpg")]
 
 [node name="Moon" parent="." index="0"]
+layers = 2
 cast_shadow = 0

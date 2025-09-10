@@ -7,6 +7,12 @@
 
 # 2D artwork
 
+* [Deep Star Maps 2020](https://svs.gsfc.nasa.gov/4851/) by NASA's Scientific Visualization Studio
+  * NASA/Goddard Space Flight Center Scientific Visualization Studio. Gaia DR2:
+    ESA/Gaia/DPAC. Constellation figures based on those developed for the IAU by
+    Alan MacRobert of Sky and Telescope magazine (Roger Sinnott and Rick
+    Fienberg).
+
 # Sounds
 
 * [key in lock old](https://freesound.org/s/776567/) by SPAudiobooks -- License: Creative Commons 0

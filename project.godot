@@ -102,6 +102,11 @@ debug_right_action={
 ]
 }
 
+[layer_names]
+
+3d_render/layer_1="Default"
+3d_render/layer_2="Moon"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

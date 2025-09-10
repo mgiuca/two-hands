@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://j2aurgfo48jf"]
+[gd_scene load_steps=12 format=4 uid="uid://j2aurgfo48jf"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_3h140"]
 [ext_resource type="PackedScene" uid="uid://dsy54vm4i37kq" path="res://scenes/key.tscn" id="2_thw68"]
 [ext_resource type="Texture2D" uid="uid://coqjmyawti5n3" path="res://images/textures/free_your_mind.png" id="3_pk3i0"]
+[ext_resource type="Script" uid="uid://iil5ogyg63uw" path="res://scenes/levels/player_head.gd" id="4_mujqx"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="4_mvgbr"]
 [ext_resource type="PackedScene" uid="uid://d0jkyta4hb56f" path="res://scenes/keyhole_invis.tscn" id="4_pk3i0"]
 [ext_resource type="PackedScene" uid="uid://udigdayvrvfd" path="res://scenes/flags.tscn" id="6_mvgbr"]
@@ -51,8 +52,8 @@ size = Vector3(0.08, 0.01, 0.08)
 [node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_3h140")]
 left_hand = NodePath("KeyLeft")
 right_hand = NodePath("KeyRight")
-activator1 = NodePath("KeyholeLeft")
-activator2 = NodePath("KeyholeRight")
+activator1 = NodePath("PlayerHead/KeyholeLeft")
+activator2 = NodePath("PlayerHead/KeyholeRight")
 
 [node name="Sun" parent="." index="0"]
 transform = Transform3D(-0.058856662, 0.44944242, 0.89136827, -0.7192714, -0.638271, 0.2743333, 0.6922315, -0.62498933, 0.36083776, 0, 0, 0)
@@ -191,29 +192,33 @@ mesh = SubResource("BoxMesh_mujqx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.056, 1.0628815, 1.722)
 mesh = SubResource("BoxMesh_mujqx")
 
-[node name="KeyholeLeft" parent="." index="8" node_paths=PackedStringArray("flags") instance=ExtResource("4_pk3i0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1, -0.76347387)
-flags = NodePath("../FlagsLeft")
+[node name="PlayerHead" type="Node3D" parent="." index="8"]
+top_level = true
+script = ExtResource("4_mujqx")
 
-[node name="KeyholeRight" parent="." index="9" node_paths=PackedStringArray("flags") instance=ExtResource("4_pk3i0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1, -0.763)
-flags = NodePath("../FlagsRight")
+[node name="KeyholeLeft" parent="PlayerHead" index="0" node_paths=PackedStringArray("flags") instance=ExtResource("4_pk3i0")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.2, 0, 0)
+flags = NodePath("../../FlagsLeft")
 
-[node name="Door" parent="." index="10" instance=ExtResource("4_mvgbr")]
+[node name="KeyholeRight" parent="PlayerHead" index="1" node_paths=PackedStringArray("flags") instance=ExtResource("4_pk3i0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.2, 0, 0)
+flags = NodePath("../../FlagsRight")
+
+[node name="Door" parent="." index="9" instance=ExtResource("4_mvgbr")]
 transform = Transform3D(2.3220954, 0, 0, 0, 2.3220954, 0, 0, 0, 2.3220954, 0, 0, -2.1633463)
 
-[node name="SecondaryLight" type="OmniLight3D" parent="." index="11"]
+[node name="SecondaryLight" type="OmniLight3D" parent="." index="10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28, 1.868, 0)
 light_color = Color(1, 0.94133335, 0.68, 1)
 light_energy = 0.2
 
-[node name="SecondaryLight2" type="OmniLight3D" parent="." index="12"]
+[node name="SecondaryLight2" type="OmniLight3D" parent="." index="11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.28, 1.868, 0)
 light_color = Color(1, 0.94133335, 0.68, 1)
 light_energy = 0.2
 
-[node name="FlagsLeft" parent="." index="13" instance=ExtResource("6_mvgbr")]
+[node name="FlagsLeft" parent="." index="12" instance=ExtResource("6_mvgbr")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0612818, 0.9673317, 1.7712408)
 
-[node name="FlagsRight" parent="." index="14" instance=ExtResource("6_mvgbr")]
+[node name="FlagsRight" parent="." index="13" instance=ExtResource("6_mvgbr")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.061, 0.967, 1.771)

@@ -123,6 +123,7 @@ text = "Enter WebXR"
 [node name="XROrigin" type="XROrigin3D" parent="."]
 
 [node name="XRCamera" type="XRCamera3D" parent="XROrigin"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
 current = true
 

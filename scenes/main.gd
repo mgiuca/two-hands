@@ -35,6 +35,8 @@ const DEFAULT_MUSIC_VOLUME : float = -10.0
 @onready var scrim_layer : CanvasLayer = $ScrimLayer
 @onready var fade_scrim : ColorRect = $ScrimLayer/FadeScrim
 
+@onready var xr_camera : XRCamera3D = %XRCamera
+
 # Seconds to complete fade-out or fade-in (double it for the full transition
 # time).
 const FADE_TIME : float = 0.2

@@ -230,7 +230,7 @@ func _webxr_session_supported(session_mode: String, supported: bool) -> void:
 
 func _on_btn_enter_web_xr_pressed() -> void:
   if not vr_supported:
-    OS.alert("Your browser doesn't support VR")
+    OS.alert("Your browser doesn't support VR, or headset is not connected")
     return
 
   # We want an immersive VR session.

@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Two Keys VR"
+config/name="Things You Can Do With Two Hands"
 config/version="0.0.1"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")

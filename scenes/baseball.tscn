@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://t1c4s2su3wef"]
+
+[ext_resource type="Script" uid="uid://038v01tyahhk" path="res://scenes/ball.gd" id="1_uraqv"]
+[ext_resource type="PackedScene" uid="uid://crq1bapl2584j" path="res://meshes/baseball.glb" id="2_uraqv"]
+[ext_resource type="Script" uid="uid://cefss4ojbk4cf" path="res://scenes/teleportable_body.gd" id="3_6rmqm"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_abd54"]
+radius = 0.055410028
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4t3fo"]
+friction = 0.01
+bounce = 0.11
+
+[node name="Baseball" type="Node3D"]
+script = ExtResource("1_uraqv")
+
+[node name="AnimatableBody" type="AnimatableBody3D" parent="."]
+
+[node name="Visual" parent="AnimatableBody" instance=ExtResource("2_uraqv")]
+unique_name_in_owner = true
+transform = Transform3D(0.065113954, 0, 0, 0, 0.065113954, 0, 0, 0, 0.065113954, 0, 0, 0)
+
+[node name="CollisionShape" type="CollisionShape3D" parent="AnimatableBody"]
+shape = SubResource("SphereShape3D_abd54")
+
+[node name="RigidBody" type="RigidBody3D" parent="."]
+mass = 3.0
+physics_material_override = SubResource("PhysicsMaterial_4t3fo")
+freeze = true
+contact_monitor = true
+max_contacts_reported = 3
+script = ExtResource("3_6rmqm")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="RigidBody"]
+shape = SubResource("SphereShape3D_abd54")
+
+[node name="ReattachTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="RigidBody" to="." method="_on_rigid_body_body_entered"]
+[connection signal="timeout" from="ReattachTimer" to="." method="_on_reattach_timer_timeout"]

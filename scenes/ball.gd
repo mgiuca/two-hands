@@ -35,10 +35,10 @@ var detached : bool:
       rigid_body.teleport(xr_controller.global_transform)
       # Transfer linear and angular velocity from the controller to the rigid body.
       var pose := xr_controller.get_pose()
-      # Give the ball a bit of a boost towards the end.
+      # Give the ball a bit of a boost.
       # TODO: Make this boost a customizable property.
-      var lin_vel := pose.linear_velocity + Vector3(0, 0, -3)
-      rigid_body.force_new_linear_velocity(pose.linear_velocity)
+      var lin_vel := pose.linear_velocity * 2
+      rigid_body.force_new_linear_velocity(lin_vel)
       rigid_body.force_new_angular_velocity(pose.angular_velocity)
       rigid_body.freeze = false
     else:

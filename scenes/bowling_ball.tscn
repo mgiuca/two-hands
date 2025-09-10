@@ -15,6 +15,8 @@ bounce = 0.11
 script = ExtResource("1_4t3fo")
 
 [node name="AnimatableBody" type="AnimatableBody3D" parent="."]
+collision_layer = 4
+collision_mask = 94
 
 [node name="Visual" parent="AnimatableBody" instance=ExtResource("1_abd54")]
 unique_name_in_owner = true
@@ -23,6 +25,8 @@ unique_name_in_owner = true
 shape = SubResource("SphereShape3D_abd54")
 
 [node name="RigidBody" type="RigidBody3D" parent="."]
+collision_layer = 4
+collision_mask = 94
 mass = 3.0
 physics_material_override = SubResource("PhysicsMaterial_4t3fo")
 freeze = true

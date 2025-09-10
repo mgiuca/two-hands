@@ -106,6 +106,13 @@ debug_right_action={
 
 3d_render/layer_1="Default"
 3d_render/layer_2="Moon"
+3d_physics/layer_1="Player"
+3d_physics/layer_2="Walls"
+3d_physics/layer_3="HeldObjects"
+3d_physics/layer_4="PhysicsObjects"
+3d_physics/layer_5="Buttons"
+3d_physics/layer_6="UnlockAreas"
+3d_physics/layer_7="GravityAreas"
 
 [physics]
 

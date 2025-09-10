@@ -85,6 +85,8 @@ sides = 16
 material = SubResource("StandardMaterial3D_5m3i7")
 
 [node name="CollisionArea" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 4
 input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionArea"]

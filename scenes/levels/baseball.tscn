@@ -46,6 +46,8 @@ environment = SubResource("Environment_lkgpm")
 [node name="Ground" type="CSGBox3D" parent="Static" index="0"]
 transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, -0.5, 4.1219196)
 use_collision = true
+collision_layer = 2
+collision_mask = 0
 size = Vector3(16, 1, 16)
 material = ExtResource("3_gcw3b")
 
@@ -76,6 +78,8 @@ omni_range = 100.0
 omni_attenuation = 0.1
 
 [node name="ForceAffector" type="Area3D" parent="." index="11"]
+collision_layer = 64
+collision_mask = 12
 gravity_space_override = 3
 gravity_point_center = Vector3(-0.393, 0.576, -0.717)
 gravity_direction = Vector3(-0.393, 0.576, -0.717)

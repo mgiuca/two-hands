@@ -26,6 +26,8 @@ _surfaces = [{
 data = PackedVector3Array(-0.2, -0.2, 0.05, -0.2, -0.2, -0.05, -0.2, 0.2, -0.05, 0.2, -0.2, -0.05, -0.2, -0.2, -0.05, -0.2, -0.2, 0.05, -0.2, 0.2, -0.05, -0.2, -0.2, -0.05, 0.2, -0.2, -0.05, -0.2, 0.2, -0.05, -0.2, 0.2, 0.05, -0.2, -0.2, 0.05, -0.2, -0.2, 0.05, -0.2, 0.2, 0.05, 0.2, 0.2, 0.05, 0.2, 0.2, 0.05, -0.2, 0.2, 0.05, -0.2, 0.2, -0.05, -0.2, -0.2, 0.05, 0.2, -0.2, 0.05, 0.2, -0.2, -0.05, 0.2, 0.2, 0.05, 0.2, -0.2, 0.05, -0.2, -0.2, 0.05, 0.2, -0.2, -0.05, 0.2, -0.2, 0.05, 0.2, 0.2, 0.05, 0.2, -0.2, -0.05, 0.2, 0.2, -0.05, -0.2, 0.2, -0.05, -0.2, 0.2, -0.05, 0.2, 0.2, -0.05, 0.2, 0.2, 0.05, 0.2, 0.2, 0.05, 0.2, 0.2, -0.05, 0.2, -0.2, -0.05)
 
 [node name="PlateActivator" type="StaticBody3D" node_paths=PackedStringArray("flags")]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_xovc2")
 flags = NodePath("Flags")
 
@@ -43,6 +45,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("ConcavePolygonShape3D_t8ub1")
 
 [node name="Button" type="StaticBody3D" parent="."]
+collision_layer = 16
+collision_mask = 4
 script = ExtResource("2_t2jum")
 
 [node name="Mesh" type="MeshInstance3D" parent="Button"]

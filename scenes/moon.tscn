@@ -13,6 +13,8 @@ script = ExtResource("1_7l7dh")
 flags = NodePath("Flags")
 
 [node name="Pushable" type="StaticBody3D" parent="."]
+collision_layer = 16
+collision_mask = 4
 script = ExtResource("2_xatjt")
 
 [node name="Visual" parent="Pushable" instance=ExtResource("2_7l7dh")]

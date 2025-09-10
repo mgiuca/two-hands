@@ -21,8 +21,8 @@ sky = SubResource("Sky_i4v62")
 tonemap_mode = 2
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5qpj5"]
-height = 22.020466
-radius = 3.5058594
+height = 25.056131
+radius = 4.7851563
 
 [node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_i34so")]
 left_hand = NodePath("BaseballLeft")
@@ -82,7 +82,7 @@ gravity_direction = Vector3(-0.393, 0.576, -0.717)
 gravity = 3.0
 
 [node name="CollisionShape" type="CollisionShape3D" parent="ForceAffector" index="0"]
-transform = Transform3D(0.30389422, -0.4080769, -0.8608841, 0.8312895, 0.55500954, 0.030361295, 0.46540916, -0.7248707, 0.5078944, -7.7775555, 11.632315, -13.953064)
+transform = Transform3D(0.30389422, -0.4080769, -0.8608841, 0.8312895, 0.55500954, 0.030361295, 0.46540916, -0.7248707, 0.5078944, -7.158163, 10.789903, -12.852832)
 shape = SubResource("CylinderShape3D_5qpj5")
 
 [node name="MarkerBottom" type="Marker3D" parent="ForceAffector" index="1"]

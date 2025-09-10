@@ -1,26 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhouj103pnqy3"]
+[gd_scene load_steps=5 format=3 uid="uid://dhouj103pnqy3"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_3olt6"]
 [ext_resource type="PackedScene" uid="uid://b57w04rr00g0x" path="res://scenes/pedestal_with_keyhole.tscn" id="2_4tcl0"]
+[ext_resource type="PackedScene" uid="uid://dsy54vm4i37kq" path="res://scenes/key.tscn" id="2_uc7wt"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="3_iof1q"]
 
-[node name="Level" node_paths=PackedStringArray("activator1", "activator2") instance=ExtResource("1_3olt6")]
+[node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_3olt6")]
+left_hand = NodePath("KeyLeft")
+right_hand = NodePath("KeyRight")
 activator1 = NodePath("PedestalLeft/Keyhole")
 activator2 = NodePath("PedestalRight/Keyhole")
 
-[node name="Static" type="Node3D" parent="." index="7"]
+[node name="KeyLeft" parent="." index="6" instance=ExtResource("2_uc7wt")]
+
+[node name="KeyRight" parent="." index="7" instance=ExtResource("2_uc7wt")]
+
+[node name="Static" type="Node3D" parent="." index="8"]
 
 [node name="Ground" type="CSGBox3D" parent="Static" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 size = Vector3(11, 1, 11)
 
-[node name="PedestalLeft" parent="." index="8" instance=ExtResource("2_4tcl0")]
+[node name="PedestalLeft" parent="." index="9" instance=ExtResource("2_4tcl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.65, -1)
 
-[node name="PedestalRight" parent="." index="9" instance=ExtResource("2_4tcl0")]
+[node name="PedestalRight" parent="." index="10" instance=ExtResource("2_4tcl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.65, -1)
 
-[node name="Door" parent="." index="10" instance=ExtResource("3_iof1q")]
+[node name="Door" parent="." index="11" instance=ExtResource("3_iof1q")]
 transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -5.1633463)
 
 [node name="SecondaryLight" type="OmniLight3D" parent="." index="12"]

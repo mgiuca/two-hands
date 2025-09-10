@@ -5,11 +5,17 @@ extends Node
 
 @export_group('Setup')
 
-@export var activator1 : Activator
-@export var activator2 : Activator
+## Object in left hand. Can be any Node3D, but must have an
+## [code]xr_controller[/code] : [XRController3D] member.
+@export var left_hand : Node3D
+## Object in right hand. Can be any Node3D, but must have an
+## [code]xr_controller[/code] : [XRController3D] member.
+@export var right_hand : Node3D
 
-@onready var key_left : Key = $KeyLeft
-@onready var key_right : Key = $KeyRight
+## First object that needs to be activated.
+@export var activator1 : Activator
+## Second object that needs to be activated.
+@export var activator2 : Activator
 
 @export_group('Debug')
 
@@ -35,8 +41,8 @@ func _ready() -> void:
   if Main.ensure_main_and_load_file(self):
     # Unloading the scene. Disable these or their _physics_process will crash before the scene
     # is unloaded.
-    key_left.process_mode = Node.PROCESS_MODE_DISABLED
-    key_right.process_mode = Node.PROCESS_MODE_DISABLED
+    left_hand.process_mode = Node.PROCESS_MODE_DISABLED
+    right_hand.process_mode = Node.PROCESS_MODE_DISABLED
     return
 
   LevelManager.current_level = self
@@ -48,8 +54,8 @@ func _ready() -> void:
   activator2.activate.connect(_on_activator_activate.bind(1))
   activator2.deactivate.connect(_on_activator_deactivate.bind(1))
 
-  key_left.xr_controller = Globals.main.left_hand
-  key_right.xr_controller = Globals.main.right_hand
+  (left_hand as Variant).xr_controller = Globals.main.left_hand
+  (right_hand as Variant).xr_controller = Globals.main.right_hand
 
 func _unhandled_input(event: InputEvent) -> void:
   # Meta/UI inputs.

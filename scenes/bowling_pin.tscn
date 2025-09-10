@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvqyeskxo4r8f"]
+
+[ext_resource type="Script" uid="uid://c34wovrbr5ilf" path="res://scenes/bowling_pin.gd" id="1_r34d0"]
+[ext_resource type="PackedScene" uid="uid://cm8vsps153bis" path="res://meshes/bowling-pin.glb" id="1_yklfw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_r34d0"]
+bounce = 0.13
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yklfw"]
+radius = 0.05810547
+height = 0.28223515
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r34d0"]
+radius = 0.109375
+height = 0.44538116
+
+[node name="BowlingPin" type="Node3D"]
+script = ExtResource("1_r34d0")
+
+[node name="RigidBody" type="RigidBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_r34d0")
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0.24, 0)
+continuous_cd = true
+linear_damp = 1.031
+angular_damp = 10.309
+
+[node name="bowling-pin" parent="RigidBody" instance=ExtResource("1_yklfw")]
+transform = Transform3D(0.19807929, 0, 0, 0, 0.19807929, 0, 0, 0, 0.19807929, 0, 0.374, 0)
+
+[node name="CollisionShapeTop" type="CollisionShape3D" parent="RigidBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5840983, 0)
+shape = SubResource("CapsuleShape3D_yklfw")
+
+[node name="CollisionShapeBottom" type="CollisionShape3D" parent="RigidBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22718376, 0)
+shape = SubResource("CapsuleShape3D_r34d0")
+
+[node name="DeactivateTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ResetTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="DeactivateTimer" to="." method="_on_deactivate_timer_timeout"]
+[connection signal="timeout" from="ResetTimer" to="." method="_on_reset_timer_timeout"]

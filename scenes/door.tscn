@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://befgfai7xh21g"]
+[gd_scene load_steps=6 format=3 uid="uid://befgfai7xh21g"]
 
 [ext_resource type="PackedScene" uid="uid://b17drhwlyqjch" path="res://meshes/door-rotate-large.glb" id="1_hpvv5"]
 [ext_resource type="Script" uid="uid://db2o3gvphk0em" path="res://scenes/door.gd" id="1_la1wf"]
 [ext_resource type="AudioStream" uid="uid://d0rfr2bx2yjsb" path="res://sounds/door-open.wav" id="3_18pbm"]
 [ext_resource type="AudioStream" uid="uid://di8olscjt41r3" path="res://sounds/door-open-finish.wav" id="4_q5w8r"]
 
-[node name="Door" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_la1wf"]
+size = Vector3(1, 1, 0.2998047)
+
+[node name="Door" type="StaticBody3D"]
 script = ExtResource("1_la1wf")
 
 [node name="Mesh" parent="." instance=ExtResource("1_hpvv5")]
@@ -15,3 +18,7 @@ stream = ExtResource("3_18pbm")
 
 [node name="SndClunk" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_q5w8r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4998653, 0.0024414063)
+shape = SubResource("BoxShape3D_la1wf")

@@ -1,15 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1kukgwhukgjf"]
+[gd_scene load_steps=6 format=3 uid="uid://b1kukgwhukgjf"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_suiyq"]
 [ext_resource type="PackedScene" uid="uid://uro72wsx2r5i" path="res://scenes/bowling_ball.tscn" id="2_2p8bq"]
-[ext_resource type="PackedScene" uid="uid://b57w04rr00g0x" path="res://scenes/pedestal_with_keyhole.tscn" id="2_7wjn3"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="3_2p8bq"]
+[ext_resource type="PackedScene" uid="uid://cvqyeskxo4r8f" path="res://scenes/bowling_pin.tscn" id="3_7wjn3"]
+[ext_resource type="PackedScene" uid="uid://udigdayvrvfd" path="res://scenes/flags.tscn" id="4_2p8bq"]
 
 [node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_suiyq")]
 left_hand = NodePath("BallLeft")
 right_hand = NodePath("BallRight")
-activator1 = NodePath("PedestalLeft/Keyhole")
-activator2 = NodePath("PedestalRight/Keyhole")
+activator1 = NodePath("PinLeft")
+activator2 = NodePath("PinRight")
 
 [node name="BallLeft" parent="." index="6" instance=ExtResource("2_2p8bq")]
 z_rotate = 1.5707963267948966
@@ -20,22 +21,40 @@ z_rotate = -1.5707963267948966
 [node name="Static" type="Node3D" parent="." index="8"]
 
 [node name="Ground" type="CSGBox3D" parent="Static" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-size = Vector3(11, 1, 11)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -5.5)
+use_collision = true
+size = Vector3(11, 1, 22)
 
-[node name="PedestalLeft" parent="." index="9" instance=ExtResource("2_7wjn3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.65, -1)
+[node name="GutterLeft" type="CSGBox3D" parent="Static/Ground" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, -3)
+operation = 2
+size = Vector3(0.5, 1, 14)
 
-[node name="PedestalRight" parent="." index="10" instance=ExtResource("2_7wjn3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.65, -1)
+[node name="GutterRight" type="CSGBox3D" parent="Static/Ground" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -3)
+operation = 2
+size = Vector3(0.5, 1, 14)
 
-[node name="Door" parent="." index="11" instance=ExtResource("3_2p8bq")]
-transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -5.1633463)
+[node name="PinLeft" parent="." index="9" node_paths=PackedStringArray("flags") instance=ExtResource("3_7wjn3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.571, 0.361, -14.486)
+debug_action = "debug_left_action"
+flags = NodePath("../FlagsLeft")
 
-[node name="SecondaryLight" type="OmniLight3D" parent="." index="12"]
+[node name="PinRight" parent="." index="10" node_paths=PackedStringArray("flags") instance=ExtResource("3_7wjn3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.571, 0.361, -14.486)
+debug_action = "debug_right_action"
+flags = NodePath("../FlagsRight")
+
+[node name="FlagsLeft" parent="." index="11" instance=ExtResource("4_2p8bq")]
+transform = Transform3D(8.649347, 0, 0, 0, 8.649347, 0, 0, 0, 8.649347, -1.699976, -0.86555254, -15.160644)
+
+[node name="FlagsRight" parent="." index="12" instance=ExtResource("4_2p8bq")]
+transform = Transform3D(8.649347, 0, 0, 0, 8.649347, 0, 0, 0, 8.649347, 1.7, -0.866, -15.161)
+
+[node name="Door" parent="." index="13" instance=ExtResource("3_2p8bq")]
+transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -16.163345)
+
+[node name="SecondaryLight" type="OmniLight3D" parent="." index="14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2278504, 0.83508337)
 light_color = Color(1, 0.94133335, 0.68, 1)
 light_energy = 0.34
-
-[editable path="PedestalLeft"]
-[editable path="PedestalRight"]

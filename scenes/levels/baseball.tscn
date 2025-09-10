@@ -7,9 +7,11 @@
 [ext_resource type="Material" uid="uid://ctwnqtmeffdlp" path="res://materials/grass.tres" id="4_4jxpb"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="5_8o0ly"]
 
-[node name="Level" node_paths=PackedStringArray("left_hand", "right_hand") instance=ExtResource("1_i34so")]
+[node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_i34so")]
 left_hand = NodePath("BaseballLeft")
 right_hand = NodePath("BaseballRight")
+activator1 = NodePath("PlateActivator")
+activator2 = NodePath("PlateActivator")
 
 [node name="BaseballLeft" parent="." index="5" instance=ExtResource("2_f2mr3")]
 
@@ -37,7 +39,7 @@ sides = 16
 material = ExtResource("3_gcw3b")
 
 [node name="PlateActivator" parent="." index="8" instance=ExtResource("3_f2mr3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.6601996)
 
 [node name="Door" parent="." index="9" instance=ExtResource("5_8o0ly")]
 transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -10.163345)

@@ -1,18 +1,18 @@
 [gd_scene load_steps=15 format=3 uid="uid://b1sqy5b072rvm"]
 
-[ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_i34so"]
-[ext_resource type="Texture2D" uid="uid://bij2yn57174ha" path="res://images/stars-skybox.jpg" id="2_5qpj5"]
-[ext_resource type="AudioStream" uid="uid://bn5aqcmd2ri5y" path="res://sounds/baseball-home-run.wav" id="2_8o0ly"]
-[ext_resource type="PackedScene" uid="uid://t1c4s2su3wef" path="res://scenes/baseball.tscn" id="2_f2mr3"]
-[ext_resource type="PackedScene" uid="uid://cww4n0ain3r8c" path="res://scenes/plate_activator.tscn" id="3_f2mr3"]
-[ext_resource type="Material" uid="uid://belgehb58nlcj" path="res://materials/dirt.tres" id="3_gcw3b"]
-[ext_resource type="Material" uid="uid://ctwnqtmeffdlp" path="res://materials/grass.tres" id="4_4jxpb"]
-[ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="5_8o0ly"]
-[ext_resource type="PackedScene" uid="uid://bve3cb5txb6we" path="res://scenes/moon.tscn" id="8_5qpj5"]
-[ext_resource type="AudioStream" uid="uid://bcwdduh36r1qs" path="res://sounds/baseball-ambience.ogg" id="10_i4v62"]
+[ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_4nf3g"]
+[ext_resource type="AudioStream" uid="uid://bn5aqcmd2ri5y" path="res://sounds/baseball-home-run.wav" id="2_5l2g5"]
+[ext_resource type="Texture2D" uid="uid://bij2yn57174ha" path="res://images/stars-skybox.jpg" id="3_6526h"]
+[ext_resource type="PackedScene" uid="uid://t1c4s2su3wef" path="res://scenes/baseball.tscn" id="4_0fb0o"]
+[ext_resource type="Material" uid="uid://belgehb58nlcj" path="res://materials/dirt.tres" id="5_y5vpk"]
+[ext_resource type="Material" uid="uid://ctwnqtmeffdlp" path="res://materials/grass.tres" id="6_n7a13"]
+[ext_resource type="PackedScene" uid="uid://cww4n0ain3r8c" path="res://scenes/plate_activator.tscn" id="7_p6ums"]
+[ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="8_nol06"]
+[ext_resource type="PackedScene" uid="uid://bve3cb5txb6we" path="res://scenes/moon.tscn" id="9_fnjrh"]
+[ext_resource type="AudioStream" uid="uid://bcwdduh36r1qs" path="res://sounds/baseball-ambience.ogg" id="10_886mf"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_8o0ly"]
-panorama = ExtResource("2_5qpj5")
+panorama = ExtResource("3_6526h")
 
 [sub_resource type="Sky" id="Sky_i4v62"]
 sky_material = SubResource("PanoramaSkyMaterial_8o0ly")
@@ -26,12 +26,12 @@ tonemap_mode = 2
 height = 26.343983
 radius = 5.5546875
 
-[node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_i34so")]
+[node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_4nf3g")]
 left_hand = NodePath("BaseballLeft")
 right_hand = NodePath("BaseballRight")
 activator1 = NodePath("PlateActivator")
 activator2 = NodePath("Moon")
-custom_victory_sound = ExtResource("2_8o0ly")
+custom_victory_sound = ExtResource("2_5l2g5")
 
 [node name="Sun" parent="." index="0"]
 transform = Transform3D(-0.8660254, -0.43301278, 0.24999999, 0.081266895, -0.6152517, -0.78413075, 0.49335158, -0.65876037, 0.5680132, 0, 0, 0)
@@ -40,9 +40,9 @@ layers = 2
 [node name="WorldEnvironment" parent="." index="1"]
 environment = SubResource("Environment_lkgpm")
 
-[node name="BaseballLeft" parent="." index="5" instance=ExtResource("2_f2mr3")]
+[node name="BaseballLeft" parent="." index="5" instance=ExtResource("4_0fb0o")]
 
-[node name="BaseballRight" parent="." index="6" instance=ExtResource("2_f2mr3")]
+[node name="BaseballRight" parent="." index="6" instance=ExtResource("4_0fb0o")]
 
 [node name="Static" type="Node3D" parent="." index="7"]
 
@@ -52,28 +52,28 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 size = Vector3(16, 1, 16)
-material = ExtResource("3_gcw3b")
+material = ExtResource("5_y5vpk")
 
 [node name="Grass" type="CSGBox3D" parent="Static" index="1"]
 transform = Transform3D(0.51535165, 0, 0.51535165, 0, 0.7288173, 0, -0.51535165, 0, 0.51535165, 0, -0.30989575, 4.1219196)
 use_collision = true
 size = Vector3(16, 1, 16)
-material = ExtResource("4_4jxpb")
+material = ExtResource("6_n7a13")
 
 [node name="Plate" type="CSGCylinder3D" parent="Static" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.037144184, 0)
 radius = 0.6
 height = 0.19335938
 sides = 16
-material = ExtResource("3_gcw3b")
+material = ExtResource("5_y5vpk")
 
-[node name="PlateActivator" parent="." index="8" instance=ExtResource("3_f2mr3")]
+[node name="PlateActivator" parent="." index="8" instance=ExtResource("7_p6ums")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.8013875)
 
-[node name="Door" parent="." index="9" instance=ExtResource("5_8o0ly")]
+[node name="Door" parent="." index="9" instance=ExtResource("8_nol06")]
 transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -6.0414257)
 
-[node name="Moon" parent="." index="10" instance=ExtResource("8_5qpj5")]
+[node name="Moon" parent="." index="10" instance=ExtResource("9_fnjrh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 20, -27)
 
 [node name="MoonLight" type="OmniLight3D" parent="Moon" index="2"]
@@ -106,5 +106,5 @@ omni_range = 11.786
 omni_attenuation = 0.2
 
 [node name="Ambience" type="AudioStreamPlayer" parent="." index="13"]
-stream = ExtResource("10_i4v62")
+stream = ExtResource("10_886mf")
 autoplay = true

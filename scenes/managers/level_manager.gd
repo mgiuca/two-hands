@@ -11,7 +11,7 @@ const LEVEL_NAMES : Array[String] = [
   'sliding_locks',
   'bowling',
   'babies',
-  'baseball',
+  'baseball_night',
   'free_your_mind',
 ]
 
@@ -25,7 +25,7 @@ const LEVEL_DISPLAY_NAMES : Dictionary[String, String] = {
   'sliding_locks': 'Sliding Locks',
   'bowling': 'Bowling',
   'babies': 'Babies',
-  'baseball': 'Baseball',
+  'baseball_night': 'Baseball Night',
   'free_your_mind': 'Free Your Mind',
 }
 

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://w24n725ra66v"]
+
+[ext_resource type="Script" uid="uid://bc8rlhv2x30ue" path="res://scenes/bottle.gd" id="1_qr18b"]
+[ext_resource type="PackedScene" uid="uid://dob53i0inrml4" path="res://meshes/bottle.glb" id="2_qr18b"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yk2u2"]
+radius = 0.040527344
+height = 0.1770935
+
+[node name="Bottle" type="AnimatableBody3D"]
+collision_layer = 4
+collision_mask = 34
+input_ray_pickable = false
+script = ExtResource("1_qr18b")
+
+[node name="Visual" type="Node3D" parent="."]
+transform = Transform3D(0.99999994, 0, -3.5527137e-15, 0, 0.99999994, 0, 3.5527137e-15, 0, 0.99999994, 0, 0, 0)
+top_level = true
+
+[node name="bottle" parent="Visual" instance=ExtResource("2_qr18b")]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03501892, 0)
+shape = SubResource("CapsuleShape3D_yk2u2")

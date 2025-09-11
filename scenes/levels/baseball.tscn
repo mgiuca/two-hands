@@ -1,13 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://b1sqy5b072rvm"]
+[gd_scene load_steps=15 format=3 uid="uid://b1sqy5b072rvm"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_i34so"]
 [ext_resource type="Texture2D" uid="uid://bij2yn57174ha" path="res://images/stars-skybox.jpg" id="2_5qpj5"]
+[ext_resource type="AudioStream" uid="uid://bn5aqcmd2ri5y" path="res://sounds/baseball-home-run.wav" id="2_8o0ly"]
 [ext_resource type="PackedScene" uid="uid://t1c4s2su3wef" path="res://scenes/baseball.tscn" id="2_f2mr3"]
 [ext_resource type="PackedScene" uid="uid://cww4n0ain3r8c" path="res://scenes/plate_activator.tscn" id="3_f2mr3"]
 [ext_resource type="Material" uid="uid://belgehb58nlcj" path="res://materials/dirt.tres" id="3_gcw3b"]
 [ext_resource type="Material" uid="uid://ctwnqtmeffdlp" path="res://materials/grass.tres" id="4_4jxpb"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="5_8o0ly"]
 [ext_resource type="PackedScene" uid="uid://bve3cb5txb6we" path="res://scenes/moon.tscn" id="8_5qpj5"]
+[ext_resource type="AudioStream" uid="uid://bcwdduh36r1qs" path="res://sounds/baseball-ambience.ogg" id="10_i4v62"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_8o0ly"]
 panorama = ExtResource("2_5qpj5")
@@ -29,6 +31,7 @@ left_hand = NodePath("BaseballLeft")
 right_hand = NodePath("BaseballRight")
 activator1 = NodePath("PlateActivator")
 activator2 = NodePath("Moon")
+custom_victory_sound = ExtResource("2_8o0ly")
 
 [node name="Sun" parent="." index="0"]
 transform = Transform3D(-0.8660254, -0.43301278, 0.24999999, 0.081266895, -0.6152517, -0.78413075, 0.49335158, -0.65876037, 0.5680132, 0, 0, 0)
@@ -101,3 +104,7 @@ gizmo_extents = 3.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.8154063, 0)
 omni_range = 11.786
 omni_attenuation = 0.2
+
+[node name="Ambience" type="AudioStreamPlayer" parent="." index="13"]
+stream = ExtResource("10_i4v62")
+autoplay = true

@@ -17,6 +17,10 @@ extends Node
 ## Second object that needs to be activated.
 @export var activator2 : Activator
 
+@export_group('Audio')
+
+@export var custom_victory_sound : AudioStream
+
 @export_group('Debug')
 
 ## If true, UI shows lots of extra debugging info.
@@ -56,6 +60,9 @@ func _ready() -> void:
 
   (left_hand as Variant).xr_controller = Globals.main.left_hand
   (right_hand as Variant).xr_controller = Globals.main.right_hand
+
+  if custom_victory_sound != null:
+    snd_success.stream = custom_victory_sound
 
 func _unhandled_input(event: InputEvent) -> void:
   # Meta/UI inputs.

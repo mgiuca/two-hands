@@ -57,4 +57,6 @@ func _on_activate() -> void:
   snd_crying.stop()
 
 func _on_deactivate() -> void:
-  snd_crying.play()
+  # Don't cry if level is complete.
+  if not LevelManager.current_level.victory:
+    snd_crying.play()

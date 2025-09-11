@@ -149,6 +149,10 @@ font_size = 64
 wait_time = 3.0
 one_shot = true
 
+[node name="LongPressCalibrateTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [node name="LongPressQuitTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
@@ -159,4 +163,5 @@ one_shot = true
 [connection signal="button_pressed" from="XROrigin/RightHand" to="." method="_on_right_hand_button_pressed"]
 [connection signal="button_released" from="XROrigin/RightHand" to="." method="_on_right_hand_button_released"]
 [connection signal="timeout" from="LongPressSkipTimer" to="." method="_on_long_press_skip_timer_timeout"]
+[connection signal="timeout" from="LongPressCalibrateTimer" to="." method="_on_long_press_calibrate_timer_timeout"]
 [connection signal="timeout" from="LongPressQuitTimer" to="." method="_on_long_press_quit_timer_timeout"]

@@ -55,6 +55,7 @@ var vr_supported : bool = false
 @onready var web_xr_setup_ui : CanvasLayer = $WebXRSetupUI
 
 @onready var long_press_skip_timer : Timer = $LongPressSkipTimer
+@onready var long_press_calibrate_timer : Timer = $LongPressCalibrateTimer
 @onready var long_press_quit_timer : Timer = $LongPressQuitTimer
 var long_press_active_label : Label3D
 
@@ -283,6 +284,14 @@ func _webxr_session_ended() -> void:
 func _webxr_session_failed(message: String) -> void:
   OS.alert("Failed to initialize WebXR: " + message)
 
+## Calibrates based on the player's current head height, and restarts the
+## level.
+func calibrate_height() -> void:
+  Globals.calibrated_player_height = clampf(xr_camera.global_position.y,
+    Globals.PLAYER_HEIGHT_MIN, Globals.PLAYER_HEIGHT_MAX)
+  print('Calibrated player height = %.1fm' % Globals.calibrated_player_height)
+  reload_current_scene()
+
 func setup_long_press_label(controller: Node, action: String) -> void:
   hide_long_press_label()
   long_press_active_label = controller.get_node('LblLongPress')
@@ -306,23 +315,25 @@ func _on_right_hand_button_released(button_name: String) -> void:
   _on_controller_button_released(button_name, right_hand)
 
 func _on_controller_button_pressed(button_name: String, controller: Node) -> void:
-  if button_name == 'by_button' or button_name == 'menu_button':
-    # B, Y or menu = long-press to quit
+  if (button_name == 'by_button' and controller == left_hand) or button_name == 'menu_button':
+    # Y or menu = long-press to quit
     long_press_quit_timer.start()
     setup_long_press_label(controller, 'Quitting')
+  elif button_name == 'by_button' and controller == right_hand:
+    # B = long-press to calibrate
+    long_press_calibrate_timer.start()
+    setup_long_press_label(controller, 'Calibrating')
   elif button_name == 'ax_button':
     # A or X = long-press to skip
     long_press_skip_timer.start()
     setup_long_press_label(controller, 'Skipping')
 
 func _on_controller_button_released(button_name: String, _controller: Node) -> void:
-  if button_name == 'by_button' or button_name == 'menu_button':
-    # Cancel long-press
-    long_press_quit_timer.stop()
-    hide_long_press_label()
-  elif button_name == 'ax_button':
-    # Cancel long-press
+  if button_name == 'by_button' or button_name == 'ax_button' or button_name == 'menu_button':
+    # Cancel all long-presses
     long_press_skip_timer.stop()
+    long_press_calibrate_timer.stop()
+    long_press_quit_timer.stop()
     hide_long_press_label()
 
 func _on_long_press_skip_timer_timeout() -> void:
@@ -330,6 +341,9 @@ func _on_long_press_skip_timer_timeout() -> void:
     LevelManager.current_level.complete_level()
   else:
     LevelManager.switch_to_next_level()
+
+func _on_long_press_calibrate_timer_timeout() -> void:
+  calibrate_height()
 
 func _on_long_press_quit_timer_timeout() -> void:
   if OS.has_feature('web'):

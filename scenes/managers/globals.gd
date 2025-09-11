@@ -5,6 +5,16 @@ var main : Main
 
 var inited : bool = false
 
+## Minimum player height.
+const PLAYER_HEIGHT_MIN : float = 0.6
+
+## Maximum player height.
+const PLAYER_HEIGHT_MAX : float = 2.5
+
+## The height of the player when they last used the calibrate feature, defaulting
+## to 1.7m. Used to set up level geometry.
+var calibrated_player_height : float = 1.7
+
 ## Initialize settings. Only works once (so changing levels doesn't
 ## override your settings).
 func init_settings(start_music_volume: float, start_fx_volume: float) -> void:

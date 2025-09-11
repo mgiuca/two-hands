@@ -1,6 +1,10 @@
 class_name Ball
 extends Node3D
 
+## The controller velocity is multiplied by this amount when the ball is
+## released.
+@export_range(0.0, 5.0, 0.1, 'or_greater') var throw_velocity_multiplier : float = 2.0
+
 @onready var reattach_timer : Timer = $ReattachTimer
 
 ## Controller this ball is bound to. Can't be null (even when detached).
@@ -17,8 +21,6 @@ var xr_controller : XRController3D:
 
 var trigger_pressed : bool = false
 var grip_pressed : bool = false
-
-#var controller_linear_velocity
 
 @onready var snd_hit_ground : AudioStreamPlayer3D = $SndHitGround
 @onready var snd_hit_metal : AudioStreamPlayer3D = get_node_or_null('SndHitMetal')
@@ -41,8 +43,7 @@ var detached : bool:
       # Transfer linear and angular velocity from the controller to the rigid body.
       var pose := xr_controller.get_pose()
       # Give the ball a bit of a boost.
-      # TODO: Make this boost a customizable property.
-      var lin_vel := pose.linear_velocity * 2
+      var lin_vel := pose.linear_velocity * throw_velocity_multiplier
       rigid_body.force_new_linear_velocity(lin_vel)
       rigid_body.force_new_angular_velocity(pose.angular_velocity)
       rigid_body.freeze = false

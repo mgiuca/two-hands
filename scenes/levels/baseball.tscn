@@ -68,7 +68,7 @@ sides = 16
 material = ExtResource("3_gcw3b")
 
 [node name="PlateActivator" parent="." index="8" instance=ExtResource("3_f2mr3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.3905163)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.8013875)
 
 [node name="Door" parent="." index="9" instance=ExtResource("5_8o0ly")]
 transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -6.0414257)

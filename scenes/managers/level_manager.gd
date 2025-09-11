@@ -73,14 +73,6 @@ func switch_to_prev_level() -> bool:
   switch_to_level_index(current_level_idx - 1)
   return true
 
-## Switches to next level, or to the main menu if this is the last level.
-func switch_to_next_level_or_quit() -> void:
-  if not switch_to_next_level():
-    quit_to_main_menu()
-
-func quit_to_main_menu() -> void:
-  Globals.main.change_scene_to_file('res://scenes/main_menu.tscn')
-
 ## Gets the display name for a given level name.
 func level_display_name(basename: String) -> String:
   if basename in LEVEL_DISPLAY_NAMES:

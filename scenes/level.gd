@@ -1,8 +1,6 @@
 class_name Level
 extends Node
 
-@onready var hud : HUD = $UI/HUD
-
 @export_group('Setup')
 
 ## Object in left hand. Can be any Node3D, but must have an
@@ -23,12 +21,6 @@ extends Node
 @export var custom_victory_sound : AudioStream
 
 @export_group('Debug')
-
-## If true, UI shows lots of extra debugging info.
-@export var debug_info : bool
-
-## Bypass the menu and immediately exit.
-@export var esc_immediately_quits : bool = false
 
 ## Introduces an artificial random lag each (actual) frame to simulate a
 ## low-performance device.
@@ -52,8 +44,6 @@ func _ready() -> void:
 
   LevelManager.current_level = self
 
-  hud.debug_visible = debug_info
-
   activator1.activate.connect(_on_activator_activate.bind(0))
   activator1.deactivate.connect(_on_activator_deactivate.bind(0))
   activator2.activate.connect(_on_activator_activate.bind(1))
@@ -67,25 +57,14 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
   # Meta/UI inputs.
-  if event.is_action_pressed('menu'):
-    if esc_immediately_quits:
-      get_tree().quit()
-    else:
-      (%Menu as Menu).show_menu()
-  elif event.is_action_pressed('debug_prev_level'):
+  if event.is_action_pressed('debug_prev_level'):
     LevelManager.switch_to_prev_level()
   elif event.is_action_pressed('debug_next_level'):
     LevelManager.switch_to_next_level()
   elif event.is_action_pressed('debug_complete_level'):
     complete_level()
 
-func _process(delta: float) -> void:
-  # Delta in real-world seconds.
-  # TODO: Only relevant if this game changes Engine.time_scale.
-  # If not, just use delta.
-  var delta_real_s := delta / Engine.time_scale
-  hud.set_framerate(1.0 / delta_real_s)
-
+func _process(_delta: float) -> void:
   if artificial_lag:
     # Artificial delay for testing.
     var x : float

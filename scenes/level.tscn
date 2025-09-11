@@ -1,8 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://tdgkmflrwhol"]
+[gd_scene load_steps=11 format=3 uid="uid://tdgkmflrwhol"]
 
 [ext_resource type="Script" uid="uid://6el64wahmcuf" path="res://scenes/level.gd" id="1_j03b7"]
-[ext_resource type="PackedScene" uid="uid://c7js5gws2kjj5" path="res://scenes/ui/menu.tscn" id="3_8hwtq"]
-[ext_resource type="PackedScene" uid="uid://cj46p1qq7r6sp" path="res://scenes/ui/hud.tscn" id="4_epnyg"]
 [ext_resource type="AudioStream" uid="uid://d1x6iomieb5hh" path="res://sounds/success1.wav" id="6_olg7q"]
 [ext_resource type="AudioStream" uid="uid://bnj8gutlqrt4a" path="res://sounds/success2.wav" id="7_t1rx8"]
 [ext_resource type="AudioStream" uid="uid://c7kv2im1bv0o3" path="res://sounds/success3.wav" id="8_8iemx"]
@@ -31,7 +29,6 @@ stream_4/stream = ExtResource("10_fpun6")
 
 [node name="Level" type="Node"]
 script = ExtResource("1_j03b7")
-debug_info = true
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -39,15 +36,6 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mx8sn")
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="HUD" parent="UI" instance=ExtResource("4_epnyg")]
-
-[node name="Menu" parent="UI" instance=ExtResource("3_8hwtq")]
-unique_name_in_owner = true
-process_mode = 2
-visible = false
 
 [node name="SndSuccess" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_wc255")

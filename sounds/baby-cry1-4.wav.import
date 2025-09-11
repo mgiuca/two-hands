@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://vhcc25n5mxhl"
-path="res://.godot/imported/baby-cry5.wav-23245f24f71566112822cb109f0c3dc0.sample"
+uid="uid://c4h6ju4mdki32"
+path="res://.godot/imported/baby-cry1-4.wav-ed26b393c0d270f59aca49b08d432a3b.sample"
 
 [deps]
 
-source_file="res://sounds/baby-cry5.wav"
-dest_files=["res://.godot/imported/baby-cry5.wav-23245f24f71566112822cb109f0c3dc0.sample"]
+source_file="res://sounds/baby-cry1-4.wav"
+dest_files=["res://.godot/imported/baby-cry1-4.wav-ed26b393c0d270f59aca49b08d432a3b.sample"]
 
 [params]
 

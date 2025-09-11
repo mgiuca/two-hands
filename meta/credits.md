@@ -31,6 +31,7 @@ Sounds by me:
 * Baseball home run jingle
 * Success jingle
 * Baby crying
+* Lullaby (Wiegenlied, composed by Johannes Brahms)
 
 # Fonts
 

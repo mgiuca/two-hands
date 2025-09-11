@@ -54,5 +54,10 @@ stream = SubResource("AudioStreamRandomizer_8rev2")
 [node name="Flags" parent="." instance=ExtResource("9_7xqix")]
 transform = Transform3D(0.759217, 0, 0, 0, 0.7300541, -0.20840228, 0, 0.20840228, 0.7300541, -0.1343719, 0.3513995, 0.065250754)
 
+[node name="SndCrying" type="AudioStreamPlayer3D" parent="."]
+
+[connection signal="activate" from="." to="." method="_on_activate"]
+[connection signal="deactivate" from="." to="." method="_on_deactivate"]
 [connection signal="body_entered" from="Mouth" to="." method="_on_collision_area_body_entered"]
 [connection signal="body_exited" from="Mouth" to="." method="_on_collision_area_body_exited"]
+[connection signal="finished" from="SndCrying" to="." method="_on_snd_crying_finished"]

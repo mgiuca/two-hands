@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://c2bdn7ivam1cq"]
+[gd_scene load_steps=23 format=4 uid="uid://c2bdn7ivam1cq"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_t0qa0"]
 [ext_resource type="PackedScene" uid="uid://w24n725ra66v" path="res://scenes/bottle.tscn" id="2_t0qa0"]
@@ -7,6 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="4_id7lw"]
 [ext_resource type="PackedScene" uid="uid://d0y0b0ibmt0f1" path="res://scenes/baby.tscn" id="4_t0qa0"]
 [ext_resource type="AudioStream" uid="uid://ckughd8cxa5v3" path="res://sounds/lullaby.ogg" id="5_id7lw"]
+[ext_resource type="AudioStream" uid="uid://bdflkwgbd3bem" path="res://sounds/baby-cry1-2.wav" id="8_hqard"]
+[ext_resource type="AudioStream" uid="uid://u17kopneiqrk" path="res://sounds/baby-cry1-3.wav" id="9_xph1r"]
+[ext_resource type="AudioStream" uid="uid://c4h6ju4mdki32" path="res://sounds/baby-cry1-4.wav" id="10_37ht0"]
+[ext_resource type="AudioStream" uid="uid://bw3wy81dxjb81" path="res://sounds/baby-cry1-5.wav" id="11_fd5wo"]
+[ext_resource type="AudioStream" uid="uid://lnvkt7sig14v" path="res://sounds/baby-cry1-6.wav" id="12_dp1ol"]
+[ext_resource type="AudioStream" uid="uid://bekleebodx3wv" path="res://sounds/baby-cry2-1.wav" id="13_1hcgq"]
+[ext_resource type="AudioStream" uid="uid://jndt1s7xomp" path="res://sounds/baby-cry2-2.wav" id="14_3n1r2"]
+[ext_resource type="AudioStream" uid="uid://c345nk8eh2drb" path="res://sounds/baby-cry2-3.wav" id="15_kpbos"]
+[ext_resource type="AudioStream" uid="uid://b1l10jbma87ae" path="res://sounds/baby-cry2-4.wav" id="16_6g7x3"]
+[ext_resource type="AudioStream" uid="uid://dah5entgecscs" path="res://sounds/baby-cry2-5.wav" id="17_6a77l"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_y65rj"]
 _surfaces = [{
@@ -50,6 +60,22 @@ script/source = "extends Node3D
 func _ready() -> void:
   animation_player.play('HandleAction')
 "
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_d7ucg"]
+streams_count = 6
+stream_1/stream = ExtResource("8_hqard")
+stream_2/stream = ExtResource("9_xph1r")
+stream_3/stream = ExtResource("10_37ht0")
+stream_4/stream = ExtResource("11_fd5wo")
+stream_5/stream = ExtResource("12_dp1ol")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_af32p"]
+streams_count = 5
+stream_0/stream = ExtResource("13_1hcgq")
+stream_1/stream = ExtResource("14_3n1r2")
+stream_2/stream = ExtResource("15_kpbos")
+stream_3/stream = ExtResource("16_6g7x3")
+stream_4/stream = ExtResource("17_6a77l")
 
 [node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_t0qa0")]
 left_hand = NodePath("BottleLeft")
@@ -160,9 +186,11 @@ autoplay = true
 
 [node name="Baby1" parent="." index="9" instance=ExtResource("4_t0qa0")]
 transform = Transform3D(0.8794493, 0, -0.4759925, 0, 1, 0, 0.4759925, 0, 0.8794493, 0.6324054, 0.00525913, -0.5877454)
+crying_sound = SubResource("AudioStreamRandomizer_d7ucg")
 
 [node name="Baby2" parent="." index="10" instance=ExtResource("4_t0qa0")]
 transform = Transform3D(0.12451935, 0, 0.9922172, 0, 1, 0, -0.9922172, 0, 0.12451935, -0.6591977, 0.00525913, 0.4066227)
+crying_sound = SubResource("AudioStreamRandomizer_af32p")
 
 [node name="Door" parent="." index="11" instance=ExtResource("4_id7lw")]
 transform = Transform3D(2.807497, 0, 0, 0, 2.807497, 0, 0, 0, 2.807497, 0, 0, -4.7449336)

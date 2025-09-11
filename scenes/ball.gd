@@ -49,6 +49,8 @@ var detached : bool:
     else:
       visual.reparent(animatable_body, false)
       rigid_body.freeze = true
+      # Hit ground can be a long rolling sound, so stop it.
+      snd_hit_ground.stop()
 
 ## Z rotation to apply to the visual mesh.
 @export_range(-180, 180, 1, 'radians_as_degrees') var z_rotate : float = 0.0:
@@ -116,3 +118,8 @@ func _on_rigid_body_body_entered(body: Node) -> void:
   else:
     if snd_hit_ground:
       snd_hit_ground.play()
+
+func _on_rigid_body_sleeping_state_changed() -> void:
+  if rigid_body.sleeping:
+    # Hit ground can be a long rolling sound, so stop it.
+    snd_hit_ground.stop()

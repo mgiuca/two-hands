@@ -58,4 +58,5 @@ stream = ExtResource("4_j7b3c")
 stream = SubResource("AudioStreamRandomizer_obgss")
 
 [connection signal="body_entered" from="RigidBody" to="." method="_on_rigid_body_body_entered"]
+[connection signal="sleeping_state_changed" from="RigidBody" to="." method="_on_rigid_body_sleeping_state_changed"]
 [connection signal="timeout" from="ReattachTimer" to="." method="_on_reattach_timer_timeout"]

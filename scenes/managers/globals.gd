@@ -14,6 +14,14 @@ func init_settings(start_music_volume: float, start_fx_volume: float) -> void:
   AudioManager.fx_volume = start_fx_volume
   inited = true
 
+func average_vectors(vectors: PackedVector3Array) -> Vector3:
+  var sum := Vector3.ZERO
+  if vectors.is_empty():
+    return sum
+  for v in vectors:
+    sum += v
+  return sum / float(vectors.size())
+
 ## Clamps an angle in some range around 0°. min and max must be in (-PI, PI),
 ## exclusive.
 @warning_ignore("shadowed_global_identifier")

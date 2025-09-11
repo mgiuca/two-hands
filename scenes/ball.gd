@@ -19,6 +19,32 @@ var xr_controller : XRController3D:
     xr_controller.button_pressed.connect(_on_controller_button_pressed)
     xr_controller.button_released.connect(_on_controller_button_released)
 
+## When throwing the ball, the velocity of the ball is set to the velocity of
+## the controller, averaged out over the most recent N records. This provides
+## the number of records to average over.
+## Bigger numbers make the ball feel more sluggish, smaller numbers might make
+## a small movement or tracking error throw the ball way off. Heavier balls
+## should probably have a bigger window size.
+@export_range(1, 10, 1.0, 'or_greater') var velocity_stabilizer_window_size : int = 3
+## Records the last [member velocity_stabilizer_window_size] linear velocities
+## from the controller.
+var last_n_linear_velocities : PackedVector3Array
+## Records the last [member velocity_stabilizer_window_size] angular velocities
+## from the controller.
+var last_n_angular_velocities : PackedVector3Array
+
+## The average of the last [member velocity_stabilizer_window_size] linear
+## velocities from the controller.
+var controller_average_linear_velocity : Vector3:
+  get():
+    return Globals.average_vectors(last_n_linear_velocities)
+
+## The average of the last [member velocity_stabilizer_window_size] angular
+## velocities from the controller.
+var controller_average_angular_velocity : Vector3:
+  get():
+    return Globals.average_vectors(last_n_angular_velocities)
+
 var trigger_pressed : bool = false
 var grip_pressed : bool = false
 
@@ -41,11 +67,10 @@ var detached : bool:
       visual.reparent(rigid_body, false)
       rigid_body.teleport(xr_controller.global_transform)
       # Transfer linear and angular velocity from the controller to the rigid body.
-      var pose := xr_controller.get_pose()
       # Give the ball a bit of a boost.
-      var lin_vel := pose.linear_velocity * throw_velocity_multiplier
+      var lin_vel := controller_average_linear_velocity * throw_velocity_multiplier
       rigid_body.force_new_linear_velocity(lin_vel)
-      rigid_body.force_new_angular_velocity(pose.angular_velocity)
+      rigid_body.force_new_angular_velocity(controller_average_angular_velocity)
       rigid_body.freeze = false
     else:
       visual.reparent(animatable_body, false)
@@ -79,8 +104,21 @@ func _ready() -> void:
   visual.rotation.z = z_rotate
 
 func _physics_process(_delta: float) -> void:
+  if not xr_controller:
+    return
+
   if not detached:
     animatable_body.global_transform = xr_controller.global_transform
+
+  var pose := xr_controller.get_pose()
+  # Only include the high-confidence poses.
+  if pose and pose.tracking_confidence == XRPose.TrackingConfidence.XR_TRACKING_CONFIDENCE_HIGH:
+    last_n_linear_velocities.append(pose.linear_velocity)
+    if last_n_linear_velocities.size() > velocity_stabilizer_window_size:
+      last_n_linear_velocities.remove_at(0)
+    last_n_angular_velocities.append(pose.angular_velocity)
+    if last_n_angular_velocities.size() > velocity_stabilizer_window_size:
+      last_n_angular_velocities.remove_at(0)
 
 func _on_controller_button_pressed(button_name: String) -> void:
   if button_name == 'trigger_click':

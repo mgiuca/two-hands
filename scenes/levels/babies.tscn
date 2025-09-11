@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=4 uid="uid://c2bdn7ivam1cq"]
+[gd_scene load_steps=11 format=4 uid="uid://c2bdn7ivam1cq"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_t0qa0"]
 [ext_resource type="PackedScene" uid="uid://w24n725ra66v" path="res://scenes/bottle.tscn" id="2_t0qa0"]
 [ext_resource type="PackedScene" uid="uid://bopakv60mdjtv" path="res://meshes/cot.glb" id="3_jjwbj"]
+[ext_resource type="PackedScene" uid="uid://c7yuk8ev1nel7" path="res://meshes/music-box.glb" id="4_4bgyd"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="4_id7lw"]
 [ext_resource type="PackedScene" uid="uid://d0y0b0ibmt0f1" path="res://scenes/baby.tscn" id="4_t0qa0"]
+[ext_resource type="AudioStream" uid="uid://ckughd8cxa5v3" path="res://sounds/lullaby.ogg" id="5_id7lw"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_y65rj"]
 _surfaces = [{
@@ -39,6 +41,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_y65rj")
 
+[sub_resource type="GDScript" id="GDScript_id7lw"]
+resource_name = "MusicBox"
+script/source = "extends Node3D
+
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
+
+func _ready() -> void:
+  animation_player.play('HandleAction')
+"
+
 [node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_t0qa0")]
 left_hand = NodePath("BottleLeft")
 right_hand = NodePath("BottleRight")
@@ -60,7 +72,6 @@ size = Vector3(11, 1, 11)
 
 [node name="Roof" type="CSGBox3D" parent="Static" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
-visible = false
 use_collision = true
 collision_layer = 2
 collision_mask = 0
@@ -125,16 +136,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 [node name="Cot2" parent="Static" index="7" instance=ExtResource("3_jjwbj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 
-[node name="Baby1" parent="." index="8" instance=ExtResource("4_t0qa0")]
+[node name="Table" type="CSGCombiner3D" parent="Static" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="Top" type="CSGBox3D" parent="Static/Table" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+size = Vector3(0.5, 0.1, 0.5)
+
+[node name="Leg" type="CSGBox3D" parent="Static/Table" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+size = Vector3(0.1, 1, 0.1)
+
+[node name="Foot" type="CSGBox3D" parent="Static/Table" index="2"]
+size = Vector3(0.2, 0.05, 0.2)
+
+[node name="MusicBox" parent="." index="8" instance=ExtResource("4_4bgyd")]
+transform = Transform3D(-0.05158788, 0, -4.509956e-09, 0, 0.05158788, 0, 4.509956e-09, 0, -0.05158788, -0.026620984, 1.0459216, 3.0316756)
+script = SubResource("GDScript_id7lw")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="MusicBox" index="6"]
+stream = ExtResource("5_id7lw")
+autoplay = true
+
+[node name="Baby1" parent="." index="9" instance=ExtResource("4_t0qa0")]
 transform = Transform3D(0.8794493, 0, -0.4759925, 0, 1, 0, 0.4759925, 0, 0.8794493, 0.6324054, 0.00525913, -0.5877454)
 
-[node name="Baby2" parent="." index="9" instance=ExtResource("4_t0qa0")]
+[node name="Baby2" parent="." index="10" instance=ExtResource("4_t0qa0")]
 transform = Transform3D(0.12451935, 0, 0.9922172, 0, 1, 0, -0.9922172, 0, 0.12451935, -0.6591977, 0.00525913, 0.4066227)
 
-[node name="Door" parent="." index="10" instance=ExtResource("4_id7lw")]
+[node name="Door" parent="." index="11" instance=ExtResource("4_id7lw")]
 transform = Transform3D(2.807497, 0, 0, 0, 2.807497, 0, 0, 0, 2.807497, 0, 0, -4.7449336)
 
-[node name="SecondaryLight" type="OmniLight3D" parent="." index="11"]
+[node name="SecondaryLight" type="OmniLight3D" parent="." index="12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2278504, 0.83508337)
 light_color = Color(1, 0.94133335, 0.68, 1)
 light_energy = 1.66

@@ -36,7 +36,7 @@ func calculate_knocked_over() -> bool:
   var p := rigid_body.global_position
   var r := rigid_body.global_rotation
   # If X/Z euler rotation is large, or it's far away from its start position.
-  return absf(r.x) > deg_to_rad(50) or absf(r.z) > deg_to_rad(50) or p.distance_to(original_position) > 1.0
+  return absf(r.x) > deg_to_rad(50) or absf(r.z) > deg_to_rad(50) or p.distance_to(original_position) > 0.3
 
 func _process(_delta: float) -> void:
   if not is_knocked_over:

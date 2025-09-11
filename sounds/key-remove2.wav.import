@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/key-remove2.wav-c1b6938d4def65efebbe0b973c230
 [params]
 
 force/8_bit=false
-force/mono=false
+force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false

@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/hit-metal2.wav-3e42c55ec7ef152db9cce94b4c3e2e
 [params]
 
 force/8_bit=false
-force/mono=false
+force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false

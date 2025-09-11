@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/baseball-impact2.wav-4cedffaddd1842554d3855bd
 [params]
 
 force/8_bit=false
-force/mono=false
+force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false

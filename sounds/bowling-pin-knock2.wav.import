@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/bowling-pin-knock2.wav-0642bdfb2f9a5f9c144885
 [params]
 
 force/8_bit=false
-force/mono=false
+force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false

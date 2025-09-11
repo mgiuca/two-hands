@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/key-click1.wav-4057fa91215db4d2b1bcfef5f7fc4c
 [params]
 
 force/8_bit=false
-force/mono=false
+force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false

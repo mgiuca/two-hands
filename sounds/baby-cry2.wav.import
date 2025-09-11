@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/baby-cry2.wav-eb86543df1e7236dbee4da1c79f0266
 [params]
 
 force/8_bit=false
-force/mono=false
+force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false

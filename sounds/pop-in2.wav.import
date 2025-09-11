@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/pop-in2.wav-7113f354020906e89aa4ca0f48f0ebd1.
 [params]
 
 force/8_bit=false
-force/mono=false
+force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false

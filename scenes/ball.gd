@@ -20,6 +20,10 @@ var grip_pressed : bool = false
 
 #var controller_linear_velocity
 
+@onready var snd_hit_ground : AudioStreamPlayer3D = $SndHitGround
+@onready var snd_hit_metal : AudioStreamPlayer3D = get_node_or_null('SndHitMetal')
+@onready var snd_hit_moon : AudioStreamPlayer3D = get_node_or_null('SndHitMoon')
+
 ## Whether the ball is freely moving as a rigid body (as opposed to attached
 ## to the [member xr_controller]).
 var detached : bool:
@@ -56,6 +60,13 @@ var detached : bool:
 @onready var rigid_body : TeleportableBody = $RigidBody
 @onready var visual : Node3D = %Visual
 
+enum SoundType {
+  BOWLING,
+  BASEBALL,
+}
+
+@export var sound_type : SoundType
+
 # This has both an AnimatableBody and a RigidBody. Switches between the two
 # depending on the state of Detached. The %Visual node is literally reparented
 # depending on which object is needed.
@@ -90,4 +101,14 @@ func _on_reattach_timer_timeout() -> void:
 
 func _on_rigid_body_body_entered(body: Node) -> void:
   if body is Pushable:
+    match (body as Pushable).sound_type:
+      Pushable.SoundType.METAL:
+        if snd_hit_metal:
+          snd_hit_metal.play()
+      Pushable.SoundType.MOON:
+        if snd_hit_moon:
+          snd_hit_moon.play()
     (body as Pushable).hit_by(rigid_body)
+  else:
+    if snd_hit_ground:
+      snd_hit_ground.play()

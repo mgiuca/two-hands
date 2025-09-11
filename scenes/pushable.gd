@@ -4,6 +4,13 @@
 class_name Pushable
 extends StaticBody3D
 
+enum SoundType {
+  METAL,
+  MOON,
+}
+
+@export var sound_type : SoundType
+
 ## Emitted when hit by another certain object.
 signal hit(body: PhysicsBody3D)
 

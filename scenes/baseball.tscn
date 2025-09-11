@@ -1,8 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://t1c4s2su3wef"]
+[gd_scene load_steps=17 format=3 uid="uid://t1c4s2su3wef"]
 
 [ext_resource type="Script" uid="uid://038v01tyahhk" path="res://scenes/ball.gd" id="1_uraqv"]
 [ext_resource type="PackedScene" uid="uid://crq1bapl2584j" path="res://meshes/baseball.glb" id="2_uraqv"]
 [ext_resource type="Script" uid="uid://cefss4ojbk4cf" path="res://scenes/teleportable_body.gd" id="3_6rmqm"]
+[ext_resource type="AudioStream" uid="uid://bbfwbcilglsmn" path="res://sounds/baseball-impact1.wav" id="4_e0l7h"]
+[ext_resource type="AudioStream" uid="uid://ca4olm5608wvf" path="res://sounds/baseball-impact2.wav" id="5_ujcyu"]
+[ext_resource type="AudioStream" uid="uid://ddaj58v0y2lql" path="res://sounds/baseball-impact3.wav" id="6_0nux7"]
+[ext_resource type="AudioStream" uid="uid://ccy48v5lpwjg7" path="res://sounds/baseball-impact4.wav" id="7_dffqa"]
+[ext_resource type="AudioStream" uid="uid://djxfrn4jjitdj" path="res://sounds/hit-metal1.wav" id="8_5dd4w"]
+[ext_resource type="AudioStream" uid="uid://jph5c70pm64i" path="res://sounds/hit-metal2.wav" id="9_httb3"]
+[ext_resource type="AudioStream" uid="uid://em6gw64wgljh" path="res://sounds/hit-metal3.wav" id="10_gvlf1"]
+[ext_resource type="AudioStream" uid="uid://gonsj5iqt4vf" path="res://sounds/hit-metal4.wav" id="11_tgkom"]
+[ext_resource type="AudioStream" uid="uid://ogah3g2a6l6v" path="res://sounds/hit-moon.wav" id="12_hmv2t"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_abd54"]
 radius = 0.055410028
@@ -11,8 +20,23 @@ radius = 0.055410028
 friction = 0.01
 bounce = 0.11
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yi3dg"]
+streams_count = 4
+stream_0/stream = ExtResource("4_e0l7h")
+stream_1/stream = ExtResource("5_ujcyu")
+stream_2/stream = ExtResource("6_0nux7")
+stream_3/stream = ExtResource("7_dffqa")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sp1gf"]
+streams_count = 4
+stream_0/stream = ExtResource("8_5dd4w")
+stream_1/stream = ExtResource("9_httb3")
+stream_2/stream = ExtResource("10_gvlf1")
+stream_3/stream = ExtResource("11_tgkom")
+
 [node name="Baseball" type="Node3D"]
 script = ExtResource("1_uraqv")
+sound_type = 1
 
 [node name="AnimatableBody" type="AnimatableBody3D" parent="."]
 collision_layer = 4
@@ -41,6 +65,15 @@ shape = SubResource("SphereShape3D_abd54")
 [node name="ReattachTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="SndHitGround" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_yi3dg")
+
+[node name="SndHitMetal" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_sp1gf")
+
+[node name="SndHitMoon" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("12_hmv2t")
 
 [connection signal="body_entered" from="RigidBody" to="." method="_on_rigid_body_body_entered"]
 [connection signal="timeout" from="ReattachTimer" to="." method="_on_reattach_timer_timeout"]

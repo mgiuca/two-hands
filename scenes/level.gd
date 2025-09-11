@@ -19,6 +19,7 @@ extends Node
 
 @export_group('Audio')
 
+## Audio that plays on winning, instead of the default.
 @export var custom_victory_sound : AudioStream
 
 @export_group('Debug')

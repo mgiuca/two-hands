@@ -54,9 +54,12 @@ func switch_to_level_index(index: int) -> void:
   current_level_idx = index
   Globals.main.change_scene_to_file(path)
 
+func is_last_level() -> bool:
+  return current_level_idx == LEVEL_NAMES.size() - 1
+
 ## Returns true if the level switched, false if this was the last level.
 func switch_to_next_level() -> bool:
-  if current_level_idx == LEVEL_NAMES.size() - 1:
+  if is_last_level():
     return false
 
   switch_to_level_index(current_level_idx + 1)

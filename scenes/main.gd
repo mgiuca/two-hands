@@ -54,6 +54,10 @@ var vr_supported : bool = false
 
 @onready var web_xr_setup_ui : CanvasLayer = $WebXRSetupUI
 
+@onready var long_press_skip_timer : Timer = $LongPressSkipTimer
+@onready var long_press_quit_timer : Timer = $LongPressQuitTimer
+var long_press_active_label : Label3D
+
 func _ready() -> void:
   Globals.init_settings(music_volume, sound_effects_volume)
   Globals.main = self
@@ -278,3 +282,58 @@ func _webxr_session_ended() -> void:
 
 func _webxr_session_failed(message: String) -> void:
   OS.alert("Failed to initialize WebXR: " + message)
+
+func setup_long_press_label(controller: Node, action: String) -> void:
+  hide_long_press_label()
+  long_press_active_label = controller.get_node('LblLongPress')
+  long_press_active_label.text = action + '...'
+  long_press_active_label.show()
+
+func hide_long_press_label() -> void:
+  if long_press_active_label:
+    long_press_active_label.hide()
+
+func _on_left_hand_button_pressed(button_name: String) -> void:
+  _on_controller_button_pressed(button_name, left_hand)
+
+func _on_left_hand_button_released(button_name: String) -> void:
+  _on_controller_button_released(button_name, left_hand)
+
+func _on_right_hand_button_pressed(button_name: String) -> void:
+  _on_controller_button_pressed(button_name, right_hand)
+
+func _on_right_hand_button_released(button_name: String) -> void:
+  _on_controller_button_released(button_name, right_hand)
+
+func _on_controller_button_pressed(button_name: String, controller: Node) -> void:
+  if button_name == 'by_button' or button_name == 'menu_button':
+    # B, Y or menu = long-press to quit
+    long_press_quit_timer.start()
+    setup_long_press_label(controller, 'Quitting')
+  elif button_name == 'ax_button':
+    # A or X = long-press to skip
+    long_press_skip_timer.start()
+    setup_long_press_label(controller, 'Skipping')
+
+func _on_controller_button_released(button_name: String, _controller: Node) -> void:
+  if button_name == 'by_button' or button_name == 'menu_button':
+    # Cancel long-press
+    long_press_quit_timer.stop()
+    hide_long_press_label()
+  elif button_name == 'ax_button':
+    # Cancel long-press
+    long_press_skip_timer.stop()
+    hide_long_press_label()
+
+func _on_long_press_skip_timer_timeout() -> void:
+  if LevelManager.is_last_level():
+    LevelManager.current_level.complete_level()
+  else:
+    LevelManager.switch_to_next_level()
+
+func _on_long_press_quit_timer_timeout() -> void:
+  if OS.has_feature('web'):
+    # Just exit XR (don't actually quit).
+    _webxr_session_ended()
+  else:
+    get_tree().quit()

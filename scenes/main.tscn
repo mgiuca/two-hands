@@ -131,8 +131,32 @@ current = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
 
+[node name="LblLongPress" type="Label3D" parent="XROrigin/LeftHand"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.15, 0)
+visible = false
+font_size = 64
+
 [node name="RightHand" type="XRController3D" parent="XROrigin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
 
+[node name="LblLongPress" type="Label3D" parent="XROrigin/RightHand"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.15, 0)
+visible = false
+font_size = 64
+
+[node name="LongPressSkipTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="LongPressQuitTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="pressed" from="WebXRSetupUI/BtnEnterWebXR" to="." method="_on_btn_enter_web_xr_pressed"]
+[connection signal="button_pressed" from="XROrigin/LeftHand" to="." method="_on_left_hand_button_pressed"]
+[connection signal="button_released" from="XROrigin/LeftHand" to="." method="_on_left_hand_button_released"]
+[connection signal="button_pressed" from="XROrigin/RightHand" to="." method="_on_right_hand_button_pressed"]
+[connection signal="button_released" from="XROrigin/RightHand" to="." method="_on_right_hand_button_released"]
+[connection signal="timeout" from="LongPressSkipTimer" to="." method="_on_long_press_skip_timer_timeout"]
+[connection signal="timeout" from="LongPressQuitTimer" to="." method="_on_long_press_quit_timer_timeout"]

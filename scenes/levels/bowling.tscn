@@ -47,12 +47,12 @@ size = Vector3(0.5, 1, 12)
 material = SubResource("StandardMaterial3D_ujw30")
 
 [node name="PinLeft" parent="." index="8" node_paths=PackedStringArray("flags") instance=ExtResource("3_7wjn3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.571, 0.361, -7.486)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.571, -0.016990244, -7.486)
 debug_action = "debug_left_action"
 flags = NodePath("../FlagsLeft")
 
 [node name="PinRight" parent="." index="9" node_paths=PackedStringArray("flags") instance=ExtResource("3_7wjn3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.571, 0.361, -7.486)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.571, -0.016990244, -7.486)
 debug_action = "debug_right_action"
 flags = NodePath("../FlagsRight")
 

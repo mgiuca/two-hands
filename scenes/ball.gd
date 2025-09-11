@@ -23,6 +23,7 @@ var grip_pressed : bool = false
 @onready var snd_hit_ground : AudioStreamPlayer3D = $SndHitGround
 @onready var snd_hit_metal : AudioStreamPlayer3D = get_node_or_null('SndHitMetal')
 @onready var snd_hit_moon : AudioStreamPlayer3D = get_node_or_null('SndHitMoon')
+@onready var snd_hit_pin : AudioStreamPlayer3D = get_node_or_null('SndHitPin')
 
 ## Whether the ball is freely moving as a rigid body (as opposed to attached
 ## to the [member xr_controller]).
@@ -109,6 +110,9 @@ func _on_rigid_body_body_entered(body: Node) -> void:
         if snd_hit_moon:
           snd_hit_moon.play()
     (body as Pushable).hit_by(rigid_body)
+  elif body.name == 'PinBody':
+    if snd_hit_pin:
+      snd_hit_pin.play()
   else:
     if snd_hit_ground:
       snd_hit_ground.play()

@@ -17,7 +17,7 @@ height = 0.44538116
 [node name="BowlingPin" type="Node3D"]
 script = ExtResource("1_r34d0")
 
-[node name="RigidBody" type="RigidBody3D" parent="."]
+[node name="PinBody" type="RigidBody3D" parent="."]
 collision_layer = 8
 collision_mask = 78
 physics_material_override = SubResource("PhysicsMaterial_r34d0")
@@ -27,14 +27,14 @@ continuous_cd = true
 linear_damp = 1.031
 angular_damp = 10.309
 
-[node name="bowling-pin" parent="RigidBody" instance=ExtResource("1_yklfw")]
+[node name="bowling-pin" parent="PinBody" instance=ExtResource("1_yklfw")]
 transform = Transform3D(0.19807929, 0, 0, 0, 0.19807929, 0, 0, 0, 0.19807929, 0, 0.374, 0)
 
-[node name="CollisionShapeTop" type="CollisionShape3D" parent="RigidBody"]
+[node name="CollisionShapeTop" type="CollisionShape3D" parent="PinBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5840983, 0)
 shape = SubResource("CapsuleShape3D_yklfw")
 
-[node name="CollisionShapeBottom" type="CollisionShape3D" parent="RigidBody"]
+[node name="CollisionShapeBottom" type="CollisionShape3D" parent="PinBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22718376, 0)
 shape = SubResource("CapsuleShape3D_r34d0")
 

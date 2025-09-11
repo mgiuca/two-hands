@@ -1,7 +1,7 @@
 class_name BowlingPin
 extends Activator
 
-@onready var rigid_body : RigidBody3D = $RigidBody
+@onready var rigid_body : RigidBody3D = $PinBody
 @onready var deactivate_timer : Timer = $DeactivateTimer
 @onready var reset_timer : Timer = $ResetTimer
 

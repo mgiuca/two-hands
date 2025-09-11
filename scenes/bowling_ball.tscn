@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://uro72wsx2r5i"]
+[gd_scene load_steps=11 format=3 uid="uid://uro72wsx2r5i"]
 
 [ext_resource type="Script" uid="uid://038v01tyahhk" path="res://scenes/ball.gd" id="1_4t3fo"]
 [ext_resource type="PackedScene" uid="uid://d3fb1utrbtvkr" path="res://meshes/bowling_ball.tscn" id="1_abd54"]
 [ext_resource type="Script" uid="uid://cefss4ojbk4cf" path="res://scenes/teleportable_body.gd" id="3_gwpu0"]
+[ext_resource type="AudioStream" uid="uid://8kfqhljjkngj" path="res://sounds/bowling-ball-roll.wav" id="4_j7b3c"]
+[ext_resource type="AudioStream" uid="uid://dt8n7mnkw4met" path="res://sounds/bowling-pin-knock1.wav" id="5_ldgru"]
+[ext_resource type="AudioStream" uid="uid://ct7nbwjtfmhqi" path="res://sounds/bowling-pin-knock2.wav" id="6_muodg"]
+[ext_resource type="AudioStream" uid="uid://dnspo2kc7ndfl" path="res://sounds/bowling-pin-knock3.wav" id="7_wlqkt"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_abd54"]
 radius = 0.108712435
@@ -10,6 +14,12 @@ radius = 0.108712435
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4t3fo"]
 friction = 0.01
 bounce = 0.11
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_obgss"]
+streams_count = 3
+stream_0/stream = ExtResource("5_ldgru")
+stream_1/stream = ExtResource("6_muodg")
+stream_2/stream = ExtResource("7_wlqkt")
 
 [node name="BowlingBall" type="Node3D"]
 script = ExtResource("1_4t3fo")
@@ -30,6 +40,8 @@ collision_mask = 94
 mass = 3.0
 physics_material_override = SubResource("PhysicsMaterial_4t3fo")
 freeze = true
+contact_monitor = true
+max_contacts_reported = 3
 script = ExtResource("3_gwpu0")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="RigidBody"]
@@ -39,4 +51,11 @@ shape = SubResource("SphereShape3D_abd54")
 wait_time = 5.0
 one_shot = true
 
+[node name="SndHitGround" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_j7b3c")
+
+[node name="SndHitPin" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_obgss")
+
+[connection signal="body_entered" from="RigidBody" to="." method="_on_rigid_body_body_entered"]
 [connection signal="timeout" from="ReattachTimer" to="." method="_on_reattach_timer_timeout"]

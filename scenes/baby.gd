@@ -14,6 +14,8 @@ extends Activator
 
 @onready var snd_crying : AudioStreamPlayer3D = $SndCrying
 
+@onready var satisfy_timer : Timer = $SatisfyTimer
+
 var bottle_lock_global_transform : Transform3D:
   get():
     return bottle_lock_marker.global_transform
@@ -39,24 +41,25 @@ func _on_collision_area_body_entered(body: Node3D) -> void:
   if body is Bottle and inserted_bottle == null:
     inserted_bottle = body as Bottle
     inserted_bottle.lock_to_baby = self
-    active = true
     snd_insert.play()
+    snd_crying.stop()
+    # Don't immediately activate; need to stay feeding for a short timer.
+    satisfy_timer.start()
 
 func _on_collision_area_body_exited(body: Node3D) -> void:
   if body is Bottle and inserted_bottle == body:
     (body as Bottle).lock_to_baby = null
     inserted_bottle = null
     active = false
+    satisfy_timer.stop()
     snd_remove.play()
+    # Don't cry if level is complete.
+    if not LevelManager.current_level.victory:
+      snd_crying.play()
 
 func _on_snd_crying_finished() -> void:
   # Just keep crying.
   snd_crying.play()
 
-func _on_activate() -> void:
-  snd_crying.stop()
-
-func _on_deactivate() -> void:
-  # Don't cry if level is complete.
-  if not LevelManager.current_level.victory:
-    snd_crying.play()
+func _on_satisfy_timer_timeout() -> void:
+  active = true

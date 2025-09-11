@@ -46,8 +46,11 @@ transform = Transform3D(0.759217, 0, 0, 0, 0.7300541, -0.20840228, 0, 0.20840228
 
 [node name="SndCrying" type="AudioStreamPlayer3D" parent="."]
 
-[connection signal="activate" from="." to="." method="_on_activate"]
-[connection signal="deactivate" from="." to="." method="_on_deactivate"]
+[node name="SatisfyTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="body_entered" from="Mouth" to="." method="_on_collision_area_body_entered"]
 [connection signal="body_exited" from="Mouth" to="." method="_on_collision_area_body_exited"]
 [connection signal="finished" from="SndCrying" to="." method="_on_snd_crying_finished"]
+[connection signal="timeout" from="SatisfyTimer" to="." method="_on_satisfy_timer_timeout"]

@@ -110,7 +110,7 @@ func _on_activator_deactivate(_activator_id: int) -> void:
   pass
 
 func _on_win_timer_timeout() -> void:
-  LevelManager.switch_to_next_level_or_quit()
+  LevelManager.switch_to_next_level()
 
 ## Opens the door, if there is one.
 ##

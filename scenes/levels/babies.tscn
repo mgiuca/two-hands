@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://c2bdn7ivam1cq"]
+[gd_scene load_steps=24 format=4 uid="uid://c2bdn7ivam1cq"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_t0qa0"]
 [ext_resource type="PackedScene" uid="uid://w24n725ra66v" path="res://scenes/bottle.tscn" id="2_t0qa0"]
@@ -77,17 +77,45 @@ stream_2/stream = ExtResource("15_kpbos")
 stream_3/stream = ExtResource("16_6g7x3")
 stream_4/stream = ExtResource("17_6a77l")
 
+[sub_resource type="GDScript" id="GDScript_01i28"]
+script/source = "extends Node
+
+@onready var baby1 : Baby = $'../Baby1'
+@onready var baby2 : Baby = $'../Baby2'
+
+func _ready() -> void:
+  # Reset baby positions based on calibrated player height.
+
+  # Assumptions: Player's arm span = player's height (according to Leonardo's
+  # Vitruvian Man). So place the babies a player height width apart.
+  # (Don't subtract on this one, you can stretch.)
+  var baby_dist_from_origin := Globals.calibrated_player_height / 2.0
+  # Don't make them closer than easy_locks.
+  baby_dist_from_origin = max(baby_dist_from_origin, 0.3)
+
+  #print('babies are %.1fm away' % [baby_dist_from_origin])
+
+  set_baby_distance(baby1, baby_dist_from_origin)
+  set_baby_distance(baby2, baby_dist_from_origin)
+
+func set_baby_distance(baby: Node3D, dist: float) -> void:
+  # Scale the XZ vector.
+  var baby_xz : Vector2 = Vector2(baby.position.x, baby.position.z)
+  baby_xz = baby_xz.normalized() * dist
+  baby.position = Vector3(baby_xz.x, baby.position.y, baby_xz.y)
+"
+
 [node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_t0qa0")]
 left_hand = NodePath("BottleLeft")
 right_hand = NodePath("BottleRight")
 activator1 = NodePath("Baby1")
 activator2 = NodePath("Baby2")
 
-[node name="BottleLeft" parent="." index="5" instance=ExtResource("2_t0qa0")]
+[node name="BottleLeft" parent="." index="4" instance=ExtResource("2_t0qa0")]
 
-[node name="BottleRight" parent="." index="6" instance=ExtResource("2_t0qa0")]
+[node name="BottleRight" parent="." index="5" instance=ExtResource("2_t0qa0")]
 
-[node name="Static" type="Node3D" parent="." index="7"]
+[node name="Static" type="Node3D" parent="." index="6"]
 
 [node name="Ground" type="CSGBox3D" parent="Static" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -177,7 +205,7 @@ size = Vector3(0.1, 1, 0.1)
 [node name="Foot" type="CSGBox3D" parent="Static/Table" index="2"]
 size = Vector3(0.2, 0.05, 0.2)
 
-[node name="MusicBox" parent="." index="8" instance=ExtResource("4_4bgyd")]
+[node name="MusicBox" parent="." index="7" instance=ExtResource("4_4bgyd")]
 transform = Transform3D(-0.05158788, 0, -4.509956e-09, 0, 0.05158788, 0, 4.509956e-09, 0, -0.05158788, -0.026620984, 1.0459216, 3.0316756)
 script = SubResource("GDScript_id7lw")
 
@@ -185,18 +213,21 @@ script = SubResource("GDScript_id7lw")
 stream = ExtResource("5_id7lw")
 autoplay = true
 
-[node name="Baby1" parent="." index="9" instance=ExtResource("4_t0qa0")]
+[node name="Baby1" parent="." index="8" instance=ExtResource("4_t0qa0")]
 transform = Transform3D(0.44568214, -4.760239e-09, 0.8951913, 1.8888293e-09, 1, 4.3771893e-09, -0.8951913, -2.599722e-10, 0.44568214, -0.59302896, 0.00525913, -0.5825793)
 crying_sound = SubResource("AudioStreamRandomizer_d7ucg")
 
-[node name="Baby2" parent="." index="10" instance=ExtResource("4_t0qa0")]
+[node name="Baby2" parent="." index="9" instance=ExtResource("4_t0qa0")]
 transform = Transform3D(-0.69054157, 3.1054466e-08, -0.72329265, 3.081054e-08, 1, 1.3519432e-08, 0.72329265, -1.2949308e-08, -0.69054157, 0.71685666, 0.00525913, 0.53433)
 crying_sound = SubResource("AudioStreamRandomizer_af32p")
 
-[node name="Door" parent="." index="11" instance=ExtResource("4_id7lw")]
+[node name="Door" parent="." index="10" instance=ExtResource("4_id7lw")]
 transform = Transform3D(2.807497, 0, 0, 0, 2.807497, 0, 0, 0, 2.807497, 0, 0, -4.7449336)
 
-[node name="SecondaryLight" type="OmniLight3D" parent="." index="12"]
+[node name="SecondaryLight" type="OmniLight3D" parent="." index="11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2278504, 0.83508337)
 light_color = Color(1, 0.94133335, 0.68, 1)
 light_energy = 1.66
+
+[node name="CustomSetup" parent="." index="12"]
+script = SubResource("GDScript_01i28")

@@ -44,4 +44,6 @@ stream = SubResource("AudioStreamRandomizer_wc255")
 wait_time = 4.0
 one_shot = true
 
+[node name="CustomSetup" type="Node" parent="."]
+
 [connection signal="timeout" from="WinTimer" to="." method="_on_win_timer_timeout"]

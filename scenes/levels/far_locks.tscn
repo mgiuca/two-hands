@@ -1,15 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://c82ocqhenmlo5"]
+[gd_scene load_steps=6 format=3 uid="uid://c82ocqhenmlo5"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_bvxa4"]
 [ext_resource type="PackedScene" uid="uid://b57w04rr00g0x" path="res://scenes/pedestal_with_keyhole.tscn" id="2_61y7v"]
 [ext_resource type="PackedScene" uid="uid://dsy54vm4i37kq" path="res://scenes/key.tscn" id="2_dyqso"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="3_61y7v"]
 
+[sub_resource type="GDScript" id="GDScript_dyqso"]
+script/source = "extends Node
+
+@onready var pedestal_left : CSGBox3D = $'../PedestalLeft'
+@onready var pedestal_right : CSGBox3D = $'../PedestalRight'
+
+func _ready() -> void:
+  # Reset pedestal positions based on calibrated player height.
+
+  # Assumptions: Player's arm span = player's height (according to Leonardo's
+  # Vitruvian Man). So place the pedestals a player height width apart, and
+  # subtract a bit.
+  var pedestal_dist_from_origin := (Globals.calibrated_player_height / 2.0) - 0.1
+  # Don't make them closer than easy_locks.
+  pedestal_dist_from_origin = max(pedestal_dist_from_origin, 0.3)
+
+  #print('locks are %.1fm away' % [pedestal_dist_from_origin])
+
+  pedestal_left.position.x = -pedestal_dist_from_origin
+  pedestal_right.position.x = pedestal_dist_from_origin
+"
+
 [node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_bvxa4")]
 left_hand = NodePath("KeyLeft")
 right_hand = NodePath("KeyRight")
 activator1 = NodePath("PedestalLeft/Keyhole")
 activator2 = NodePath("PedestalRight/Keyhole")
+
+[node name="CustomSetup" parent="." index="4"]
+script = SubResource("GDScript_dyqso")
 
 [node name="KeyLeft" parent="." index="5" instance=ExtResource("2_dyqso")]
 

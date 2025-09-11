@@ -1,15 +1,53 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1fernks3jkny"]
+[gd_scene load_steps=6 format=3 uid="uid://d1fernks3jkny"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_g8rwh"]
 [ext_resource type="PackedScene" uid="uid://bkk0yyari5lal" path="res://scenes/keyhole.tscn" id="2_g8rwh"]
 [ext_resource type="PackedScene" uid="uid://dsy54vm4i37kq" path="res://scenes/key.tscn" id="2_ynkfw"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="3_ofxq6"]
 
+[sub_resource type="GDScript" id="GDScript_ynkfw"]
+script/source = "extends Node
+
+@onready var box_hole_top : CSGBox3D = $'../Pedestal/BoxHoleTop'
+@onready var keyhole_top : Keyhole = $'../Pedestal/KeyholeTop'
+@onready var box_hole_bottom : CSGBox3D = $'../Pedestal/BoxHoleBottom'
+@onready var keyhole_bottom : Keyhole = $'../Pedestal/KeyholeBottom'
+
+func _ready() -> void:
+  # Reset top lock position based on calibrated player height.
+
+  # Assumptions: Player's arm span = player's height (according to Leonardo's
+  # Vitruvian Man).
+  # Doing the full calculation for completeness, but basically the assumption
+  # is that you can reach height * 1.3.
+  var shoulder_width := Globals.calibrated_player_height * .09
+  var head_height := Globals.calibrated_player_height * .11
+  var centre_to_fingertips := Globals.calibrated_player_height / 2.0
+  var arm_length := centre_to_fingertips - shoulder_width
+  var max_arm_reach_height := Globals.calibrated_player_height - head_height + arm_length
+
+  # So place the high lock as high as you can reach, minus a bit.
+  var top_lock_height := max_arm_reach_height - 0.1
+
+  # Place the bottom one two arm lengths below, clamped to the floor.
+  var bottom_lock_height := maxf(top_lock_height - arm_length * 2, 0.2)
+
+  #print('lock heights = %.1fm and %.1fm' % [bottom_lock_height, top_lock_height])
+
+  box_hole_top.position.y = top_lock_height
+  keyhole_top.position.y = top_lock_height
+  box_hole_bottom.position.y = bottom_lock_height
+  keyhole_bottom.position.y = bottom_lock_height
+"
+
 [node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_g8rwh")]
 left_hand = NodePath("KeyLeft")
 right_hand = NodePath("KeyRight")
 activator1 = NodePath("Pedestal/KeyholeTop")
 activator2 = NodePath("Pedestal/KeyholeBottom")
+
+[node name="CustomSetup" parent="." index="4"]
+script = SubResource("GDScript_ynkfw")
 
 [node name="KeyLeft" parent="." index="5" instance=ExtResource("2_ynkfw")]
 
@@ -24,28 +62,31 @@ collision_layer = 2
 collision_mask = 0
 size = Vector3(11, 1, 11)
 
-[node name="Pedestal" type="CSGBox3D" parent="." index="8"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -1)
+[node name="Pedestal" type="CSGCombiner3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Box" type="CSGBox3D" parent="Pedestal" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 use_collision = true
 collision_layer = 2
 collision_mask = 0
 size = Vector3(0.5, 2.5, 0.5)
 
-[node name="BoxHoleTop" type="CSGBox3D" parent="Pedestal" index="0"]
-transform = Transform3D(0.9508958, 0, 0, 0, 0.9508958, 0, 0, 0, 0.9508958, 0, 0.88736534, 0.23652616)
+[node name="BoxHoleTop" type="CSGBox3D" parent="Pedestal" index="1"]
+transform = Transform3D(0.9508958, 0, 0, 0, 0.9508958, 0, 0, 0, 0.9508958, 0, 2.1373653, 0.23652613)
 operation = 2
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="KeyholeTop" parent="Pedestal" index="1" instance=ExtResource("2_g8rwh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.88736534, 0.23652616)
+[node name="KeyholeTop" parent="Pedestal" index="2" instance=ExtResource("2_g8rwh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1373653, 0.23652613)
 
-[node name="BoxHoleBottom" type="CSGBox3D" parent="Pedestal" index="2"]
-transform = Transform3D(0.9508958, 0, 0, 0, 0.9508958, 0, 0, 0, 0.9508958, 0, -0.6407427, 0.23652616)
+[node name="BoxHoleBottom" type="CSGBox3D" parent="Pedestal" index="3"]
+transform = Transform3D(0.9508958, 0, 0, 0, 0.9508958, 0, 0, 0, 0.9508958, 0, 0.6092573, 0.23652613)
 operation = 2
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="KeyholeBottom" parent="Pedestal" index="3" instance=ExtResource("2_g8rwh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6407427, 0.23652616)
+[node name="KeyholeBottom" parent="Pedestal" index="4" instance=ExtResource("2_g8rwh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6092573, 0.23652613)
 
 [node name="Door" parent="." index="9" instance=ExtResource("3_ofxq6")]
 transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -5.1633463)

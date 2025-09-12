@@ -35,6 +35,7 @@ const DEFAULT_MUSIC_VOLUME : float = -10.0
 @onready var scrim_layer : CanvasLayer = $ScrimLayer
 @onready var fade_scrim : ColorRect = $ScrimLayer/FadeScrim
 
+@onready var xr_origin : XROrigin3D = $XROrigin
 @onready var xr_camera : XRCamera3D = %XRCamera
 
 # Seconds to complete fade-out or fade-in (double it for the full transition
@@ -281,12 +282,22 @@ func _webxr_session_ended() -> void:
 func _webxr_session_failed(message: String) -> void:
   OS.alert("Failed to initialize WebXR: " + message)
 
-## Calibrates based on the player's current head height, and restarts the
-## level.
-func calibrate_height() -> void:
-  Globals.calibrated_player_height = clampf(xr_camera.global_position.y,
+## Calibrates based on the player's current headset transform, and restarts the
+## level.[br]
+## [br]
+## This has two effects: firstly, the player's height is measured which can be
+## used to modify level geometry to suit the player's height. Secondly, the
+## world origin is reset so that the player is in the centre facing forwards.
+func calibration() -> void:
+  Globals.calibrated_player_height = clampf(xr_camera.position.y,
     Globals.PLAYER_HEIGHT_MIN, Globals.PLAYER_HEIGHT_MAX)
   print('Calibrated player height = %.1fm' % Globals.calibrated_player_height)
+
+  # Reposition the origin so that the player's XZ is at zero, and Y rotation is
+  # zero.
+  xr_origin.position.x = -xr_camera.position.x
+  xr_origin.position.z = -xr_camera.position.z
+  xr_origin.rotation.y = -xr_camera.rotation.y
   reload_current_scene()
 
 func setup_long_press_label(controller: Node, action: String) -> void:
@@ -340,7 +351,7 @@ func _on_long_press_skip_timer_timeout() -> void:
     LevelManager.switch_to_next_level()
 
 func _on_long_press_calibrate_timer_timeout() -> void:
-  calibrate_height()
+  calibration()
 
 func _on_long_press_quit_timer_timeout() -> void:
   if OS.has_feature('web'):

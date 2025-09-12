@@ -323,21 +323,21 @@ func _on_right_hand_button_released(button_name: String) -> void:
   _on_controller_button_released(button_name, right_hand)
 
 func _on_controller_button_pressed(button_name: String, controller: Node) -> void:
-  if (button_name == 'by_button' and controller == left_hand) or button_name == 'menu_button':
-    # Y or menu = long-press to quit
+  if button_name == 'quit':
+    # (e.g. Y or menu on Touch/Pico) = long-press to quit
     long_press_quit_timer.start()
     setup_long_press_label(controller, 'Quitting')
-  elif button_name == 'by_button' and controller == right_hand:
-    # B = long-press to calibrate
+  elif button_name == 'calibrate':
+    # (e.g. B on Touch/Pico) = long-press to calibrate
     long_press_calibrate_timer.start()
     setup_long_press_label(controller, 'Calibrating')
-  elif button_name == 'ax_button':
-    # A or X = long-press to skip
+  elif button_name == 'skip':
+    # (e.g. A or X on Touch/Pico) = long-press to skip
     long_press_skip_timer.start()
     setup_long_press_label(controller, 'Skipping')
 
 func _on_controller_button_released(button_name: String, _controller: Node) -> void:
-  if button_name == 'by_button' or button_name == 'ax_button' or button_name == 'menu_button':
+  if button_name == 'quit' or button_name == 'calibrate' or button_name == 'skip':
     # Cancel all long-presses
     long_press_skip_timer.stop()
     long_press_calibrate_timer.stop()

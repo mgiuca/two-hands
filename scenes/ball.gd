@@ -57,7 +57,6 @@ var controller_average_angular_velocity : Vector3:
   get():
     return Globals.average_vectors(last_n_angular_velocities)
 
-var trigger_pressed : bool = false
 var grip_pressed : bool = false
 
 @onready var snd_hit_ground : AudioStreamPlayer3D = $SndHitGround
@@ -148,19 +147,15 @@ func _physics_process(delta: float) -> void:
       last_n_angular_velocities.remove_at(0)
 
 func _on_controller_button_pressed(button_name: String) -> void:
-  if button_name == 'trigger_click':
-    trigger_pressed = true
-  elif button_name == 'grip_click':
+  if button_name == 'grip_click':
     grip_pressed = true
 
 func _on_controller_button_released(button_name: String) -> void:
-  var trigger_or_grip_was_pressed := trigger_pressed or grip_pressed
-  if button_name == 'trigger_click':
-    trigger_pressed = false
-  elif button_name == 'grip_click':
+  var grip_was_pressed := grip_pressed
+  if button_name == 'grip_click':
     grip_pressed = false
 
-  if trigger_or_grip_was_pressed and not trigger_pressed and not grip_pressed:
+  if grip_was_pressed and not grip_pressed:
     # Was gripping, now released.
     detached = true
     reattach_timer.start()

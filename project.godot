@@ -123,4 +123,5 @@ anti_aliasing/quality/msaa_3d=1
 [xr]
 
 openxr/enabled=true
+openxr/binding_modifiers/dpad_binding=true
 shaders/enabled=true

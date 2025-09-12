@@ -3,7 +3,7 @@ extends Node3D
 
 ## The controller velocity is multiplied by this amount when the ball is
 ## released.
-@export_range(0.0, 5.0, 0.1, 'or_greater') var throw_velocity_multiplier : float = 2.0
+@export_range(0.0, 5.0, 0.1, 'or_greater') var throw_velocity_multiplier : float = 1.0
 
 @onready var reattach_timer : Timer = $ReattachTimer
 
@@ -25,19 +25,31 @@ var xr_controller : XRController3D:
 ## Bigger numbers make the ball feel more sluggish, smaller numbers might make
 ## a small movement or tracking error throw the ball way off. Heavier balls
 ## should probably have a bigger window size.
-@export_range(1, 10, 1.0, 'or_greater') var velocity_stabilizer_window_size : int = 3
-## Records the last [member velocity_stabilizer_window_size] linear velocities
-## from the controller.
-var last_n_linear_velocities : PackedVector3Array
+@export_range(1, 10, 1.0, 'or_greater') var velocity_stabilizer_window_size : int = 10
+## Records the last [member velocity_stabilizer_window_size] deltas between
+## physics ticks.
+var last_n_deltas : PackedFloat64Array
+## Records the last [member velocity_stabilizer_window_size] positions from the
+## controller. Corresponds to [member last_n_deltas].
+var last_n_positions : PackedVector3Array
 ## Records the last [member velocity_stabilizer_window_size] angular velocities
-## from the controller.
+## from the controller, where the confidence was high. Note: Does not strictly
+## correspond to the other last_n arrays.
 var last_n_angular_velocities : PackedVector3Array
 
-## The average of the last [member velocity_stabilizer_window_size] linear
-## velocities from the controller.
+## The average linear velocity over the last
+## [member velocity_stabilizer_window_size] ticks.
 var controller_average_linear_velocity : Vector3:
   get():
-    return Globals.average_vectors(last_n_linear_velocities)
+    # Compute from difference between position N ticks ago and current position,
+    # divided by time. See big note in _physics_process for explanation.
+    var start_pos := last_n_positions[0]
+    var end_pos := last_n_positions[-1]
+    var time_delta : float = 0
+    # Sum all deltas, ignoring the first.
+    for i in range(1, last_n_deltas.size()):
+      time_delta += last_n_deltas[i]
+    return (end_pos - start_pos) / time_delta
 
 ## The average of the last [member velocity_stabilizer_window_size] angular
 ## velocities from the controller.
@@ -103,19 +115,34 @@ enum SoundType {
 func _ready() -> void:
   visual.rotation.z = z_rotate
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
   if not xr_controller:
     return
 
   if not detached:
     animatable_body.global_transform = xr_controller.global_transform
 
+  # Record the delta and position data, so we can calculate the linear velocity.
+  # NOTE: The XRPose can be used to retrieve the linear velocity, but testing
+  # (from other people, not directly observed by me or debugged) has shown that
+  # this data seems to be completely missing on WebXR on Meta Quest. I don't know
+  # why. As a last-ditch attempt to make throwing work properly on Meta Quest,
+  # I am avoiding XRPose.linear_velocity and instead manually calculating it
+  # from the delta between two positions divided by time.
+  last_n_deltas.append(delta)
+  if last_n_deltas.size() > velocity_stabilizer_window_size:
+    last_n_deltas.remove_at(0)
+  last_n_positions.append(xr_controller.global_position)
+  if last_n_positions.size() > velocity_stabilizer_window_size:
+    last_n_positions.remove_at(0)
+
+  # Use pose for angular velocities.
+  # TODO: Strictly, for consistency, we should use the same technique as above.
+  # However, angular is less important and also harder to calculate, so we just
+  # ask the pose.
   var pose := xr_controller.get_pose()
   # Only include the high-confidence poses.
   if pose and pose.tracking_confidence == XRPose.TrackingConfidence.XR_TRACKING_CONFIDENCE_HIGH:
-    last_n_linear_velocities.append(pose.linear_velocity)
-    if last_n_linear_velocities.size() > velocity_stabilizer_window_size:
-      last_n_linear_velocities.remove_at(0)
     last_n_angular_velocities.append(pose.angular_velocity)
     if last_n_angular_velocities.size() > velocity_stabilizer_window_size:
       last_n_angular_velocities.remove_at(0)

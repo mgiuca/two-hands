@@ -33,15 +33,6 @@ Sounds by me:
 * Baby crying
 * Lullaby (Wiegenlied, composed by Johannes Brahms)
 
-# Fonts
-
-"Play"
-Copyright (c) 2011, Jonas Hecksher, Playtypes, e-types AS (lasse@e-types.com),
-with Reserved Font Name 'Play', 'Playtype', 'Playtype Sans'.
-
-This Font Software is licensed under the SIL Open Font License, Version 1.1.
-https://openfontlicense.org
-
 # Engine
 
 This game uses Godot Engine, available under the following license:

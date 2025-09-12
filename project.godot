@@ -43,6 +43,7 @@ window/size/viewport_width=640
 window/size/viewport_height=360
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/vsync/vsync_mode=0
 
 [editor_plugins]
 
@@ -110,6 +111,7 @@ debug_right_action={
 
 [physics]
 
+common/physics_ticks_per_second=90
 3d/physics_engine="Jolt Physics"
 common/enable_object_picking=false
 

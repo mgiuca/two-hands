@@ -83,11 +83,19 @@ var detached : bool:
       rigid_body.force_new_linear_velocity(lin_vel)
       rigid_body.force_new_angular_velocity(controller_average_angular_velocity)
       rigid_body.freeze = false
+
+      # Ensure only the rigid body has collisions enabled.
+      rigid_body.process_mode = Node.PROCESS_MODE_INHERIT
+      animatable_body.process_mode = Node.PROCESS_MODE_DISABLED
     else:
       visual.reparent(animatable_body, false)
       rigid_body.freeze = true
       # Hit ground can be a long rolling sound, so stop it.
       snd_hit_ground.stop()
+
+      # Ensure only the animatable body has collisions enabled.
+      rigid_body.process_mode = Node.PROCESS_MODE_DISABLED
+      animatable_body.process_mode = Node.PROCESS_MODE_INHERIT
 
 ## Z rotation to apply to the visual mesh.
 @export_range(-180, 180, 1, 'radians_as_degrees') var z_rotate : float = 0.0:

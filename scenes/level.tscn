@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://tdgkmflrwhol"]
+[gd_scene load_steps=12 format=3 uid="uid://tdgkmflrwhol"]
 
 [ext_resource type="Script" uid="uid://6el64wahmcuf" path="res://scenes/level.gd" id="1_j03b7"]
 [ext_resource type="AudioStream" uid="uid://d1x6iomieb5hh" path="res://sounds/success1.wav" id="6_olg7q"]
@@ -27,6 +27,8 @@ stream_2/stream = ExtResource("8_8iemx")
 stream_3/stream = ExtResource("9_64w2a")
 stream_4/stream = ExtResource("10_fpun6")
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2r41h"]
+
 [node name="Level" type="Node"]
 script = ExtResource("1_j03b7")
 
@@ -45,5 +47,12 @@ wait_time = 4.0
 one_shot = true
 
 [node name="CustomSetup" type="Node" parent="."]
+
+[node name="KeepOutZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape" type="CollisionShape3D" parent="KeepOutZone"]
+shape = SubResource("CapsuleShape3D_2r41h")
+debug_color = Color(0.84270436, 0.30975482, 0.57567453, 0.41960785)
 
 [connection signal="timeout" from="WinTimer" to="." method="_on_win_timer_timeout"]

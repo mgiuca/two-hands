@@ -233,7 +233,7 @@ transform = Transform3D(0.44568214, -4.760239e-09, 0.8951913, 1.8888293e-09, 1, 
 crying_sound = SubResource("AudioStreamRandomizer_d7ucg")
 
 [node name="Baby2" parent="." index="9" instance=ExtResource("4_t0qa0")]
-transform = Transform3D(-0.69054157, 3.1054466e-08, -0.72329265, 3.081054e-08, 1, 1.3519432e-08, 0.72329265, -1.2949308e-08, -0.69054157, 0.71685666, 0.00525913, 0.53433)
+transform = Transform3D(-0.07134068, 1.5683028e-08, -0.997452, 3.0810536e-08, 1, 1.3519431e-08, 0.997452, -2.9767548e-08, -0.07134068, 0.9225017, 0.00525913, 0.0849579)
 crying_sound = SubResource("AudioStreamRandomizer_af32p")
 
 [node name="Door" parent="." index="10" instance=ExtResource("4_id7lw")]

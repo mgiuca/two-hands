@@ -295,9 +295,17 @@ func calibration() -> void:
 
   # Reposition the origin so that the player's XZ is at zero, and Y rotation is
   # zero.
-  xr_origin.position.x = -xr_camera.position.x
-  xr_origin.position.z = -xr_camera.position.z
   xr_origin.rotation.y = -xr_camera.rotation.y
+  # Apply the origin's rotation to the camera first, before cancelling it out.
+  # This is necessary to first cancel out the rotation that will be applied
+  # to the camera, before we cancel out its *rotated* position.
+  # Example: camera XZ pos = (2.0, 1.0), Y rot = 90°.
+  # Origin Y rot = -90°, thus camera rot = 0°, camera XZ pos = (-1.0, 2.0).
+  # Origin XZ pos = (-1.0, 2.0), thus camera XZ pos = (0.0, 0.0).
+  var camera_position := xr_camera.position
+  camera_position = camera_position.rotated(Vector3.UP, xr_origin.rotation.y)
+  xr_origin.position.x = -camera_position.x
+  xr_origin.position.z = -camera_position.z
   reload_current_scene()
 
 func setup_long_press_label(controller: Node, action: String) -> void:

@@ -14,6 +14,8 @@ config/name="Things You Can Do With Two Hands"
 config/version="0.0.6"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+boot_splash/bg_color=Color(0.38306668, 0.3664034, 0.69585246, 1)
+boot_splash/image="uid://dvdg07qs10bw4"
 config/icon="uid://c1flrkb1jyaf"
 
 [autoload]

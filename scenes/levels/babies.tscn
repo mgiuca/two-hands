@@ -112,6 +112,9 @@ right_hand = NodePath("BottleRight")
 activator1 = NodePath("Baby1")
 activator2 = NodePath("Baby2")
 
+[node name="Sun" parent="." index="0"]
+directional_shadow_split_1 = 0.116
+
 [node name="BottleLeft" parent="." index="4" instance=ExtResource("2_t0qa0")]
 
 [node name="BottleRight" parent="." index="5" instance=ExtResource("2_t0qa0")]

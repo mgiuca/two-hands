@@ -1,21 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhouj103pnqy3"]
+[gd_scene load_steps=10 format=3 uid="uid://dhouj103pnqy3"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_3olt6"]
 [ext_resource type="PackedScene" uid="uid://b57w04rr00g0x" path="res://scenes/pedestal_with_keyhole.tscn" id="2_4tcl0"]
-[ext_resource type="PackedScene" uid="uid://dsy54vm4i37kq" path="res://scenes/key.tscn" id="2_uc7wt"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="3_iof1q"]
+[ext_resource type="PackedScene" uid="uid://dhaqth6q5yw4n" path="res://addons/godot-xr-tools/hands/model/hand_l.gltf" id="4_23yhr"]
+[ext_resource type="Material" uid="uid://dy6nhifvvmm73" path="res://addons/godot-xr-tools/hands/materials/caucasian_hand.tres" id="5_0n2b1"]
+[ext_resource type="PackedScene" uid="uid://the6y7swe6j0" path="res://addons/godot-xr-tools/hands/animations/left/AnimationPlayer.tscn" id="6_m15v8"]
+[ext_resource type="PackedScene" uid="uid://bw43r4qqsiwkj" path="res://meshes/key.tscn" id="7_jfuu6"]
+[ext_resource type="PackedScene" uid="uid://ds1t8vc0kxoeo" path="res://addons/godot-xr-tools/hands/model/hand_r.gltf" id="8_m15v8"]
+[ext_resource type="PackedScene" uid="uid://bxipj7hyjwy6f" path="res://addons/godot-xr-tools/hands/animations/right/AnimationPlayer.tscn" id="9_jfuu6"]
 
-[node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_3olt6")]
-left_hand = NodePath("KeyLeft")
-right_hand = NodePath("KeyRight")
+[node name="Level2" node_paths=PackedStringArray("activator1", "activator2") instance=ExtResource("1_3olt6")]
 activator1 = NodePath("PedestalLeft/Keyhole")
 activator2 = NodePath("PedestalRight/Keyhole")
 
-[node name="KeyLeft" parent="." index="5" instance=ExtResource("2_uc7wt")]
-
-[node name="KeyRight" parent="." index="6" instance=ExtResource("2_uc7wt")]
-
-[node name="Static" type="Node3D" parent="." index="7"]
+[node name="Static" type="Node3D" parent="." index="5"]
 
 [node name="Ground" type="CSGBox3D" parent="Static" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -24,19 +23,85 @@ collision_layer = 2
 collision_mask = 0
 size = Vector3(11, 1, 11)
 
-[node name="PedestalLeft" parent="." index="8" instance=ExtResource("2_4tcl0")]
+[node name="PedestalLeft" parent="." index="6" instance=ExtResource("2_4tcl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.65, -1)
 
-[node name="PedestalRight" parent="." index="9" instance=ExtResource("2_4tcl0")]
+[node name="PedestalRight" parent="." index="7" instance=ExtResource("2_4tcl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.65, -1)
 
-[node name="Door" parent="." index="10" instance=ExtResource("3_iof1q")]
+[node name="Door" parent="." index="8" instance=ExtResource("3_iof1q")]
 transform = Transform3D(3.870159, 0, 0, 0, 3.870159, 0, 0, 0, 3.870159, 0, 0, -5.1633463)
 
-[node name="SecondaryLight" type="OmniLight3D" parent="." index="11"]
+[node name="SecondaryLight" type="OmniLight3D" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2278504, 0.83508337)
 light_color = Color(1, 0.94133335, 0.68, 1)
 light_energy = 0.15
 
+[node name="hand_l" parent="." index="11" instance=ExtResource("4_23yhr")]
+transform = Transform3D(1.4600127, 0, 0, 0, 1.2390515, -0.77226216, 0, 0.77226216, 1.2390515, -0.33553028, 1.0556202, -0.26848292)
+
+[node name="Skeleton3D" parent="hand_l/Armature" index="0"]
+bones/1/rotation = Quaternion(0.29719162, 0.16220348, -0.2585172, 0.9047299)
+bones/2/rotation = Quaternion(0.008111671, 0.3017718, -0.04082962, 0.95247096)
+bones/3/rotation = Quaternion(-0.37391606, -0.17643905, -0.17850095, 0.8928569)
+bones/5/rotation = Quaternion(-0.0012845465, -0.011608094, -0.016825877, 0.99979025)
+bones/6/rotation = Quaternion(0.10028979, -0.06420218, -0.3086109, 0.94370514)
+bones/7/rotation = Quaternion(-0.012548935, -0.052655056, -0.3978463, 0.91585386)
+bones/8/rotation = Quaternion(0.019954609, -0.06749937, -0.49919337, 0.8636271)
+bones/10/rotation = Quaternion(-0.035753887, -0.0004000325, 0.0063676415, 0.9993403)
+bones/11/rotation = Quaternion(0.044671375, -0.011272606, -0.6869284, 0.7252633)
+bones/12/rotation = Quaternion(0.028719656, -0.018174235, -0.6484513, 0.76049703)
+bones/13/rotation = Quaternion(-0.0133031905, -0.031132486, -0.8157329, 0.5774371)
+bones/15/rotation = Quaternion(-0.070265576, 0.010190836, -0.024330735, 0.9971795)
+bones/16/rotation = Quaternion(0.08214412, -0.004789534, -0.6105446, 0.78769577)
+bones/17/rotation = Quaternion(0.056462377, -0.04694072, -0.62298685, 0.7787785)
+bones/18/rotation = Quaternion(0.08124046, -0.022468923, -0.8346168, 0.54434353)
+bones/20/rotation = Quaternion(-0.09173688, 0.020302717, -0.010182976, 0.9955242)
+bones/21/rotation = Quaternion(0.1031344, -0.027251663, -0.60873723, 0.7861677)
+bones/22/rotation = Quaternion(0.09854316, -0.051522892, -0.65626967, 0.7462873)
+bones/23/rotation = Quaternion(0.12680389, -0.05329105, -0.79177266, 0.5951276)
+
+[node name="mesh_Hand_L" parent="hand_l/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("5_0n2b1")
+
+[node name="AnimationPlayer" parent="hand_l" index="1" instance=ExtResource("6_m15v8")]
+
+[node name="key" parent="hand_l" index="2" instance=ExtResource("7_jfuu6")]
+transform = Transform3D(0.041124202, 0, 0.2936552, 0, 0.29652077, 0, -0.2936552, 0, 0.041124202, 0.047450542, 0.020547688, -0.04646969)
+
+[node name="hand_r" parent="." index="12" instance=ExtResource("8_m15v8")]
+transform = Transform3D(1.4600127, 0, 0, 0, 1.2390515, -0.77226216, 0, 0.77226216, 1.2390515, 0.336, 1.056, -0.268)
+
+[node name="Skeleton3D" parent="hand_r/Armature" index="0"]
+bones/1/rotation = Quaternion(0.29719162, -0.16220348, 0.25851724, 0.9047299)
+bones/2/rotation = Quaternion(0.008111658, -0.3017718, 0.0408296, 0.95247096)
+bones/3/rotation = Quaternion(-0.37391612, 0.17643909, 0.17850097, 0.89285684)
+bones/5/rotation = Quaternion(-0.0012845465, 0.011608096, 0.01682588, 0.99979025)
+bones/6/rotation = Quaternion(0.10028979, 0.06420218, 0.3086109, 0.94370514)
+bones/7/rotation = Quaternion(-0.012548933, 0.052655064, 0.3978463, 0.91585386)
+bones/8/rotation = Quaternion(0.019954603, 0.06749937, 0.4991933, 0.8636271)
+bones/10/rotation = Quaternion(-0.035753887, 0.00040003238, -0.0063676336, 0.9993403)
+bones/11/rotation = Quaternion(0.044671375, 0.011272614, 0.6869284, 0.7252633)
+bones/12/rotation = Quaternion(0.028719656, 0.018174244, 0.64845145, 0.760497)
+bones/13/rotation = Quaternion(-0.013303183, 0.031132486, 0.8157329, 0.5774371)
+bones/15/rotation = Quaternion(-0.07026557, -0.010190836, 0.024330745, 0.99717957)
+bones/16/rotation = Quaternion(0.08214414, 0.0047895475, 0.6105446, 0.7876959)
+bones/17/rotation = Quaternion(0.056462396, 0.04694072, 0.62298673, 0.7787787)
+bones/18/rotation = Quaternion(0.08124046, 0.022468919, 0.8346168, 0.54434353)
+bones/20/rotation = Quaternion(-0.09173688, -0.020302719, 0.010182976, 0.9955242)
+bones/21/rotation = Quaternion(0.1031344, 0.027251652, 0.6087373, 0.7861676)
+bones/22/rotation = Quaternion(0.09854316, 0.051522907, 0.65626967, 0.7462873)
+bones/23/rotation = Quaternion(0.1268039, 0.053291067, 0.79177266, 0.5951276)
+
+[node name="mesh_Hand_R" parent="hand_r/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("5_0n2b1")
+
+[node name="AnimationPlayer" parent="hand_r" index="1" instance=ExtResource("9_jfuu6")]
+
+[node name="key" parent="hand_r" index="2" instance=ExtResource("7_jfuu6")]
+transform = Transform3D(-0.041267708, 0, 0.29363504, 0, 0.29652077, 0, -0.29363504, 0, -0.041267708, -0.047, 0.021, -0.046)
+
 [editable path="PedestalLeft"]
 [editable path="PedestalRight"]
+[editable path="hand_l"]
+[editable path="hand_r"]

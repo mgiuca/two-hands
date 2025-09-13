@@ -26,6 +26,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="VersionInfo" type="CanvasLayer" parent="."]
 layer = 101
+visible = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="VersionInfo"]
 position = Vector2(10, 0)

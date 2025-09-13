@@ -38,8 +38,8 @@ func _ready() -> void:
   if Main.ensure_main_and_load_file(self):
     # Unloading the scene. Disable these or their _physics_process will crash before the scene
     # is unloaded.
-    left_hand.process_mode = Node.PROCESS_MODE_DISABLED
-    right_hand.process_mode = Node.PROCESS_MODE_DISABLED
+    #left_hand.process_mode = Node.PROCESS_MODE_DISABLED
+    #right_hand.process_mode = Node.PROCESS_MODE_DISABLED
     return
 
   LevelManager.current_level = self
@@ -49,8 +49,8 @@ func _ready() -> void:
   activator2.activate.connect(_on_activator_activate.bind(1))
   activator2.deactivate.connect(_on_activator_deactivate.bind(1))
 
-  (left_hand as Variant).xr_controller = Globals.main.left_hand
-  (right_hand as Variant).xr_controller = Globals.main.right_hand
+  #(left_hand as Variant).xr_controller = Globals.main.left_hand
+  #(right_hand as Variant).xr_controller = Globals.main.right_hand
 
   if custom_victory_sound != null:
     snd_success.stream = custom_victory_sound

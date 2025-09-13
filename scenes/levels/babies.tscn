@@ -242,7 +242,7 @@ transform = Transform3D(2.807497, 0, 0, 0, 2.807497, 0, 0, 0, 2.807497, 0, 0, -4
 [node name="SecondaryLight" type="OmniLight3D" parent="." index="11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.228, 0)
 light_color = Color(1, 0.94133335, 0.68, 1)
-light_energy = 0.5
+light_energy = 0.3
 shadow_enabled = true
 omni_range = 3.866
 

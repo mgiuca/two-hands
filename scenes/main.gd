@@ -40,7 +40,7 @@ const DEFAULT_MUSIC_VOLUME : float = -10.0
 
 # Seconds to complete fade-out or fade-in (double it for the full transition
 # time).
-const FADE_TIME : float = 0.2
+const FADE_TIME : float = 0.0
 
 var music_fade_tween : Tween
 

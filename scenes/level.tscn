@@ -8,8 +8,10 @@
 [ext_resource type="AudioStream" uid="uid://ces0lv0fe7jt6" path="res://sounds/success5.wav" id="10_fpun6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w8frs"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+sky_top_color = Color(0.339952, 0.41503713, 0.7699107, 1)
+sky_horizon_color = Color(0.5313, 0.59213495, 0.69, 1)
+ground_bottom_color = Color(0.09410869, 0.19865113, 0.18918115, 1)
+ground_horizon_color = Color(0.44277176, 0.45115536, 0.4679197, 1)
 
 [sub_resource type="Sky" id="Sky_wu84c"]
 sky_material = SubResource("ProceduralSkyMaterial_w8frs")

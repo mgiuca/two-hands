@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://j0ri3x1fbgmf"]
+[gd_scene load_steps=13 format=3 uid="uid://j0ri3x1fbgmf"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_aoy6b"]
 [ext_resource type="AudioStream" uid="uid://bn5aqcmd2ri5y" path="res://sounds/baseball-home-run.wav" id="2_tei21"]
@@ -10,6 +10,20 @@
 [ext_resource type="Texture2D" uid="uid://dqdehot1mgddj" path="res://images/textures/throw_instruction.png" id="7_x8rrm"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="8_bgetu"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x8rrm"]
+sky_top_color = Color(0.20515567, 0.27468657, 0.7004247, 1)
+sky_horizon_color = Color(0.6536037, 0.52515405, 0.76309174, 1)
+ground_bottom_color = Color(0.09410869, 0.19865113, 0.18918115, 1)
+ground_horizon_color = Color(0.5736324, 0.37935424, 0.50372225, 1)
+
+[sub_resource type="Sky" id="Sky_aoy6b"]
+sky_material = SubResource("ProceduralSkyMaterial_x8rrm")
+
+[sub_resource type="Environment" id="Environment_tei21"]
+background_mode = 2
+sky = SubResource("Sky_aoy6b")
+tonemap_mode = 2
+
 [node name="Level" node_paths=PackedStringArray("left_hand", "right_hand", "activator1", "activator2") instance=ExtResource("1_aoy6b")]
 left_hand = NodePath("BaseballLeft")
 right_hand = NodePath("BaseballRight")
@@ -19,6 +33,9 @@ custom_victory_sound = ExtResource("2_tei21")
 
 [node name="Sun" parent="." index="0"]
 layers = 2
+
+[node name="WorldEnvironment" parent="." index="1"]
+environment = SubResource("Environment_tei21")
 
 [node name="BaseballLeft" parent="." index="5" instance=ExtResource("4_c7upe")]
 

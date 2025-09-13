@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1kukgwhukgjf"]
+[gd_scene load_steps=13 format=3 uid="uid://b1kukgwhukgjf"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_suiyq"]
 [ext_resource type="PackedScene" uid="uid://uro72wsx2r5i" path="res://scenes/bowling_ball.tscn" id="2_2p8bq"]
@@ -7,6 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://dd5c8cxcbexbc" path="res://scenes/instruction_sign.tscn" id="3_y0td8"]
 [ext_resource type="PackedScene" uid="uid://udigdayvrvfd" path="res://scenes/flags.tscn" id="4_2p8bq"]
 [ext_resource type="Texture2D" uid="uid://c3i6uomugbqkr" path="res://images/textures/skip_instruction.png" id="4_okbce"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y0td8"]
+sky_top_color = Color(0.4650972, 0.41341078, 0.60075986, 1)
+sky_horizon_color = Color(0.7506885, 0.65269864, 0.5369904, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_okbce"]
+sky_material = SubResource("ProceduralSkyMaterial_y0td8")
+
+[sub_resource type="Environment" id="Environment_ff613"]
+background_mode = 2
+sky = SubResource("Sky_okbce")
+tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2p8bq"]
 albedo_color = Color(1, 0.80828303, 0.43702203, 1)
@@ -19,6 +32,9 @@ left_hand = NodePath("BallLeft")
 right_hand = NodePath("BallRight")
 activator1 = NodePath("PinLeft")
 activator2 = NodePath("PinRight")
+
+[node name="WorldEnvironment" parent="." index="1"]
+environment = SubResource("Environment_ff613")
 
 [node name="BallLeft" parent="." index="5" instance=ExtResource("2_2p8bq")]
 z_rotate = 1.5707963267948966

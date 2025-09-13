@@ -130,7 +130,6 @@ size = Vector3(11, 1, 11)
 
 [node name="Roof" type="CSGBox3D" parent="Static" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
-visible = false
 use_collision = true
 collision_layer = 2
 collision_mask = 0
@@ -241,9 +240,11 @@ crying_sound = SubResource("AudioStreamRandomizer_af32p")
 transform = Transform3D(2.807497, 0, 0, 0, 2.807497, 0, 0, 0, 2.807497, 0, 0, -4.7449336)
 
 [node name="SecondaryLight" type="OmniLight3D" parent="." index="11"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2278504, 0.83508337)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.228, 0)
 light_color = Color(1, 0.94133335, 0.68, 1)
 light_energy = 0.5
+shadow_enabled = true
+omni_range = 3.866
 
 [node name="CustomSetup" parent="." index="12"]
 script = SubResource("GDScript_01i28")

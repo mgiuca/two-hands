@@ -102,7 +102,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.493549, 12.464487, -15.510
 gizmo_extents = 3.0
 
 [node name="FloodLight" type="OmniLight3D" parent="." index="12"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.8154063, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9156175, 0)
+shadow_enabled = true
 omni_range = 11.786
 omni_attenuation = 0.2
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=4 uid="uid://c2bdn7ivam1cq"]
+[gd_scene load_steps=25 format=4 uid="uid://c2bdn7ivam1cq"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_t0qa0"]
 [ext_resource type="PackedScene" uid="uid://w24n725ra66v" path="res://scenes/bottle.tscn" id="2_t0qa0"]
 [ext_resource type="PackedScene" uid="uid://bopakv60mdjtv" path="res://meshes/cot.glb" id="3_jjwbj"]
 [ext_resource type="PackedScene" uid="uid://c7yuk8ev1nel7" path="res://meshes/music-box.glb" id="4_4bgyd"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="4_id7lw"]
+[ext_resource type="Texture2D" uid="uid://bm0vgngwmgft8" path="res://images/textures/calibrate_instruction.png" id="4_nnyux"]
 [ext_resource type="PackedScene" uid="uid://d0y0b0ibmt0f1" path="res://scenes/baby.tscn" id="4_t0qa0"]
 [ext_resource type="AudioStream" uid="uid://ckughd8cxa5v3" path="res://sounds/lullaby.ogg" id="5_id7lw"]
 [ext_resource type="AudioStream" uid="uid://bdflkwgbd3bem" path="res://sounds/baby-cry1-2.wav" id="8_hqard"]
@@ -208,6 +209,14 @@ size = Vector3(0.2, 0.05, 0.2)
 [node name="Coaster" type="CSGBox3D" parent="Static/Table" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56045747, 0)
 size = Vector3(0.15, 0.02, 0.15)
+
+[node name="CalibrateInstruction" type="CSGBox3D" parent="Static" index="9"]
+transform = Transform3D(-1.844796, 0, -1.6127719e-07, 0, 1.8447962, 0, 1.6127719e-07, 0, -1.844796, 0, 0.6458975, 4.7128334)
+size = Vector3(0.5, 0.5, 0.1)
+
+[node name="Instruction" type="Sprite3D" parent="Static/CalibrateInstruction" index="0"]
+transform = Transform3D(0.048431065, 0, -1.8626451e-09, 0, 0.048431017, 0, 1.8626451e-09, 0, 0.048431065, 0.0028364956, 0, 0.060531974)
+texture = ExtResource("4_nnyux")
 
 [node name="MusicBox" parent="." index="7" instance=ExtResource("4_4bgyd")]
 transform = Transform3D(-0.05158788, 0, -4.509956e-09, 0, 0.05158788, 0, 4.509956e-09, 0, -0.05158788, -0.014414601, 0.57, 1.032)

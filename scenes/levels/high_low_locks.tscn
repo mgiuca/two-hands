@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1fernks3jkny"]
+[gd_scene load_steps=9 format=3 uid="uid://d1fernks3jkny"]
 
 [ext_resource type="PackedScene" uid="uid://tdgkmflrwhol" path="res://scenes/level.tscn" id="1_g8rwh"]
 [ext_resource type="PackedScene" uid="uid://bkk0yyari5lal" path="res://scenes/keyhole.tscn" id="2_g8rwh"]
 [ext_resource type="PackedScene" uid="uid://dsy54vm4i37kq" path="res://scenes/key.tscn" id="2_ynkfw"]
+[ext_resource type="PackedScene" uid="uid://dd5c8cxcbexbc" path="res://scenes/instruction_sign.tscn" id="3_avtwo"]
 [ext_resource type="PackedScene" uid="uid://befgfai7xh21g" path="res://scenes/door.tscn" id="3_ofxq6"]
+[ext_resource type="Texture2D" uid="uid://bm0vgngwmgft8" path="res://images/textures/calibrate_instruction.png" id="4_8gxms"]
+[ext_resource type="Texture2D" uid="uid://c3i6uomugbqkr" path="res://images/textures/skip_instruction.png" id="5_8gxms"]
 
 [sub_resource type="GDScript" id="GDScript_ynkfw"]
 script/source = "extends Node
@@ -61,6 +64,14 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 size = Vector3(11, 1, 11)
+
+[node name="CalibrateSign" parent="Static" index="1" instance=ExtResource("3_avtwo")]
+transform = Transform3D(0.68765783, 0, -0.7260346, 0, 1, 0, 0.7260346, 0, 0.68765783, 1.4483707, 0, -1.0830752)
+texture = ExtResource("4_8gxms")
+
+[node name="SkipSign" parent="Static" index="2" instance=ExtResource("3_avtwo")]
+transform = Transform3D(-0.9999999, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.9999999, 0, 0, 2)
+texture = ExtResource("5_8gxms")
 
 [node name="Pedestal" type="CSGCombiner3D" parent="." index="8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)

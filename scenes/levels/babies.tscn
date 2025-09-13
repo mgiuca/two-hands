@@ -240,7 +240,7 @@ transform = Transform3D(2.807497, 0, 0, 0, 2.807497, 0, 0, 0, 2.807497, 0, 0, -4
 [node name="SecondaryLight" type="OmniLight3D" parent="." index="11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2278504, 0.83508337)
 light_color = Color(1, 0.94133335, 0.68, 1)
-light_energy = 1.66
+light_energy = 0.5
 
 [node name="CustomSetup" parent="." index="12"]
 script = SubResource("GDScript_01i28")

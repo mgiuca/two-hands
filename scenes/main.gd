@@ -327,13 +327,15 @@ func _on_controller_button_pressed(button_name: String, controller: Node) -> voi
   # However, WebXR doesn't use that mapping, so we also check the clunky direct
   # controller names from the default Godot action set (which is always used
   # in WebXR) as a fallback. !!!
-  if button_name == 'quit' or (button_name == 'by_button' and controller == left_hand) \
-    or button_name == 'menu_button':
+  # NOTE NOTE: However, on web, there's no quit action, so the Y button is just
+  # mapped to calibrate.
+  if button_name == 'quit' and not OS.has_feature('web'):
     # (e.g. Y or menu on Touch/Pico) = long-press to quit
     long_press_quit_timer.start()
     setup_long_press_label(controller, 'Quitting')
-  elif button_name == 'calibrate' or (button_name == 'by_button' and controller == right_hand):
+  elif button_name == 'calibrate' or button_name == 'by_button':
     # (e.g. B on Touch/Pico) = long-press to calibrate
+    # On WebXR, Y button also maps to this.
     long_press_calibrate_timer.start()
     setup_long_press_label(controller, 'Calibrating')
   elif button_name == 'skip' or button_name == 'ax_button':
@@ -359,8 +361,8 @@ func _on_long_press_calibrate_timer_timeout() -> void:
   calibration()
 
 func _on_long_press_quit_timer_timeout() -> void:
-  if OS.has_feature('web'):
-    # Just exit XR (don't actually quit).
-    _webxr_session_ended()
-  else:
+  # There's no quit on web.
+  # NOTE: I tried simply setting use_xr = false, but it crashed on Chrome and
+  # made the headset unresponsive. So just don't allow quitting.
+  if not OS.has_feature('web'):
     get_tree().quit()

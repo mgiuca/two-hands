@@ -48,7 +48,7 @@ script = ExtResource("3_gwpu0")
 shape = SubResource("SphereShape3D_abd54")
 
 [node name="ReattachTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 4.0
 one_shot = true
 
 [node name="SndHitGround" type="AudioStreamPlayer3D" parent="."]
